@@ -1,2 +1,15 @@
 # DuszaWorkshop-KapOS
-Repo a Dusza workshop KapOS csapatanak munkajanak tarolasara
+
+Rengeteg chatelésre alkalmas alkalmazás elérhető a piacon. A gond velük, hogy vagy túl sok mellékes funkcionalitást tartalmaznak (pl.: a Google Chattel "együtt jár" a Gmail, Facebook Messenger mellé Facebookot is "kap" a felhasználó), vagy nem biztonságosak (nyilvános chat szobák) és értesítéseket sem lehet megfelelően beállítani, ami egy csoportnál külön zavaró lehet.
+
+A projekt célja egy olyan webes alkalmazás kifejlesztése, melyben valós időben lehet chatelni, de a pontos funkcionalitásokat, értesítési beállításokat teljesen személyre lehet szabni.
+Minden felhasználó létrehozhat szabályokat az értesítésekre akár szobára, akár személy(ek)re fókuszálva saját feltételrendszer definiálással.
+
+A chat természetesen tartalmazhat extra funkcionalitásokat: valós idejű vagy körökre osztott játék, fájlküldés, feliratkozás stb.
+
+# Technology Stack
+Java
+Javascript
+MariaDB
+GIT
+(Trello)

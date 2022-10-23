@@ -15,7 +15,7 @@ GIT
 (Trello)
 
 # Linkek
-https://github.com/net0218game/DuszaWorkshop-KapOS
-https://trello.com/b/ZBdWYfdd/kapos-2022
-https://docs.google.com/document/d/1S1kZUWX22djP9L3uQKY-pd8BRoKGmr6ybdIFsm7_TMg/edit?usp=sharing
+* (GitHub)[https://github.com/net0218game/DuszaWorkshop-KapOS]
+* (Trello)[https://trello.com/b/ZBdWYfdd/kapos-2022]
+* (Google Doksi)[https://docs.google.com/document/d/1S1kZUWX22djP9L3uQKY-pd8BRoKGmr6ybdIFsm7_TMg/edit?usp=sharing]
 

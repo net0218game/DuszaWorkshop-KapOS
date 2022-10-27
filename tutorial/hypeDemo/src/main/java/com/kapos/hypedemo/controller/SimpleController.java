@@ -25,7 +25,13 @@ public class SimpleController {
 
     @PostMapping("/user/example")
     public User insertExampleUser(){
-        return userRepository.save(new User("szilardKorom","korom.szilard@gmail.com","gzv970"));
+        return userRepository.save(new User("hype", "hype@gmail.com", "hypejelszo"));
+    }
+
+    // Felhasználó létrehozása GET method-dal
+    @GetMapping("/createuser/{username}/{password}")
+    public User insertExampleUser(@PathVariable String username, @PathVariable String password){
+        return userRepository.save(new User(username, "email@gmail.com", password));
     }
 
     @GetMapping("/user/{id}")

@@ -1,6 +1,9 @@
 package com.kapos.hypedemo.model;
 
+import org.springframework.lang.NonNull;
+
 import javax.persistence.*;
+import java.util.Date;
 import java.util.Objects;
 
 @Entity
@@ -12,18 +15,35 @@ public class User {
     @Column
     private String userName;
     @Column
+    private String firstName;
+    @Column
+    private String secondName;
+    @Column
     private String email;
     @Column
     private String password;
+    @Column
+    private boolean gender;
+    @Column
+    private Date born;
+
+    public User(User user) {
+
+    }
+
+    public User(String userName, String firstName, String secondName, String email, String password, Boolean gender, Date born) {
+        this.userName = userName;
+        this.firstName = firstName;
+        this.secondName = secondName;
+        this.email = email;
+        this.password = password;
+        this.gender = gender;
+        this.born = born;
+    }
 
     public User() {
     }
 
-    public User(String userName, String email, String password) {
-        this.userName = userName;
-        this.email = email;
-        this.password = password;
-    }
 
     public Integer getId() {
         return id;
@@ -57,6 +77,14 @@ public class User {
         this.password = password;
     }
 
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -68,5 +96,25 @@ public class User {
     @Override
     public int hashCode() {
         return Objects.hash(id, userName, email, password);
+    }
+
+    public void setGender(boolean gender) {
+        this.gender = gender;
+    }
+
+    public boolean isGender() {
+        return gender;
+    }
+
+    public Date getBorn() {
+        return born;
+    }
+
+    public String getSecondName() {
+        return secondName;
+    }
+
+    public void setSecondName(String secondName) {
+        this.secondName = secondName;
     }
 }

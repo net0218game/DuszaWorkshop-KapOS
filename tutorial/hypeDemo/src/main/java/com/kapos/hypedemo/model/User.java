@@ -1,8 +1,8 @@
 package com.kapos.hypedemo.model;
 
-import org.springframework.lang.NonNull;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import java.util.Date;
 import java.util.Objects;
 
@@ -12,19 +12,18 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    @Column
+    @NotBlank(message = "Please fill in the required datas!")
     private String userName;
-    @Column
+    @NotBlank(message = "Please fill in the required datas!")
     private String firstName;
-    @Column
+    @NotBlank(message = "Please fill in the required datas!")
     private String secondName;
-    @Column
+    @NotBlank(message = "Please fill in the required datas!")
     private String email;
-    @Column
+    @NotBlank(message = "Please fill in the required datas!")
     private String password;
-    @Column
+    @NotBlank(message = "Please fill in the required datas!")
     private boolean gender;
-    @Column
     private Date born;
 
     public User(User user) {
@@ -53,6 +52,14 @@ public class User {
         this.id = id;
     }
 
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
     public String getUserName() {
         return userName;
     }
@@ -61,13 +68,6 @@ public class User {
         this.userName = userName;
     }
 
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
 
     public String getPassword() {
         return password;
@@ -106,9 +106,13 @@ public class User {
         return gender;
     }
 
-    public Date getBorn() {
+    /*public Date getBorn() {
         return born;
     }
+
+    public void setBorn(Date born) {
+        this.born = born;
+    }*/
 
     public String getSecondName() {
         return secondName;

@@ -1,0 +1,36 @@
+* {
+    box-sizing: border-box;
+}
+
+/* Create two equal columns that floats next to each other */
+.column {
+    float: left;
+    width: 50%;
+    padding: 10px;
+}
+
+/* Clear floats after the columns */
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+input {
+    width: 20%;
+    min-height: 38px;
+    font-size: 15px;
+    border: 1px solid #c8c8c8;
+    text-align: left;
+}
+
+button {
+    width: 200px;
+    height: 40px;
+    font-size: 20px;
+    margin-top: 50px;
+    border: none;
+    color: black;
+    background-color: rgb(0, 255, 255);
+    box-shadow: 0px 0px 20px 10px rgba(0, 255, 255, 0.9);
+}

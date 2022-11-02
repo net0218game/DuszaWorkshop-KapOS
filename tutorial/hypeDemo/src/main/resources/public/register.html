@@ -3,32 +3,59 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="stylesheet" href="/CSS/register.css"/>
 </head>
 <body>
-<form method="post" th:action="@{/register}" th:object="${user}">
-    <label>Name</label>
-    <input type="text" name="userName" th:value="*{userName}">
+<h1>Let's Create an Account!</h1>
 
-    <label>First Name</label>
-    <input type="text" name="firstName" th:value="*{firstName}">
 
-    <label>Second Name</label>
-    <input type="text" name="secondName" th:value="*{secondName}">
+<div class="row">
+    <div class="column" style="background-color:#aaa;">
+        <form method="post" th:action="@{/register}" th:object="${user}">
+            <label>
+                <p>Name</p>
+                <input type="text" name="userName" th:value="*{userName}">
+            </label>
 
-    <label>Email</label>
-    <input type="email" name="email" th:value="*{email}">
 
-    <label>Password</label>
-    <input type="password" name="password" th:value="*{password}">
+            <label>
+                <p>First Name</p>
+                <input type="text" name="firstName" th:value="*{firstName}">
+            </label>
 
-    <label>Gender</label>
-    <input type="checkbox" name="gender" th:value="*{gender}">
+            <label>
+                <p>Second Name</p>
+                <input type="text" name="secondName" th:value="*{secondName}">
+            </label>
 
-    <label>Date of Birth</label>
-    <input type="date" name="born" th:value="*{born}">
-    <br>
-    <button type="submit">Create Account!</button>
-</form>
+            <label>
+                <p>Email</p>
+                <input type="email" name="email" th:value="*{email}" th:errorClass="is-invalid">
+            </label>
+
+            <label>
+                <p>Password</p>
+                <input type="password" name="password" th:value="*{password}">
+            </label>
+
+            <label>
+                <p>Gender</p>
+                <input type="checkbox" name="gender" th:value="*{gender}">
+            </label>
+
+            <label>
+                <p>Date of Birth</p>
+                <input type="date" name="born" th:value="*{born}">
+            </label>
+            <br>
+            <button type="submit">Create Account!</button>
+        </form>
+    </div>
+    <div class="column" style="background-color:#bbb;">
+        <h2>Join the Hype!</h2>
+        <img src="/Media/logo.png" alt="hype">
+    </div>
+</div>
 
 </body>
 </html>

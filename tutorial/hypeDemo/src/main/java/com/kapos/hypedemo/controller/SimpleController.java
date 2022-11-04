@@ -84,9 +84,9 @@ public class SimpleController {
 
     @MessageMapping("/chat.addUser")
     @SendTo("/topic/public")
-    public Chat addUser(@Payload Chat chatMessage, SimpMessageHeaderAccessor headerAccessor, User user) {
+    public Chat addUser(@Payload Chat chatMessage, SimpMessageHeaderAccessor headerAccessor, Chat chat) {
         // Add username in web socket session
-        headerAccessor.getSessionAttributes().put("username", user.getUserName());
+        headerAccessor.getSessionAttributes().put("username", chat.getSender());
         return chatMessage;
     }
 }

@@ -2,60 +2,48 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Register to join the Hype</title>
     <link rel="stylesheet" href="/CSS/register.css"/>
+    <link rel="stylesheet" href="/CSS/button.css"/>
+    <link rel="stylesheet" href="/CSS/hype.css"/>
+    <link rel="icon" type="image/x-icon" href="/Media/hype.gif">
+
 </head>
 <body>
-<h1>Let's Create an Account!</h1>
 
-
-<div class="row">
-    <div class="column" style="background-color:#aaa;">
+    <div class="container" id="container1">
+        <h1 class="title">Let's Create an Account!</h1>
         <form method="post" th:action="@{/register}" th:object="${user}">
-            <label>
-                <p>Name</p>
-                <input type="text" name="userName" th:value="*{userName}">
-            </label>
 
+            <input type="text" placeholder="Username" name="userName" required th:value="*{userName}">
 
-            <label>
-                <p>First Name</p>
-                <input type="text" name="firstName" th:value="*{firstName}">
-            </label>
+            <input type="text" placeholder="First Name" name="firstName" required th:value="*{firstName}">
 
-            <label>
-                <p>Second Name</p>
-                <input type="text" name="secondName" th:value="*{secondName}">
-            </label>
+            <input type="text" placeholder="Second Name" name="secondName" required th:value="*{secondName}">
+
+            <input type="email" placeholder="Email Address" name="email" required th:value="*{email}" th:errorClass="is-invalid">
+
+            <input type="password" placeholder="Password" name="password" required th:value="*{password}">
 
             <label>
-                <p>Email</p>
-                <input type="email" name="email" th:value="*{email}" th:errorClass="is-invalid">
+                <p>Gender (True: Male, False: Female)</p>
+                <input type="checkbox" placeholder="Gender" name="gender" required th:value="*{gender}">
             </label>
 
             <label>
-                <p>Password</p>
-                <input type="password" name="password" th:value="*{password}">
+                <p>Date Of Birth</p>
+                <input type="date" placeholder="Date of Birth" name="born" required th:value="*{born}">
             </label>
 
-            <label>
-                <p>Gender</p>
-                <input type="checkbox" name="gender" th:value="*{gender}">
-            </label>
-
-            <label>
-                <p>Date of Birth</p>
-                <input type="date" name="born" th:value="*{born}">
-            </label>
             <br>
-            <button type="submit">Create Account!</button>
+            <button type="submit" class="button">Create Account!</button>
         </form>
     </div>
-    <div class="column" style="background-color:#bbb;">
-        <h2>Join the Hype!</h2>
-        <img src="/Media/logo.png" alt="hype">
+    <div class="container" id="container2">
+        <h2>Join the <b class="hype">Hype</b>!</h2>
+        <img src="/Media/logo.png" alt="hype" width="50%">
+        <p>valami szoveg majd jon meg ide</p>
     </div>
-</div>
 
 </body>
 </html>

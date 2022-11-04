@@ -1,0 +1,17 @@
+.hype {
+    animation: color-change 10s infinite;
+}
+
+@keyframes color-change {
+    0% { color: #fd6260; }
+    10% { color: #76fd76; }
+    20% { color: #8ab3fb; }
+    30% { color: #fd8afd; }
+    40% { color: #00ffd5; }
+    50% { color: #002bff; }
+    60% { color: #7a00ff; }
+    70% { color: #ff00c8; }
+    80% { color: #ff0000; }
+    90% { color: #ff4400; }
+    100% { color: #fc6cb5; }
+}

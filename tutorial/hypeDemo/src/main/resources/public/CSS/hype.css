@@ -1,5 +1,6 @@
 .hype {
     animation: color-change 10s infinite;
+    background: none;
 }
 
 @keyframes color-change {

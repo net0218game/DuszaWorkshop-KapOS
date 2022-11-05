@@ -1,0 +1,91 @@
+* {
+    font-family: Arial;
+    background-color: black;
+    color: white;
+}
+
+.card {
+    box-shadow: 0 4px 8px 0 rgb(255, 255, 255);
+    max-width: 300px;
+    margin: auto;
+    text-align: center;
+    font-family: arial;
+    position: static;
+}
+
+.card-container {
+    padding: 50px;
+    display: flex;
+}
+
+.card-title {
+    color: grey;
+    font-size: 18px;
+}
+
+button {
+    border: none;
+    outline: 0;
+    display: inline-block;
+    padding: 8px;
+    color: black;
+    background-color: white;
+    text-align: center;
+    cursor: pointer;
+    width: 100%;
+    font-size: 18px;
+}
+
+a {
+    text-decoration: none;
+    font-size: 22px;
+}
+
+button:hover, a:hover {
+    opacity: 0.7;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    text-align: center;
+}
+
+h1 {
+    font-size: 100px;
+}
+
+h2 {
+    font-size: 50px;
+    padding-top: 40px;
+    padding-bottom: 40px;
+}
+
+.title-div {
+    background-color: black;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid white;
+}
+
+.button {
+    margin: 20px;
+}
+
+
+.project p {
+    margin: auto;
+    text-align: justify;
+    width: 60%;
+    font-family: Roboto;
+    font-size: 20px;
+    letter-spacing: 2px;
+}
+
+
+.footer {
+    margin-top: 100px;
+    margin-bottom: 100px;
+    text-align: center;
+}

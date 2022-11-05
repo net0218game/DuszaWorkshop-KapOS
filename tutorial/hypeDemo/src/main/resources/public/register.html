@@ -7,36 +7,60 @@
     <link rel="stylesheet" href="/CSS/button.css"/>
     <link rel="stylesheet" href="/CSS/hype.css"/>
     <link rel="icon" type="image/x-icon" href="/Media/hype.gif">
-
+    <script src="https://kit.fontawesome.com/02ff1d2c53.js" crossorigin="anonymous"></script>
 </head>
 <body>
 
     <div class="container" id="container1">
         <h1 class="title">Let's Create an Account!</h1>
         <form method="post" th:action="@{/register}" th:object="${user}">
+            <div class="input-icons">
+                <div class="input-container">
+                    <i class="fa-solid fa-user"></i>
+                    <input type="text" placeholder="Username" name="userName" required th:value="*{userName}">
+                </div>
 
-            <input type="text" placeholder="Username" name="userName" required th:value="*{userName}">
+                <div class="input-container">
+                    <i class="fa-solid fa-signature"></i>
+                    <input type="text" placeholder="First Name" name="firstName" required th:value="*{firstName}">
+                </div>
 
-            <input type="text" placeholder="First Name" name="firstName" required th:value="*{firstName}">
+                <div class="input-container">
+                    <i class="fa-solid fa-signature"></i>
+                    <input type="text" placeholder="Second Name" name="secondName" required th:value="*{secondName}">
+                </div>
 
-            <input type="text" placeholder="Second Name" name="secondName" required th:value="*{secondName}">
+                <div class="input-container">
+                    <i class="fa-solid fa-envelope"></i>
+                    <input type="email" placeholder="Email Address" name="email" required th:value="*{email}" th:errorClass="is-invalid">
+                </div>
 
-            <input type="email" placeholder="Email Address" name="email" required th:value="*{email}" th:errorClass="is-invalid">
+                <div class="input-container">
+                    <i class="fa-solid fa-lock"></i>
+                    <input type="password" placeholder="Password" name="password" required th:value="*{password}">
+                </div>
 
-            <input type="password" placeholder="Password" name="password" required th:value="*{password}">
+                <div class="input-container">
+                    <i class="fa-solid fa-venus-mars"></i>
+                    <select name="gender" id="gender">
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
+                        <option value="other">Other</option>
 
-            <label>
-                <p>Gender (True: Male, False: Female)</p>
-                <input type="checkbox" placeholder="Gender" name="gender" required th:value="*{gender}">
-            </label>
+                    </select>
+                </div>
 
-            <label>
-                <p>Date Of Birth</p>
-                <input type="date" placeholder="Date of Birth" name="born" required th:value="*{born}">
-            </label>
+                <div class="input-container">
+                    <label>
+                        <p>Date Of Birth</p>
+                        <i class="fa-solid fa-calendar-days"></i>
+                        <input type="date" placeholder="Date of Birth" name="born" required th:value="*{born}">
+                    </label>
+                </div>
 
-            <br>
-            <button type="submit" class="button">Create Account!</button>
+                <br>
+                <button type="submit" class="button">Create Account!</button>
+            </div>
         </form>
     </div>
     <div class="container" id="container2">
@@ -44,6 +68,7 @@
         <img src="/Media/logo.png" alt="hype" width="50%">
         <p>valami szoveg majd jon meg ide</p>
     </div>
+
 
 </body>
 </html>

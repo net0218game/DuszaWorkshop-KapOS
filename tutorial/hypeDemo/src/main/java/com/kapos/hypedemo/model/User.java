@@ -23,14 +23,14 @@ public class User {
     @NotBlank(message = "Please fill in the required datas!")
     private String password;
     @NotBlank(message = "Please fill in the required datas!")
-    private boolean gender;
+    private String gender;
     private Date born;
 
     public User(User user) {
 
     }
 
-    public User(String userName, String firstName, String secondName, String email, String password, Boolean gender, Date born) {
+    public User(String userName, String firstName, String secondName, String email, String password, String gender, Date born) {
         this.userName = userName;
         this.firstName = firstName;
         this.secondName = secondName;
@@ -98,11 +98,11 @@ public class User {
         return Objects.hash(id, userName, email, password);
     }
 
-    public void setGender(boolean gender) {
+    public void setGender(String gender) {
         this.gender = gender;
     }
 
-    public boolean isGender() {
+    public String isGender() {
         return gender;
     }
 

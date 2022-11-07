@@ -29,13 +29,13 @@ public class SimpleController {
 
     @PostMapping("/user/example")
     public User insertExampleUser() {
-        return userRepository.save(new User("hype", "hype", "hype", "hype@gmail.com", "hypejelszo", false, null));
+        return userRepository.save(new User("hype", "hype", "hype", "hype@gmail.com", "hypejelszo", "Male", null));
     }
 
     // Felhasználó létrehozása GET method-dal
     @GetMapping("/createuser/{username}/{password}")
     public User insertExampleUser(@PathVariable String username, @PathVariable String password) {
-        return userRepository.save(new User("hype", "hype", "hype", "hype@gmail.com", "hypejelszo", false, null));
+        return userRepository.save(new User("hype", "hype", "hype", "hype@gmail.com", "hypejelszo", "Male", null));
 
     }
 

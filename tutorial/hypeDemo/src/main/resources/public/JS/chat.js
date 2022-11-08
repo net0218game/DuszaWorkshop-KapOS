@@ -33,8 +33,8 @@ function connect(event) {
 
 
 function onConnected() {
-    // Subscribe to the Public Topic
-    stompClient.subscribe('/topic/public', onMessageReceived);
+    // Subscribe to the Public Chat
+    stompClient.subscribe('/chat/public', onMessageReceived);
 
     // Tell your username to the server
     stompClient.send("/app/chat.addUser",
@@ -47,7 +47,7 @@ function onConnected() {
 
 
 function onError(error) {
-    connectingElement.textContent = 'Could not connect to WebSocket server. Please refresh this page to try again!';
+    connectingElement.textContent = 'NEM SIKERULT CSATLAKOZNI A WEBSOCKET SERVERHEZ! INDÍTSD EL AZ ALKALMAZÁST!';
     connectingElement.style.color = 'red';
 }
 

@@ -36,12 +36,10 @@ public class SimpleController {
     @GetMapping("/createuser/{username}/{password}")
     public User insertExampleUser(@PathVariable String username, @PathVariable String password) {
         return userRepository.save(new User("hype", "hype", "hype", "hype@gmail.com", "hypejelszo", "Male", null));
-
     }
 
     @GetMapping("/")
     public ModelAndView index() {
-
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("index.html");
         return modelAndView;
@@ -59,9 +57,15 @@ public class SimpleController {
 
     @GetMapping("/chat")
     public ModelAndView chat() {
-
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("chat.html");
+        return modelAndView;
+    }
+
+    @GetMapping("/hype")
+    public ModelAndView hype() {
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("hype.html");
         return modelAndView;
     }
 
@@ -70,23 +74,23 @@ public class SimpleController {
         return userRepository.save(new User(user.getUserName(), user.getFirstName(), user.getSecondName(), user.getEmail(), user.getPassword(), user.isGender(), null));
     }
 
-
     @GetMapping("/user/{id}")
     public User findById(@PathVariable Integer id) {
         return userRepository.findById(id).orElse(null);
     }
 
     @MessageMapping("/chat.sendMessage")
-    @SendTo("/topic/public")
+    @SendTo("/chat/public")
     public Chat sendMessage(@Payload Chat chatMessage) {
         return chatMessage;
     }
 
     @MessageMapping("/chat.addUser")
-    @SendTo("/topic/public")
+    @SendTo("/chat/public")
     public Chat addUser(@Payload Chat chatMessage, SimpMessageHeaderAccessor headerAccessor, Chat chat) {
-        // Add username in web socket session
+        // felhasznalo hozzaadasa session-höz (?)
         headerAccessor.getSessionAttributes().put("username", chat.getSender());
+
         return chatMessage;
     }
 }

@@ -11,9 +11,9 @@
 </head>
 <body>
 <div class="title-div">
-    <h1 class="hype">HYPE</h1>
-    <button class="button">Chat with <span class="hype">HYPE</span></button>
-    <button class="button">Register</button>
+    <h1 class="hype" onclick="hype()">HYPE</h1>
+    <button class="button" onclick="chat()">Chat with <span class="hype">HYPE</span></button>
+    <button class="button" onclick="register()">Register</button>
 </div>
 
 <h2>Meet The Team</h2>
@@ -76,8 +76,6 @@
     </div>
 </div>
 
-
-
 <div class="project">
     <h2>DuszaWorkshop-KapOS</h2>
     <p>Rengeteg chatelésre alkalmas alkalmazás elérhető a piacon. A gond velük, hogy vagy túl sok mellékes funkcionalitást
@@ -97,8 +95,20 @@
 </div>
 
 <div class="footer">
-    <img src="/Media/logo.png" alt="hype:DD" width="25%">
+    <img src="/Media/logo.png" onclick="hype()" alt="hype:DD" width="25%">
 </div>
+<script>
+    function chat() {
+        window.location.replace("/chat")
+    }
 
+    function register() {
+        window.location.replace("/register")
+    }
+
+    function hype() {
+        window.location.replace("/hype")
+    }
+</script>
 </body>
 </html>

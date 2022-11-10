@@ -4,10 +4,16 @@ import com.kapos.hypedemo.model.Chat;
 import com.kapos.hypedemo.model.User;
 import com.kapos.hypedemo.model.repo.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.messaging.simp.SimpMessageHeaderAccessor;
+import org.springframework.messaging.simp.SimpMessagingTemplate;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.provisioning.InMemoryUserDetailsManager;
+import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -16,6 +22,9 @@ import org.springframework.web.servlet.ModelAndView;
 public class SimpleController {
 
     private final UserRepository userRepository;
+
+    @Autowired
+    private SimpMessagingTemplate simpMessagingTemplate;
 
     @Autowired
     public SimpleController(UserRepository userRepository) {
@@ -79,18 +88,25 @@ public class SimpleController {
         return userRepository.findById(id).orElse(null);
     }
 
-    @MessageMapping("/chat.sendMessage")
-    @SendTo("/chat/public")
+
+    // A Public Chat része
+    @MessageMapping("/application")
+    @SendTo("/all/messages")
     public Chat sendMessage(@Payload Chat chatMessage) {
         return chatMessage;
     }
 
-    @MessageMapping("/chat.addUser")
+    @MessageMapping("/application.addUser")
     @SendTo("/chat/public")
     public Chat addUser(@Payload Chat chatMessage, SimpMessageHeaderAccessor headerAccessor, Chat chat) {
         // felhasznalo hozzaadasa session-höz (?)
         headerAccessor.getSessionAttributes().put("username", chat.getSender());
-
         return chatMessage;
     }
+
+    @MessageMapping("/private")
+    public void sendToSpecificUser(@Payload Chat chat) {
+        simpMessagingTemplate.convertAndSendToUser(chat.getReceiver(), "/specific", chat);
+    }
+
 }

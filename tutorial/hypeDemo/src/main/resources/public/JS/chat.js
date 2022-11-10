@@ -1,5 +1,3 @@
-'use strict';
-
 var usernamePage = document.querySelector('#username-page');
 var chatPage = document.querySelector('#chat-page');
 var usernameForm = document.querySelector('#usernameForm');
@@ -7,14 +5,21 @@ var messageForm = document.querySelector('#messageForm');
 var messageInput = document.querySelector('#message');
 var messageArea = document.querySelector('#messageArea');
 var connectingElement = document.querySelector('.connecting');
+var contactName = document.querySelector('.contactName');
 
 var stompClient = null;
 var username = null;
+var sessionId = "";
+var receiver = "test"
+
+const date = new Date();
+
 
 var colors = [
     '#2196F3', '#32c787', '#00BCD4', '#ff5652',
     '#ffc107', '#ff85af', '#FF9800', '#39bbb0'
 ];
+
 
 function connect(event) {
     username = document.querySelector('#name').value.trim();
@@ -26,6 +31,8 @@ function connect(event) {
         var socket = new SockJS('/ws');
         stompClient = Stomp.over(socket);
 
+
+
         stompClient.connect({}, onConnected, onError);
     }
     event.preventDefault();
@@ -34,13 +41,15 @@ function connect(event) {
 
 function onConnected() {
     // Subscribe to the Public Chat
-    stompClient.subscribe('/chat/public', onMessageReceived);
+    //stompClient.subscribe('/all/messages', onMessageReceived);
+    stompClient.subscribe('/user/specific', onMessageReceived);
 
-    // Tell your username to the server
-    stompClient.send("/app/chat.addUser",
+    stompClient.send("/app/application.addUser",
         {},
         JSON.stringify({sender: username, type: 'JOIN'})
     )
+
+    connectingElement.classList.add('hidden');
 
     connectingElement.classList.add('hidden');
 }
@@ -57,10 +66,16 @@ function sendMessage(event) {
     if (messageContent && stompClient) {
         var chatMessage = {
             sender: username,
+            receiver: receiver,
             content: messageInput.value,
             type: 'CHAT'
         };
-        stompClient.send("/app/chat.sendMessage", {}, JSON.stringify(chatMessage));
+
+        if(receiver !== username) {
+            displayMessage(username, messageInput.value)
+        }
+
+        stompClient.send("/app/private", {}, JSON.stringify(chatMessage));
         messageInput.value = '';
     }
     event.preventDefault();
@@ -75,9 +90,6 @@ function onMessageReceived(payload) {
     if (message.type === 'JOIN') {
         messageElement.classList.add('event-message');
         message.content = message.sender + ' joined the Hype!';
-    } else if (message.type === 'LEAVE') {
-        messageElement.classList.add('event-message');
-        message.content = message.sender + ' left!';
     } else {
         messageElement.classList.add('chat-message');
 
@@ -102,6 +114,41 @@ function onMessageReceived(payload) {
 
     messageArea.appendChild(messageElement);
     messageArea.scrollTop = messageArea.scrollHeight;
+}
+
+function displayMessage(username, content) {
+    var messageElement = document.createElement('li');
+    messageElement.classList.add('chat-message');
+
+    var avatarElement = document.createElement('i');
+    var avatarText = document.createTextNode(username[0]);
+    avatarElement.appendChild(avatarText);
+    avatarElement.style['background-color'] = getAvatarColor(username);
+
+    messageElement.appendChild(avatarElement);
+
+    var usernameElement = document.createElement('span');
+    var usernameText = document.createTextNode(username);
+    var dateText = document.createTextNode(" - " + date.getHours() + ":" + date.getMinutes());
+
+    usernameElement.appendChild(usernameText);
+    usernameElement.appendChild(dateText);
+    messageElement.appendChild(usernameElement);
+
+    var textElement = document.createElement('p');
+    var messageText = document.createTextNode(content);
+    textElement.appendChild(messageText);
+
+    messageElement.appendChild(textElement);
+
+    messageArea.appendChild(messageElement);
+    messageArea.scrollTop = messageArea.scrollHeight;
+}
+
+function getContactName(contact) {
+    receiver = contact.id;
+    contactName.innerHTML = receiver;
+    console.log(receiver)
 }
 
 

@@ -18,7 +18,12 @@ public class WebSocketConfiguration implements WebSocketMessageBrokerConfigurer 
 
     @Override
     public void configureMessageBroker(MessageBrokerRegistry registry) {
+        // A Public Chat része
+        // registry.setApplicationDestinationPrefixes("/app");
+        // registry.enableSimpleBroker("/chat");
+
+        // DM Chat része
+        registry.enableSimpleBroker("/all", "/specific");
         registry.setApplicationDestinationPrefixes("/app");
-        registry.enableSimpleBroker("/chat");
     }
 }

@@ -18,6 +18,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.List;
+
 @RestController
 public class SimpleController {
 
@@ -109,4 +111,8 @@ public class SimpleController {
         simpMessagingTemplate.convertAndSendToUser(chat.getReceiver(), "/specific", chat);
     }
 
+    @ModelAttribute("contacts")
+    public List<User> getUsers(){
+        return userRepository.findAll();
+    }
 }

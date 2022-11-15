@@ -11,12 +11,17 @@ import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.messaging.simp.SimpMessageHeaderAccessor;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+
+import java.security.Principal;
+import java.util.List;
+import java.util.Objects;
 
 @RestController
 public class SimpleController {
@@ -31,22 +36,7 @@ public class SimpleController {
         this.userRepository = userRepository;
     }
 
-    @PostMapping("/hello")
-    public String helloWorld() {
-        return "Hello World";
-    }
-
-    @PostMapping("/user/example")
-    public User insertExampleUser() {
-        return userRepository.save(new User("hype", "hype", "hype", "hype@gmail.com", "hypejelszo", "Male", null));
-    }
-
-    // Felhasználó létrehozása GET method-dal
-    @GetMapping("/createuser/{username}/{password}")
-    public User insertExampleUser(@PathVariable String username, @PathVariable String password) {
-        return userRepository.save(new User("hype", "hype", "hype", "hype@gmail.com", "hypejelszo", "Male", null));
-    }
-
+    // ========== Eleresi utak ==========
     @GetMapping("/")
     public ModelAndView index() {
         ModelAndView modelAndView = new ModelAndView();
@@ -78,18 +68,30 @@ public class SimpleController {
         return modelAndView;
     }
 
-    @PostMapping("/register")
-    public User insertUser(User user) {
-        return userRepository.save(new User(user.getUserName(), user.getFirstName(), user.getSecondName(), user.getEmail(), user.getPassword(), user.isGender(), null));
+    // ========== Eleresi utak vege ==========
+
+    // Felhasznalok Kilistazasa
+    @GetMapping("/contacts")
+    public ModelAndView contact() {
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("contacts.html");
+        return modelAndView;
     }
 
+    // Regisztralas
+    @PostMapping("/register")
+    public User insertUser(User user) {
+        return userRepository.save(new User(user.getUserName(), user.getFirstName(), user.getSecondName(), user.getEmail(), user.getPassword(), user.getGender(), user.getBorn()));
+    }
+
+    // Felhasznalo Lekerdezese ID Alapjan
     @GetMapping("/user/{id}")
     public User findById(@PathVariable Integer id) {
         return userRepository.findById(id).orElse(null);
     }
 
-
-    // A Public Chat része
+    /*
+    // A Public Chat Része
     @MessageMapping("/application")
     @SendTo("/all/messages")
     public Chat sendMessage(@Payload Chat chatMessage) {
@@ -99,14 +101,21 @@ public class SimpleController {
     @MessageMapping("/application.addUser")
     @SendTo("/chat/public")
     public Chat addUser(@Payload Chat chatMessage, SimpMessageHeaderAccessor headerAccessor, Chat chat) {
-        // felhasznalo hozzaadasa session-höz (?)
+        // felhasznalo hozzaadasa session-höz (????)
         headerAccessor.getSessionAttributes().put("username", chat.getSender());
         return chatMessage;
-    }
+    }*/
 
+    // Handling Private Messages
     @MessageMapping("/private")
     public void sendToSpecificUser(@Payload Chat chat) {
         simpMessagingTemplate.convertAndSendToUser(chat.getReceiver(), "/specific", chat);
+        // uzenetek eltarolasa db ben
     }
 
+    // Send The Contact Details To The Client
+    @ModelAttribute("contacts")
+    public List<User> contacts() {
+        return userRepository.findAll();
+    }
 }

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
     <meta charset="UTF-8">
     <title>Hype</title>
@@ -12,8 +13,12 @@
 <body>
 <div class="title-div">
     <h1 class="hype" onclick="hype()">HYPE</h1>
+    <div sec:authorize="isAuthenticated()">
+        (Signed In As: <span sec:authentication="name"></span> )</div>
     <button class="button" onclick="chat()">Chat with <span class="hype">HYPE</span></button>
     <button class="button" onclick="register()">Register</button>
+    <button class="button" sec:authorize="isAuthenticated()" onclick="logout()">Log Out</button>
+    <button class="button" sec:authorize="!isAuthenticated()" onclick="login()">Sign In</button>
 </div>
 
 <h2>The Team</h2>
@@ -28,7 +33,9 @@
             <a href="#"><i class="fa fa-reddit"></i></a>
             <a href="#"><i class="fa fa-instagram"></i></a>
         </div>
-        <p><button>Chat on <b class="hype">HYPE</b></button></p>
+        <p>
+            <button>Chat on <b class="hype">HYPE</b></button>
+        </p>
     </div>
     <div class="card">
         <img src="/Media/logo.png" alt="hype-logo" style="width:100%">
@@ -39,7 +46,9 @@
             <a href="#"><i class="fa fa-reddit"></i></a>
             <a href="#"><i class="fa fa-instagram"></i></a>
         </div>
-        <p><button>Chat on <b class="hype">HYPE</b></button></p>
+        <p>
+            <button>Chat on <b class="hype">HYPE</b></button>
+        </p>
     </div>
     <div class="card">
         <img src="/Media/logo.png" alt="hype-logo" style="width:100%">
@@ -50,7 +59,9 @@
             <a href="#"><i class="fa fa-reddit"></i></a>
             <a href="#"><i class="fa fa-instagram"></i></a>
         </div>
-        <p><button>Chat on <b class="hype">HYPE</b></button></p>
+        <p>
+            <button>Chat on <b class="hype">HYPE</b></button>
+        </p>
     </div>
     <div class="card">
         <img src="/Media/logo.png" alt="hype-logo" style="width:100%">
@@ -61,7 +72,9 @@
             <a href="#"><i class="fa fa-reddit"></i></a>
             <a href="#"><i class="fa fa-instagram"></i></a>
         </div>
-        <p><button>Chat on <b class="hype">HYPE</b></button></p>
+        <p>
+            <button>Chat on <b class="hype">HYPE</b></button>
+        </p>
     </div>
     <div class="card">
         <img src="/Media/logo.png" alt="hype-logo" style="width:100%">
@@ -72,15 +85,19 @@
             <a href="#"><i class="fa fa-reddit"></i></a>
             <a href="#"><i class="fa fa-instagram"></i></a>
         </div>
-        <p><button>Chat on <b class="hype">HYPE</b></button></p>
+        <p>
+            <button>Chat on <b class="hype">HYPE</b></button>
+        </p>
     </div>
 </div>
 
 <div class="project">
     <h2>DuszaWorkshop-KapOS</h2>
-    <p>Rengeteg chatelésre alkalmas alkalmazás elérhető a piacon. A gond velük, hogy vagy túl sok mellékes funkcionalitást
+    <p>Rengeteg chatelésre alkalmas alkalmazás elérhető a piacon. A gond velük, hogy vagy túl sok mellékes
+        funkcionalitást
         tartalmaznak (pl.: a Google Chattel "együtt jár" a Gmail, Facebook Messenger mellé Facebookot is "kap" a
-        felhasználó), vagy nem biztonságosak (nyilvános chat szobák) és értesítéseket sem lehet megfelelően beállítani, ami
+        felhasználó), vagy nem biztonságosak (nyilvános chat szobák) és értesítéseket sem lehet megfelelően beállítani,
+        ami
         egy csoportnál külön zavaró lehet.
 
         A projekt célja egy olyan webes alkalmazás kifejlesztése, melyben valós időben lehet chatelni, de a pontos
@@ -108,6 +125,14 @@
 
     function hype() {
         window.location.replace("/hype")
+    }
+
+    function login() {
+        window.location.replace("/login")
+    }
+
+    function logout() {
+        window.location.replace("/logout")
     }
 </script>
 </body>

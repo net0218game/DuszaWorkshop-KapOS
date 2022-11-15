@@ -1,9 +1,11 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
     <title>Hype</title>
     <link rel="stylesheet" href="/CSS/chat.css"/>
+    <link rel="stylesheet" href="/CSS/hype.css"/>
     <link rel="icon" type="image/x-icon" href="/Media/hype.gif">
 </head>
 <body>
@@ -33,6 +35,7 @@
             <h2>Contacts</h2>
         </div>
         <ul id="contactArea">
+            <p>Pre-Defined Test Contacts</p>
             <li class="chat-message" id="test" onclick="getContactName(this)">
                 <i style="background-color: rgb(255, 193, 7);">T</i>
                 <span>test</span>
@@ -43,16 +46,26 @@
                 <span>test2</span>
                 <p>Last message</p>
             </li>
-            <li class="chat-message" id="david" onclick="getContactName(this)">
-                <i style="background-color: rgb(0,255,191);">T</i>
-                <span>David</span>
-                <p>Last message</p>
+            <hr>
+            <p>Contacts Loaded From Database</p>
+            <!--EZ IGY NEM MARADHAT!!!! AZ ID BEALLITASANAL, MERT HA 2 UGYAN OLYAN NEVU FELHASZNALO VAN AKKOR MEGHAL!!
+            KI KELL MAJD CSERELNI FELHASZNALO ID-RE (contact.id) ES AZ UZENET KULDESI MODOT MEGVALTOZTATNI FELHASZNALO
+             NEVROL ID RE.-->
+            <li class="chat-message" th:each="contact : ${contacts}" th:id="${contact.userName}" onclick="getContactName(this)">
+                <i style="background-color: rgb(200,0,255);">T</i>
+                <span th:text="${contact.userName}">username comes here</span>
+                <p>Last message comes here</p>
             </li>
+            <hr>
+            <!-- Thymeleaf megszerzi a bejelentkezesi tokent, ha be vagy jelentkezve
+             fontos dolog, a kesobbiekben hasznalni fogjuk. -->
+            <div sec:authorize="isAuthenticated()">
+                Signed In As <span sec:authentication="name"></span></div>
         </ul>
     </div>
     <div class="chat-container">
         <div class="chat-header">
-            <h2 class="contactName">Hype Chat Demo</h2>
+            <h2 class="contactName"><span class="hype">HYPE</span> Chat Demo</h2>
         </div>
         <div class="connecting">
             Connecting...
@@ -63,7 +76,7 @@
         <form id="messageForm" name="messageForm">
             <div class="form-group">
                 <div class="input-group clearfix">
-                    <input type="text" id="message" placeholder="Type a message..." autocomplete="off"
+                    <input type="text" id="message" placeholder="Send a message with HYPE!" autocomplete="off"
                            class="input"/>
                     <button type="submit" class="start-button">Send</button>
                 </div>

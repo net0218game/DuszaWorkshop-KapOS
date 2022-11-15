@@ -6,6 +6,7 @@ var messageInput = document.querySelector('#message');
 var messageArea = document.querySelector('#messageArea');
 var connectingElement = document.querySelector('.connecting');
 var contactName = document.querySelector('.contactName');
+var inputBox = document.querySelector('#message');
 
 var stompClient = null;
 var username = null;
@@ -31,8 +32,6 @@ function connect(event) {
         var socket = new SockJS('/ws');
         stompClient = Stomp.over(socket);
 
-
-
         stompClient.connect({}, onConnected, onError);
     }
     event.preventDefault();
@@ -44,13 +43,13 @@ function onConnected() {
     //stompClient.subscribe('/all/messages', onMessageReceived);
     stompClient.subscribe('/user/specific', onMessageReceived);
 
-    stompClient.send("/app/application.addUser",
+    /*stompClient.send("/app/application.addUser",
         {},
         JSON.stringify({sender: username, type: 'JOIN'})
-    )
+    )*/
+    fetch("/username").then((result) => console.log(result));
 
     connectingElement.classList.add('hidden');
-
     connectingElement.classList.add('hidden');
 }
 
@@ -71,7 +70,7 @@ function sendMessage(event) {
             type: 'CHAT'
         };
 
-        if(receiver !== username) {
+        if (receiver !== username) {
             displayMessage(username, messageInput.value)
         }
 
@@ -90,6 +89,10 @@ function onMessageReceived(payload) {
     if (message.type === 'JOIN') {
         messageElement.classList.add('event-message');
         message.content = message.sender + ' joined the Hype!';
+    } else if(message.type === 'SYSTEMMESSAGE') {
+        messageElement.classList.add('event-message');
+        message.content = message.content + ' This is a system message!';
+
     } else {
         messageElement.classList.add('chat-message');
 
@@ -146,11 +149,15 @@ function displayMessage(username, content) {
 }
 
 function getContactName(contact) {
+    // Torli az elozo uzeneteket
+    messageArea.innerHTML = ""
+    // Beallitja az uzenet fogadojat, es a contact cimet
     receiver = contact.id;
     contactName.innerHTML = receiver;
+    // Beallitja az input box placeholder-jét
+    inputBox.placeholder = "Send a message to " + receiver + "!"
     console.log(receiver)
 }
-
 
 function getAvatarColor(messageSender) {
     var hash = 0;

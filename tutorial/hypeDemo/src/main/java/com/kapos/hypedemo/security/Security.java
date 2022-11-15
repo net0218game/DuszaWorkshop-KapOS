@@ -32,11 +32,16 @@ public class Security {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
+                .csrf().disable()
                 .authorizeHttpRequests()
                 .mvcMatchers("/","/ws/**")
                 .permitAll()
                 .and()
                 .authorizeHttpRequests()
+                .antMatchers("/").permitAll()
+                .antMatchers("/CSS/**").permitAll()
+                .antMatchers("/Media/**").permitAll()
+                .antMatchers("/JS/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
@@ -45,23 +50,6 @@ public class Security {
                 .logout( logout -> logout.logoutSuccessUrl("/"));
         return http.build();
     }
-
-    /*public Authentication authenticate(Authentication authentication) throws AuthenticationException {
-
-        String username = authentication.getName();
-        String password = authentication.getCredentials().toString();
-
-        com.kapos.hypedemo.model.User user = userRepository.findUserByuserName(username);
-        if (user == null) {
-            throw new BadCredentialsException("Details not found");
-        }
-
-        if (encoder.matches(password, user.getPassword())) {
-            return new UsernamePasswordAuthenticationToken(username, password);
-        } else {
-            throw new BadCredentialsException("Password mismatch");
-        }
-    }*/
 
     @Bean
     public InMemoryUserDetailsManager userDetailsService() {

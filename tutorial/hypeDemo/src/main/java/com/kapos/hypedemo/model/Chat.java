@@ -5,6 +5,7 @@ public class Chat {
     private String content;
     private String sender;
     private String receiver;
+    private String senderNickname;
 
     public String getReceiver() {
         return receiver;
@@ -14,11 +15,18 @@ public class Chat {
         this.receiver = receiver;
     }
 
+    public String getSenderNickname() {
+        return senderNickname;
+    }
+
+    public void setSenderNickname(String senderNickname) {
+        this.senderNickname = senderNickname;
+    }
 
     public enum MessageType {
         CHAT,
         JOIN,
-        LEAVE
+        SYSTEMMESSAGE
     }
 
     public MessageType getType() {

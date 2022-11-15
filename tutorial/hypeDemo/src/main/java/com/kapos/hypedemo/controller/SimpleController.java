@@ -18,7 +18,6 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
-
 import java.security.Principal;
 import java.util.List;
 import java.util.Objects;
@@ -115,7 +114,7 @@ public class SimpleController {
 
     // Send The Contact Details To The Client
     @ModelAttribute("contacts")
-    public List<User> contacts() {
+    public List<User> getUsers(){
         return userRepository.findAll();
     }
 }

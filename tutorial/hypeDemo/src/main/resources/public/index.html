@@ -15,11 +15,9 @@
 <!-- NAV(nemzeti ado- es vamhivatal)(elf)BAR -->
 <div class="topnav" id="myTopnav">
     <a href="/" class="active">Home</a>
-    <a href="#news">News</a>
-    <a href="#contact">Contact</a>
-    <a href="#about">About</a>
+    <a href="/register">Register</a>
     <a href="/login" style="float:right;" sec:authorize="!isAuthenticated()">Log In</a>
-    <a href="/logout" style="float:right;" sec:authorize="isAuthenticated()">Log Out</a>
+    <a href="/logout" style="float:right; color: white; background-color: red"  sec:authorize="isAuthenticated()">Log Out</a>
 
     <a sec:authorize="isAuthenticated()" href="#" style="float: right">
         Signed In As: <span sec:authentication="name">USERNAME</span></a>

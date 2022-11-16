@@ -1,7 +1,10 @@
 * {
-    font-family: Arial;
     background-color: black;
     color: white;
+}
+@font-face {
+    font-family: Comfortaa;
+    src: url("public/Media/Comfortaa-Bold.ttf");
 }
 
 .card {

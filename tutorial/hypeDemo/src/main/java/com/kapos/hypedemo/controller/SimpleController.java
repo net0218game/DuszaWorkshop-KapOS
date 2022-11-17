@@ -2,37 +2,30 @@ package com.kapos.hypedemo.controller;
 
 import com.kapos.hypedemo.model.Chat;
 import com.kapos.hypedemo.model.User;
+import com.kapos.hypedemo.model.repo.MessagesRepository;
 import com.kapos.hypedemo.model.repo.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.Payload;
-import org.springframework.messaging.handler.annotation.SendTo;
-import org.springframework.messaging.simp.SimpMessageHeaderAccessor;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
-import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.provisioning.InMemoryUserDetailsManager;
-import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
-import java.security.Principal;
+
 import java.util.List;
-import java.util.Objects;
 
 @RestController
 public class SimpleController {
-
     private final UserRepository userRepository;
+    private final MessagesRepository messagesRepository;
 
     @Autowired
     private SimpMessagingTemplate simpMessagingTemplate;
 
     @Autowired
-    public SimpleController(UserRepository userRepository) {
+    public SimpleController(UserRepository userRepository, MessagesRepository messagesRepository) {
         this.userRepository = userRepository;
+        this.messagesRepository = messagesRepository;
     }
 
     // ========== Eleresi utak ==========
@@ -110,6 +103,8 @@ public class SimpleController {
     public void sendToSpecificUser(@Payload Chat chat) {
         simpMessagingTemplate.convertAndSendToUser(chat.getReceiver(), "/specific", chat);
         // uzenetek eltarolasa db ben
+        messagesRepository.save(new Chat(chat.getId(), chat.getContent(), chat.getSender(), chat.getReceiver()));
+
     }
 
     // Send The Contact Details To The Client

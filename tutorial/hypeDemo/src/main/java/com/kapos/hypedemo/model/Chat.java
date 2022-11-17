@@ -16,11 +16,12 @@ public class Chat {
     private String sender;
     private String receiver;
     private String senderNickname;
-    public Chat(Integer id, String content, String sender, String receiver){
-        this.id=id;
-        this.content=content;
-        this.sender=sender;
-        this.receiver=receiver;
+
+    public Chat(Integer id, String content, String sender, String receiver) {
+        this.id = id;
+        this.content = content;
+        this.sender = sender;
+        this.receiver = receiver;
     }
 
     public Chat() {

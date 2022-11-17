@@ -62,7 +62,6 @@ public class SimpleController {
 
     // ========== Eleresi utak vege ==========
 
-    // Felhasznalok Kilistazasa
     @GetMapping("/contacts")
     public ModelAndView contact() {
         ModelAndView modelAndView = new ModelAndView();
@@ -82,8 +81,8 @@ public class SimpleController {
         return userRepository.findById(id).orElse(null);
     }
 
-    /*
-    // A Public Chat Része
+
+    /* // A Public Chat Része
     @MessageMapping("/application")
     @SendTo("/all/messages")
     public Chat sendMessage(@Payload Chat chatMessage) {
@@ -101,13 +100,16 @@ public class SimpleController {
     // Handling Private Messages
     @MessageMapping("/private")
     public void sendToSpecificUser(@Payload Chat chat) {
+        // Uzenet elkuldese felhasznalonak
         simpMessagingTemplate.convertAndSendToUser(chat.getReceiver(), "/specific", chat);
-        // uzenetek eltarolasa db ben
+        // Uzenetek eltarolasa db ben
+        /* A kesobbiekben a sender-t es a receiver-t meg kell valtoztatnunk senderId és receiverId-re.
+        Ezeket majd a Spring Security-vel bejelentkezett felhasznalonak az Id-jevel oldjuk meg.*/
         messagesRepository.save(new Chat(chat.getId(), chat.getContent(), chat.getSender(), chat.getReceiver()));
-
     }
 
     // Send The Contact Details To The Client
+    // Felhasznalok Kilistazasa
     @ModelAttribute("contacts")
     public List<User> getUsers(){
         return userRepository.findAll();

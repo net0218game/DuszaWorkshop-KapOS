@@ -20,7 +20,7 @@
     <a href="/" class="active">Home</a>
     <a href="/register">Register</a>
     <a href="/login" style="float:right; color: #fffef0; background-color: #29ce5e" sec:authorize="!isAuthenticated()">Sign In</a>
-    <a href="/logout" style="float:right; color: white; background-color: #ec1f1f" sec:authorize="isAuthenticated()">Sign Out</a>
+    <a href="/logout" style="float:right; color: white; background-color: #ec1f1f" sec:authorize="isAuthenticated()"><i class="fa fa-sign-out" style="background: transparent"></i></a>
 
     <a sec:authorize="isAuthenticated()" href="#" style="float: right">
         Signed In As: <span sec:authentication="name">USERNAME</span></a>

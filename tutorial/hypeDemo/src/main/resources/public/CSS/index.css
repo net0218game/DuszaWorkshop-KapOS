@@ -4,7 +4,7 @@
 }
 @font-face {
     font-family: Comfortaa;
-    src: url("public/Media/Comfortaa-Bold.ttf");
+    src: url("../Media/Comfortaa-Bold.ttf");
 }
 
 .card {

@@ -8,76 +8,102 @@
     <link rel="stylesheet" href="/CSS/index.css"/>
     <link rel="stylesheet" href="/CSS/hype.css"/>
     <link rel="stylesheet" href="/CSS/button.css"/>
-    <script src="https://kit.fontawesome.com/02ff1d2c53.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="/CSS/navbar.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://kit.fontawesome.com/02ff1d2c53.js" crossorigin="anonymous">
+    </script>
 </head>
 <body>
-<div class="title-div">
-    <h1 class="hype" onclick="hype()">HYPE</h1>
-    <div sec:authorize="isAuthenticated()">
-        (Signed In As: <span sec:authentication="name"></span> )</div>
-    <button class="button" onclick="chat()">Chat with <span class="hype">HYPE</span></button>
-    <button class="button" onclick="register()">Register</button>
-    <button class="button" sec:authorize="isAuthenticated()" onclick="logout()">Log Out</button>
-    <button class="button" sec:authorize="!isAuthenticated()" onclick="login()">Sign In</button>
+
+<!-- NAV(nemzeti ado- es vamhivatal)(elf)BAR -->
+<div class="topnav" id="myTopnav">
+    <a href="/" class="active">Home</a>
+    <a href="/register">Register</a>
+    <a href="/login" style="float:right; color: #fffef0; background-color: #29ce5e" sec:authorize="!isAuthenticated()">Sign In</a>
+    <a href="/logout" style="float:right; color: white; background-color: #ec1f1f" sec:authorize="isAuthenticated()">Sign Out</a>
+
+    <a sec:authorize="isAuthenticated()" href="#" style="float: right">
+        Signed In As: <span sec:authentication="name">USERNAME</span></a>
+    <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+        <i class="fa fa-bars"></i>
+    </a>
 </div>
 
-<h2>The Team</h2>
+<div class="title-div">
+    <h1 class="hype" onclick="hype()">HYPE</h1>
+    <button class="button" onclick="chat()">Chat with <span class="hype">HYPE</span></button>
+    <button class="button" onclick="register()">Register  <i class="fa fa-key"></i></button>
+    <button class="button" sec:authorize="isAuthenticated()" onclick="logout()">Sign Out  <i class="fa fa-sign-out"></i></button>
+    <button class="button" sec:authorize="!isAuthenticated()" onclick="login()">Sign In  <i class="fa fa-sign-in" style="background: transparent"></i></button>
+</div>
+
+<table class="center">
+    <tr>
+        <th style="width:40%"><h5>The</h5></th>
+        <th style="width:20%"><img src="/Media/kek_logo_00000.png" width="70%"></th>
+        <th style="width:40%"><h6>Team</h6></th>
+    </tr>
+</table>
+
 <img src="/Media/team.jpg" alt="team" width="100%">
+
 <div class="card-container">
     <div class="card">
-        <img src="/Media/dedike.jpg" alt="Dávid" style="width:100%">
+        <img src="/Media/david.jpg" alt="Dávid">
         <h3>Tóth Dávid</h3>
-        <p class="card-title">Minden IS</p>
+        <p class="card-title">Full Stack Developer</p>
         <p>KTMG</p>
         <div style="margin: 24px 0;">
-            <a href="#"><i class="fa fa-reddit"></i></a>
+            <a href="https://www.reddit.com/user/nokedl0218/"><i class="fa fa-reddit"></i></a>
             <a href="https://www.instagram.com/david.vagyokk/"><i class="fa fa-instagram"></i></a>
         </div>
         <p>
             <button>Chat on <b class="hype">HYPE</b></button>
         </p>
     </div>
+
     <div class="card">
-        <img src="/Media/logo.png" alt="hype-logo" style="width:100%">
+        <img src="/Media/zsombi.jpg" alt="hype-logo">
         <h3>Török Zsombor</h3>
         <p class="card-title">Database & Backend Developer</p>
         <p>KTMG</p>
         <div style="margin: 24px 0;">
-            <a href="#"><i class="fa fa-reddit"></i></a>
-            <a href="#"><i class="fa fa-instagram"></i></a>
+            <a href="https://www.instagram.com/torok.zsombor15/"><i class="fa fa-instagram"></i></a>
         </div>
         <p>
             <button>Chat on <b class="hype">HYPE</b></button>
         </p>
     </div>
+
     <div class="card">
-        <img src="/Media/bazsiactionman.jpeg" alt="hype-logo" style="width:100%">
+        <img src="/Media/bazsiactionman.jpeg" alt="hype-logo">
         <h3>Nagy Balázs</h3>
         <p class="card-title">Frontend Developer</p>
         <p>KTMG</p>
         <div style="margin: 24px 0;">
-            <a href="#"><i class="fa fa-reddit"></i></a>
-            <a href="#"><i class="fa fa-instagram"></i></a>
+            <a href="https://www.instagram.com/balazs612/"><i class="fa fa-instagram"></i></a>
         </div>
         <p>
             <button>Chat on <b class="hype">HYPE</b></button>
         </p>
     </div>
+
     <div class="card">
-        <img src="/Media/daveszko.jpg" alt="hype-logo" style="width:100%">
+        <img src="/Media/daveszko.jpg" alt="hype-logo">
         <h3>Magyarcsik Dávid</h3>
         <p class="card-title">Designer, Frontend Developer</p>
         <p>KTMG</p>
         <div style="margin: 24px 0;">
-            <a href="#"><i class="fa fa-reddit"></i></a>
+            <a href="https://www.reddit.com/user/davee1337/"><i class="fa fa-reddit"></i></a>
             <a href="https://www.instagram.com/daveszko/"><i class="fa fa-instagram"></i></a>
         </div>
         <p>
             <button>Chat on <b class="hype">HYPE</b></button>
         </p>
     </div>
+
     <div class="card">
-        <img src="/Media/logo.png" alt="hype-logo" style="width:100%">
+        <img src="/Media/logo.png" alt="hype-logo">
         <h3>Kiss Péter</h3>
         <p class="card-title">Frontend & Backend Developer</p>
         <p>KTMG</p>
@@ -92,20 +118,34 @@
 </div>
 
 <div class="project">
-    <h2>DuszaWorkshop-KapOS</h2>
-    <p>Rengeteg chatelésre alkalmas alkalmazás elérhető a piacon. A gond velük, hogy vagy túl sok mellékes
-        funkcionalitást
-        tartalmaznak (pl.: a Google Chattel "együtt jár" a Gmail, Facebook Messenger mellé Facebookot is "kap" a
-        felhasználó), vagy nem biztonságosak (nyilvános chat szobák) és értesítéseket sem lehet megfelelően beállítani,
-        ami
-        egy csoportnál külön zavaró lehet.
+    <h2>DuszaWorkshop - KapOS</h2>
 
-        A projekt célja egy olyan webes alkalmazás kifejlesztése, melyben valós időben lehet chatelni, de a pontos
-        funkcionalitásokat, értesítési beállításokat teljesen személyre lehet szabni. Minden felhasználó létrehozhat
-        szabályokat az értesítésekre akár szobára, akár személy(ek)re fókuszálva saját feltételrendszer definiálással.
+    <p>
+        Rengeteg, direkt chatelésre fejlesztett alkalmazás érhető el a piacon napjainkban.
+        A gond velük viszont az, hogy túlságosan <b>sok mellékes funkcionalitást</b> tartalmaznak.
+    </p>
 
-        A chat természetesen tartalmazhat extra funkcionalitásokat: valós idejű vagy körökre osztott játék, fájlküldés,
-        feliratkozás stb.</p>
+    <p>
+        Vehetjük például azt, hogy a <b>Google Hangouts</b>-szal "együtt jár" a <b>Gmail</b>, vagy
+        a <b>Facebook Messenger</b> mellé <b>Facebook fiókot</b> is akaratlanul létrehoz a felhasználó.<br>
+
+        Mindezek felett <b>nem biztonságosak a nyilvános chat szobák</b>, s az értesítéseket sem lehet megfelelően
+        testreszabni,
+        amely egy csoportnál <b>rendkívül zavaró tud lenni.</b> <br>
+        Gondolunk itt arra, hogy Facebook-on, ha reagálnek egy elküldött üzenetünkre,
+        ugynolyan "értékű" értesítést kapunk, mintha valaki üzent volna nekünk. <br>
+
+        <b>Projektunk célja</b>, hogy olyan webes alkalmazást fejlesszünk, melyben valós időben lehet chatelni, de <b>pontos
+        funkcionalitásokat, értesítési beállításokat teljesen személyre lehessen szabni.</b>
+    </p>
+
+    <p>
+    Minden felhasználó <b>létrehozhat szabályokat az értesítésekre,</b>
+        akár egy adott szobára, akár különböző személy(ek)re való figyelemmel, egy saját feltételrendszer definiálásával.
+
+    A chat természetesen tartalmazhat extra funkcionalitásokat is, mint pl.: valós idejű vagy körökre osztott játék, fájlküldés,
+    feliratkozás stb.
+        </p>
 
     <h2>Technology Stack</h2>
     <p>Java, Spring Boot, MariaDB, GitHub, Trello, Discord</p>
@@ -114,6 +154,7 @@
 <div class="footer">
     <img src="/Media/logo.png" onclick="hype()" alt="hype:DD" width="25%">
 </div>
+
 <script>
     function chat() {
         window.location.replace("/chat")

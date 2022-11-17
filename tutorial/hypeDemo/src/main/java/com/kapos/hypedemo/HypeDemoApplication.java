@@ -11,5 +11,6 @@ public class HypeDemoApplication {
     }
 
 
-
+    public void setField(String field) {
+    }
 }

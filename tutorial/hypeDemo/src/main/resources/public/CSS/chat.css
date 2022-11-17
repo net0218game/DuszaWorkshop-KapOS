@@ -3,6 +3,10 @@
     -moz-box-sizing: border-box;
     box-sizing: border-box;
 }
+@font-face {
+    font-family: Comfortaa;
+    src: url("../Media/Comfortaa-Bold.ttf");
+}
 
 html, body {
     height: 100%;
@@ -13,7 +17,7 @@ body {
     margin: 0;
     padding: 0;
     font-weight: 400;
-    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-family: Comfortaa;
     font-size: 1rem;
     line-height: 1.58;
     color: #333;

@@ -6,12 +6,30 @@
     <title>Hype</title>
     <link rel="stylesheet" href="/CSS/chat.css"/>
     <link rel="stylesheet" href="/CSS/hype.css"/>
+    <link rel="stylesheet" href="/CSS/navbar.css"/>
     <link rel="icon" type="image/x-icon" href="/Media/hype.gif">
 </head>
 <body>
 <noscript>
     <h2>Sorry! Your browser doesn't support Javascript</h2>
 </noscript>
+
+<!-- NAVBAR -->
+<div class="topnav" id="myTopnav">
+    <a href="/" class="active">Home</a>
+    <a href="#news">News</a>
+    <a href="#contact">Contact</a>
+    <a href="#about">About</a>
+
+    <a href="/login" style="float:right;" sec:authorize="!isAuthenticated()">Log In</a>
+    <a href="/logout" style="float:right;" sec:authorize="isAuthenticated()">Log Out</a>
+
+    <a sec:authorize="isAuthenticated()" href="#" style="float: right">
+        Signed In As: <span sec:authentication="name">USERNAME</span></a>
+    <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+        <i class="fa fa-bars"></i>
+    </a>
+</div>
 
 <div id="username-page">
     <div class="username-page-container">

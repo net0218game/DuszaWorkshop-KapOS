@@ -6,12 +6,25 @@
 <head>
     <meta charset="UTF-8">
     <title>Contacts</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
     <link rel="icon" type="image/x-icon" href="/Media/hype.gif">
     <link rel="stylesheet" href="/CSS/navbar.css"/>
+    <link rel="stylesheet" href="/CSS/hype.css"/>
     <script src="https://kit.fontawesome.com/02ff1d2c53.js" crossorigin="anonymous">
     </script>
+    <script src="/JS/navbar.js"></script>
 
     <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-weight: 400;
+            font-family: Comfortaa;
+            font-size: 1rem;
+            line-height: 1.58;
+            height: 100%;
+        }
+
         table {
         font-family: arial, sans-serif;
         border-collapse: collapse;
@@ -31,17 +44,21 @@
 </head>
 <body>
 
+<!-- NAV(nemzeti ado- es vamhivatal)(elf)BAR -->
 <div class="topnav" id="myTopnav">
-    <a href="/" class="active">Home</a>
-    <a href="/register">Register</a>
-    <a href="/login" style="float:right; color: #fffef0; background-color: #29ce5e" sec:authorize="!isAuthenticated()">Sign In</a>
-    <a href="/logout" style="float:right; color: white; background-color: #ec1f1f" sec:authorize="isAuthenticated()"><i class="fa fa-sign-out" style="background: transparent"></i></a>
+    <a href="/" class="hype">HYPE</a>
+    <a href="/register"><i class="fa fa-key"></i> Register</a>
+    <a href="/chat"><i class="fa fa-comment-dots"></i> Chat</a>
+    <a href="/contacts" class="active"><i class="fa fa-user"></i> Contacts</a>
 
-    <a sec:authorize="isAuthenticated()" href="#" style="float: right">
-        Signed In As: <span sec:authentication="name">USERNAME</span></a>
-    <a href="javascript:void(0);" class="icon" onclick="myFunction()">
-        <i class="fa fa-bars"></i>
-    </a>
+    <!-- Profil -->
+    <a sec:authorize="isAuthenticated()" class="user" href="#">
+        <i class="fa fa-user"></i> <span sec:authentication="name" style="background: transparent">USERNAME</span></a>
+    <a href="javascript:void(0);" class="icon" onclick="navbar()"><i class="fa fa-bars"></i></a>
+
+    <!-- Login / Logout -->
+    <a href="/login" class="login" sec:authorize="!isAuthenticated()"><i class="fa fa-sign-in"></i></a>
+    <a href="/logout" class="logout" sec:authorize="isAuthenticated()"><i class="fa fa-sign-out" style="background: transparent"></i></a>
 </div>
 
 <h1>Users Table</h1>

@@ -28,6 +28,7 @@ public class SimpleController {
         this.messagesRepository = messagesRepository;
     }
 
+
     // ========== Eleresi utak ==========
     @GetMapping("/")
     public ModelAndView index() {
@@ -108,10 +109,14 @@ public class SimpleController {
         messagesRepository.save(new Chat(chat.getId(), chat.getContent(), chat.getSender(), chat.getReceiver()));
     }
 
-    // Send The Contact Details To The Client
-    // Felhasznalok Kilistazasa
+    // ========== Thymeleaf Részek ==========
+
+    // Contactok Kilistazasa
     @ModelAttribute("contacts")
     public List<User> getUsers(){
         return userRepository.findAll();
     }
+
+    // ========== Thymeleaf Részek vége ==========
+
 }

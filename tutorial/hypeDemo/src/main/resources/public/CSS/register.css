@@ -6,12 +6,17 @@ body {
     margin: 0;
     padding: 0;
     font-weight: 400;
-    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-family: Comfortaa;
     font-size: 1rem;
     line-height: 1.58;
     color: #333;
     background-color: #000000;
     height: 100%;
+}
+
+@font-face {
+    font-family: Comfortaa;
+    src: url("../Media/Comfortaa-Bold.ttf");
 }
 
 /* Create two equal columns that floats next to each other */
@@ -41,7 +46,7 @@ input, select {
     margin-top: 10px;
 }
 
-i {
+.container i {
     padding-top: 22px;
     padding-left: 15px;
     color: #777777;

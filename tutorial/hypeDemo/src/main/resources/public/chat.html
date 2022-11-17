@@ -8,29 +8,31 @@
     <link rel="stylesheet" href="/CSS/hype.css"/>
     <link rel="stylesheet" href="/CSS/navbar.css"/>
     <link rel="icon" type="image/x-icon" href="/Media/hype.gif">
+    <script src="https://kit.fontawesome.com/02ff1d2c53.js" crossorigin="anonymous"></script>
+    <script src="/JS/navbar.js"></script>
 </head>
 <body>
 <noscript>
     <h2>Sorry! Your browser doesn't support Javascript</h2>
 </noscript>
 
-<!-- NAVBAR -->
+<!-- NAV(nemzeti ado- es vamhivatal)(elf)BAR -->
 <div class="topnav" id="myTopnav">
-    <a href="/" class="active">Home</a>
-    <a href="#news">News</a>
-    <a href="#contact">Contact</a>
-    <a href="#about">About</a>
+    <a href="/" class="hype">HYPE</a>
+    <a href="/register"><i class="fa fa-key"></i> Register</a>
+    <a href="/chat" class="active"><i class="fa fa-comment-dots"></i> Chat</a>
+    <a href="/contacts"><i class="fa fa-user"></i> Contacts</a>
 
-    <a href="/login" style="float:right;" sec:authorize="!isAuthenticated()">Log In</a>
-    <a href="/logout" style="float:right;" sec:authorize="isAuthenticated()">Log Out</a>
+    <!-- Profil -->
+    <a sec:authorize="isAuthenticated()" class="user" href="#">
+        <i class="fa fa-user"></i> <span sec:authentication="name" class="name" style="background: transparent">USERNAME</span></a>
+    <a href="javascript:void(0);" class="icon" onclick="navbar()"><i class="fa fa-bars"></i></a>
 
-    <a sec:authorize="isAuthenticated()" href="#" style="float: right">
-        Signed In As: <span sec:authentication="name">USERNAME</span></a>
-    <a href="javascript:void(0);" class="icon" onclick="myFunction()">
-        <i class="fa fa-bars"></i>
-    </a>
+    <!-- Login / Logout -->
+    <a href="/login" class="login" sec:authorize="!isAuthenticated()"><i class="fa fa-sign-in"></i></a>
+    <a href="/logout" class="logout" sec:authorize="isAuthenticated()"><i class="fa fa-sign-out" style="background: transparent"></i></a>
 </div>
-
+<!--
 <div id="username-page">
     <div class="username-page-container">
         <h1 class="title">Please log in to start chatting</h1>
@@ -38,7 +40,8 @@
         <form id="usernameForm" name="usernameForm">
             <div class="form-group">
                 <input type="text" id="name" placeholder="Username" autocomplete="off" class="input" required/>
-                <input type="password" id="password" placeholder="Password  (DISABLED)" autocomplete="off" class="input" disabled/>
+                <input type="password" id="password" placeholder="Password  (DISABLED)" autocomplete="off" class="input"
+                       disabled/>
             </div>
             <div class="form-group">
                 <button type="submit" class="start-button">Start Chatting</button>
@@ -46,6 +49,7 @@
         </form>
     </div>
 </div>
+-->
 
 <div id="chat-page" class="hidden">
     <div class="contact-container">
@@ -69,7 +73,8 @@
             <!--EZ IGY NEM MARADHAT!!!! AZ ID BEALLITASANAL, MERT HA 2 UGYAN OLYAN NEVU FELHASZNALO VAN AKKOR MEGHAL!!
             KI KELL MAJD CSERELNI FELHASZNALO ID-RE (contact.id) ES AZ UZENET KULDESI MODOT MEGVALTOZTATNI FELHASZNALO
              NEVROL ID RE.-->
-            <li class="chat-message" th:each="contact : ${contacts}" th:id="${contact.userName}" onclick="getContactName(this)">
+            <li class="chat-message" th:each="contact : ${contacts}" th:id="${contact.userName}"
+                onclick="getContactName(this)">
                 <i style="background-color: rgb(200,0,255);">T</i>
                 <span th:text="${contact.userName}">username comes here</span>
                 <p>Last message comes here</p>
@@ -83,7 +88,7 @@
     </div>
     <div class="chat-container">
         <div class="chat-header">
-            <h2 class="contactName"><span class="hype">HYPE</span> Chat Demo</h2>
+            <h2 class="contactName" th:text="${receiver}"><span class="hype">HYPE</span> Chat Demo</h2>
         </div>
         <div class="connecting">
             Connecting...

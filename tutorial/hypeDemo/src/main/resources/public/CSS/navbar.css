@@ -52,3 +52,23 @@
         text-align: left;
     }
 }
+
+.topnav .login {
+    background-color: #29ce5e;
+    color: black;
+    float: right;
+}
+
+.login i {
+    color: black;
+}
+
+.topnav .logout {
+    background-color: #ec1f1f;
+    color: black;
+    float: right;
+}
+
+.topnav .user {
+    float: right;
+}

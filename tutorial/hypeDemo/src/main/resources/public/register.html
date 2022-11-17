@@ -1,15 +1,36 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
     <meta charset="UTF-8">
     <title>Register to join the Hype</title>
     <link rel="stylesheet" href="/CSS/register.css"/>
     <link rel="stylesheet" href="/CSS/button.css"/>
     <link rel="stylesheet" href="/CSS/hype.css"/>
+    <link rel="stylesheet" href="/CSS/navbar.css"/>
     <link rel="icon" type="image/x-icon" href="/Media/hype.gif">
     <script src="https://kit.fontawesome.com/02ff1d2c53.js" crossorigin="anonymous"></script>
+    <script src="/JS/navbar.js"></script>
 </head>
 <body>
+
+<!-- NAV(nemzeti ado- es vamhivatal)(elf)BAR -->
+<div class="topnav" id="myTopnav">
+    <a href="/" class="hype">HYPE</a>
+    <a href="/register" class="active"><i class="fa fa-key"></i> Register</a>
+    <a href="/chat"><i class="fa fa-comment-dots"></i> Chat</a>
+    <a href="/contacts"><i class="fa fa-user"></i> Contacts</a>
+
+    <!-- Profil -->
+    <a sec:authorize="isAuthenticated()" class="user" href="#">
+        <i class="fa fa-user"></i> <span sec:authentication="name" style="background: transparent">USERNAME</span></a>
+    <a href="javascript:void(0);" class="icon" onclick="navbar()"><i class="fa fa-bars"></i></a>
+
+    <!-- Login / Logout -->
+    <a href="/login" class="login" sec:authorize="!isAuthenticated()"><i class="fa fa-sign-in"></i></a>
+    <a href="/logout" class="logout" sec:authorize="isAuthenticated()"><i class="fa fa-sign-out" style="background: transparent"></i></a>
+</div>
 
     <div class="container" id="container1">
         <h1 class="title">Let's Create an Account!</h1>

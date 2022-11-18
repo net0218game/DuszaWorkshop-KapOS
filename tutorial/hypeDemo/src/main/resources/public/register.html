@@ -23,13 +23,18 @@
     <a href="/contacts"><i class="fa fa-user"></i> Contacts</a>
 
     <!-- Profil -->
-    <a sec:authorize="isAuthenticated()" class="user" href="#">
-        <i class="fa fa-user"></i> <span sec:authentication="name" style="background: transparent">USERNAME</span></a>
-    <a href="javascript:void(0);" class="icon" onclick="navbar()"><i class="fa fa-bars"></i></a>
-
-    <!-- Login / Logout -->
+    <div class="dropdown">
+        <button class="dropbtn" sec:authorize="isAuthenticated()">
+            <i class="fa fa-user"></i> <span sec:authentication="name">USERNAME</span></a>
+        </button>
+        <div class="dropdown-content">
+            <a href="#">My Profile</a>
+            <!-- Login / Logout -->
+            <a href="/logout" class="logout" sec:authorize="isAuthenticated()"><i class="fa fa-sign-out" style="background: transparent"></i></a>
+        </div>
+    </div>
     <a href="/login" class="login" sec:authorize="!isAuthenticated()"><i class="fa fa-sign-in"></i></a>
-    <a href="/logout" class="logout" sec:authorize="isAuthenticated()"><i class="fa fa-sign-out" style="background: transparent"></i></a>
+    <a href="javascript:void(0);" class="icon" onclick="navbar()"><i class="fa fa-bars"></i></a>
 </div>
 
     <div class="container" id="container1">

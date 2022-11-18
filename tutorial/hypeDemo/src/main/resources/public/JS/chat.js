@@ -33,7 +33,7 @@ function connect(event) {
     }
     event.preventDefault();
 }*/
-username = document.querySelector('.name').textContent.trim();
+username = document.querySelector('.dropbtn').textContent.trim();
 
 chatPage.classList.remove('hidden');
 

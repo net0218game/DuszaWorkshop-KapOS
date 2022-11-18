@@ -5,12 +5,14 @@ import com.kapos.hypedemo.model.User;
 import com.kapos.hypedemo.model.repo.MessagesRepository;
 import com.kapos.hypedemo.model.repo.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.Ordered;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 
 import java.util.List;
 
@@ -61,7 +63,6 @@ public class SimpleController {
         return modelAndView;
     }
 
-    // ========== Eleresi utak vege ==========
 
     @GetMapping("/contacts")
     public ModelAndView contact() {
@@ -69,6 +70,15 @@ public class SimpleController {
         modelAndView.setViewName("contacts.html");
         return modelAndView;
     }
+
+    @GetMapping("/login")
+    public ModelAndView login() {
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("login.html");
+        return modelAndView;
+    }
+
+    // ========== Eleresi utak vege ==========
 
     // Regisztralas
     @PostMapping("/register")

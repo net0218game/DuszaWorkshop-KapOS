@@ -1,10 +1,26 @@
 * {
     background-color: black;
     color: white;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
 }
+
+body {
+    margin: 0;
+    padding: 0;
+    font-weight: 400;
+    font-family: Comfortaa;
+    font-size: 1rem;
+    line-height: 1.58;
+    color: #333;
+    background-color: #000000;
+    height: 100%;
+}
+
 @font-face {
     font-family: Comfortaa;
-    src: url("public/Media/Comfortaa-Bold.ttf");
+    src: url("../Media/Comfortaa-Bold.ttf");
 }
 
 .card {
@@ -12,8 +28,13 @@
     max-width: 300px;
     margin: auto;
     text-align: center;
-    '''font-family: Comfortaa;'''
+    font-family: Comfortaa;
     position: static;
+}
+
+.card img {
+    height: 300px;
+    width: 100%;
 }
 
 .card-container {
@@ -31,8 +52,8 @@ button {
     outline: 0;
     display: inline-block;
     padding: 8px;
-    color: black;
-    background-color: white;
+    color: #000000;
+    background-color: #ffffff;
     text-align: center;
     cursor: pointer;
     width: 100%;
@@ -42,24 +63,41 @@ button {
 a {
     text-decoration: none;
     font-size: 22px;
+    background: transparent;
 }
 
 button:hover, a:hover {
     opacity: 0.7;
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1, h2, h3, h4{
     text-align: center;
+}
+
+h5{
+    padding-top: 13px;
+    padding-bottom: 13px;
+    text-align: right;
+    font-size: 60px;
+}
+
+h6{
+    padding-top: 13px;
+    padding-bottom: 13px;
+    text-align: left;
+    font-size: 60px;
 }
 
 h1 {
     font-size: 100px;
+    font-family: Comfortaa;
 }
 
 h2 {
     font-size: 50px;
     padding-top: 40px;
     padding-bottom: 40px;
+    font-family: Comfortaa;
 }
 
 .title-div {
@@ -78,17 +116,31 @@ h2 {
 
 
 .project p {
+    font-family: Arial;
     margin: auto;
     text-align: left;
     width: 60%;
-    font-family: Comfortaa;
     font-size: 20px;
     letter-spacing: 2px;
 }
-
 
 .footer {
     margin-top: 100px;
     margin-bottom: 100px;
     text-align: center;
+}
+
+table {
+    font-family: Comfortaa;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+th {
+    border: 1px solid #000000;
+    padding: 5px;
+}
+
+i {
+    background: transparent;
 }

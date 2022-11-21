@@ -1,8 +1,12 @@
 * {
+    color: black;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
     box-sizing: border-box;
 }
 
 body {
+    background-color: black;
     margin: 0;
     padding: 0;
     font-weight: 400;
@@ -17,20 +21,6 @@ body {
 @font-face {
     font-family: Comfortaa;
     src: url("../Media/Comfortaa-Bold.ttf");
-}
-
-/* Create two equal columns that floats next to each other */
-.column {
-    float: left;
-    width: 50%;
-    padding: 10px;
-}
-
-/* Clear floats after the columns */
-.row:after {
-    content: "";
-    display: table;
-    clear: both;
 }
 
 input, select {
@@ -70,33 +60,20 @@ input::placeholder {
     background-color: #cccccc;
     box-shadow: 0 0px 30px rgba(255, 255, 255);
     border-radius: 5px;
-    width: 100%;
-    max-width: 500px;
-    display: inline-block;
-    margin-top: 42px;
+    max-width: 25%;
     vertical-align: middle;
     position: relative;
     padding: 35px 55px 35px;
-    min-height: 250px;
     position: relative;
-    top: 50%;
-    left: 0;
-    right: 0;
-    margin: 50px;
-    margin-top: 50px;
+    margin: auto;
+    margin-top: 5%;
     text-align: center;
 }
 
-#container1 {
-    float: left;
+.alert-error {
+    color: red;
 }
 
-#container2 {
-    float: right;
-}
-
-label p {
-    text-align: left;
-    color: #777777;
-    margin-bottom: -10px;
+.alert-success {
+    color: green;
 }

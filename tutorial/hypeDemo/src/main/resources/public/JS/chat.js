@@ -1,6 +1,4 @@
-var usernamePage = document.querySelector('#username-page');
 var chatPage = document.querySelector('#chat-page');
-var usernameForm = document.querySelector('#usernameForm');
 var messageForm = document.querySelector('#messageForm');
 var messageInput = document.querySelector('#message');
 var messageArea = document.querySelector('#messageArea');
@@ -21,12 +19,11 @@ var colors = [
     '#ffc107', '#ff85af', '#FF9800', '#39bbb0'
 ];
 
-
+/*
 function connect(event) {
-    username = document.querySelector('#name').value.trim();
+    username = document.querySelector('.name').value.trim();
 
     if (username) {
-        usernamePage.classList.add('hidden');
         chatPage.classList.remove('hidden');
 
         var socket = new SockJS('/ws');
@@ -35,7 +32,15 @@ function connect(event) {
         stompClient.connect({}, onConnected, onError);
     }
     event.preventDefault();
-}
+}*/
+username = document.querySelector('.dropbtn').textContent.trim();
+
+chatPage.classList.remove('hidden');
+
+var socket = new SockJS('/ws');
+stompClient = Stomp.over(socket);
+
+stompClient.connect({}, onConnected, onError);
 
 
 function onConnected() {
@@ -47,9 +52,6 @@ function onConnected() {
         {},
         JSON.stringify({sender: username, type: 'JOIN'})
     )*/
-    fetch("/username").then((result) => console.log(result));
-
-    connectingElement.classList.add('hidden');
     connectingElement.classList.add('hidden');
 }
 
@@ -167,6 +169,4 @@ function getAvatarColor(messageSender) {
     var index = Math.abs(hash % colors.length);
     return colors[index];
 }
-
-usernameForm.addEventListener('submit', connect, true)
 messageForm.addEventListener('submit', sendMessage, true)

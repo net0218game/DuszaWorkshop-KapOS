@@ -6,6 +6,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -14,14 +15,17 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 
-@Configuration
-public class Security {
+import static org.springframework.security.config.Customizer.withDefaults;
 
-    @Bean
-    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+@Configuration
+public class Security extends WebSecurityConfigurerAdapter {
+
+    @Override
+    protected void configure(HttpSecurity http) throws Exception {
         http
                 .csrf().disable()
                 .authorizeHttpRequests()
+                .antMatchers("/login").permitAll()
                 .mvcMatchers("/","/ws/**")
                 .permitAll()
                 .and()
@@ -30,14 +34,20 @@ public class Security {
                 .antMatchers("/CSS/**").permitAll()
                 .antMatchers("/Media/**").permitAll()
                 .antMatchers("/JS/**").permitAll()
+
+                // Minden oldal bejelentkezest igenyel
                 .anyRequest().authenticated()
+
                 .and()
                 .formLogin()
+                .loginPage("/login")
+                .permitAll()
                 .defaultSuccessUrl("/")
                 .and()
                 .logout( logout -> logout.logoutSuccessUrl("/"));
-        return http.build();
     }
+
+    /**/
 
     @Bean
     public InMemoryUserDetailsManager userDetailsService() {

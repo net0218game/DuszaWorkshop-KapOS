@@ -3,9 +3,10 @@
     -moz-box-sizing: border-box;
     box-sizing: border-box;
 }
+
 @font-face {
     font-family: Comfortaa;
-    src: url("public/Media/Comfortaa-Bold.ttf");
+    src: url("../Media/Comfortaa-Bold.ttf");
 }
 
 html, body {

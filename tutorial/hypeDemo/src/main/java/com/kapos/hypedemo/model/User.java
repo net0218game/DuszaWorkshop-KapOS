@@ -3,7 +3,6 @@ package com.kapos.hypedemo.model;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
-import java.util.Date;
 import java.util.Objects;
 
 @Entity
@@ -97,14 +96,6 @@ public class User {
     public int hashCode() {
         return Objects.hash(id, userName, email, password);
     }
-
-    /*public Date getBorn() {
-        return born;
-    }
-
-    public void setBorn(Date born) {
-        this.born = born;
-    }*/
 
     public String getSecondName() {
         return secondName;

@@ -2,38 +2,34 @@ package com.kapos.hypedemo.controller;
 
 import com.kapos.hypedemo.model.Chat;
 import com.kapos.hypedemo.model.User;
+import com.kapos.hypedemo.model.repo.MessagesRepository;
 import com.kapos.hypedemo.model.repo.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
+import org.springframework.core.Ordered;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.Payload;
-import org.springframework.messaging.handler.annotation.SendTo;
-import org.springframework.messaging.simp.SimpMessageHeaderAccessor;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
-import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.provisioning.InMemoryUserDetailsManager;
-import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
-import java.security.Principal;
+import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
+
 import java.util.List;
-import java.util.Objects;
 
 @RestController
 public class SimpleController {
-
     private final UserRepository userRepository;
+    private final MessagesRepository messagesRepository;
 
     @Autowired
     private SimpMessagingTemplate simpMessagingTemplate;
 
     @Autowired
-    public SimpleController(UserRepository userRepository) {
+    public SimpleController(UserRepository userRepository, MessagesRepository messagesRepository) {
         this.userRepository = userRepository;
+        this.messagesRepository = messagesRepository;
     }
+
 
     // ========== Eleresi utak ==========
     @GetMapping("/")
@@ -67,15 +63,22 @@ public class SimpleController {
         return modelAndView;
     }
 
-    // ========== Eleresi utak vege ==========
 
-    // Felhasznalok Kilistazasa
     @GetMapping("/contacts")
     public ModelAndView contact() {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("contacts.html");
         return modelAndView;
     }
+
+    @GetMapping("/login")
+    public ModelAndView login() {
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("login.html");
+        return modelAndView;
+    }
+
+    // ========== Eleresi utak vege ==========
 
     // Regisztralas
     @PostMapping("/register")
@@ -89,8 +92,8 @@ public class SimpleController {
         return userRepository.findById(id).orElse(null);
     }
 
-    /*
-    // A Public Chat Része
+
+    /* // A Public Chat Része
     @MessageMapping("/application")
     @SendTo("/all/messages")
     public Chat sendMessage(@Payload Chat chatMessage) {
@@ -108,13 +111,22 @@ public class SimpleController {
     // Handling Private Messages
     @MessageMapping("/private")
     public void sendToSpecificUser(@Payload Chat chat) {
+        // Uzenet elkuldese felhasznalonak
         simpMessagingTemplate.convertAndSendToUser(chat.getReceiver(), "/specific", chat);
-        // uzenetek eltarolasa db ben
+        // Uzenetek eltarolasa db ben
+        /* A kesobbiekben a sender-t es a receiver-t meg kell valtoztatnunk senderId és receiverId-re.
+        Ezeket majd a Spring Security-vel bejelentkezett felhasznalonak az Id-jevel oldjuk meg.*/
+        messagesRepository.save(new Chat(chat.getId(), chat.getContent(), chat.getSender(), chat.getReceiver()));
     }
 
-    // Send The Contact Details To The Client
+    // ========== Thymeleaf Részek ==========
+
+    // Contactok Kilistazasa
     @ModelAttribute("contacts")
     public List<User> getUsers(){
         return userRepository.findAll();
     }
+
+    // ========== Thymeleaf Részek vége ==========
+
 }

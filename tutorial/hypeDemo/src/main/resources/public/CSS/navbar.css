@@ -4,10 +4,10 @@
 }
 @font-face {
     font-family: Comfortaa;
-    src: url("public/Media/Comfortaa-Bold.ttf");
+    src: url("../Media/Comfortaa-Bold.ttf");
 }
-
 .topnav a {
+    background-color: #333;
     float: left;
     font-family: Comfortaa;
     display: block;
@@ -24,12 +24,17 @@
 }
 
 .topnav a.active {
-    background-color: #0f81b4;
+    background-color: #679aee;
     color: white;
 }
 
 .topnav .icon {
     display: none;
+}
+
+.topnav i {
+    background: transparent;
+    color: white;
 }
 
 @media screen and (max-width: 600px) {
@@ -52,4 +57,80 @@
         display: block;
         text-align: left;
     }
+}
+
+.topnav .login {
+    background-color: #29ce5e;
+    color: black;
+    float: right;
+}
+
+.login i {
+    color: black;
+}
+
+.topnav .logout {
+    background-color: #ec1f1f;
+    color: black;
+}
+
+.topnav .logout:hover {
+    color: #ec1f1f;
+    background-color: black;
+}
+
+.topnav .user {
+    float: right;
+}
+
+.topnav span {
+    background: transparent;
+    color: white;
+}
+
+.dropdown {
+    min-width: 200px;
+    background: transparent;
+    float: right;
+    overflow: hidden;
+}
+
+.dropdown .dropbtn {
+    font-size: 16px;
+    border: none;
+    outline: none;
+    color: white;
+    padding: 14px 16px;
+    background-color: inherit;
+    font-family: inherit;
+    margin: 0;
+}
+
+
+.dropdown-content {
+    float: right;
+    min-width: 200px;
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    box-shadow: 0px 8px 16px 0px rgba(255, 255, 255, 0.2);
+    z-index: 1;
+}
+
+.dropdown-content a {
+    width: 100%;
+    float: right;
+    color: white;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    text-align: center;
+}
+
+.dropdown-content a:hover {
+    background-color: #ddd;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
 }

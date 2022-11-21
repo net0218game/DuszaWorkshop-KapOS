@@ -1,11 +1,13 @@
 .hype {
     animation: color-change 10s infinite;
     background: none;
+    padding-top: 10px;
+    padding-bottom: 10px;
     font-family: Comfortaa;
 }
 @font-face {
     font-family: Comfortaa;
-    src: url("public/Media/Comfortaa-Bold.ttf");
+    src: url("../Media/Comfortaa-Bold.ttf");
 }
 
 @keyframes color-change {

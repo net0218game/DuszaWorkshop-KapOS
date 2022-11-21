@@ -36,6 +36,12 @@ input, select {
     margin-top: 10px;
 }
 
+label p {
+    text-align: left;
+    color: #777777;
+    margin-bottom: -10px;
+}
+
 .container i {
     padding-top: 22px;
     padding-left: 15px;

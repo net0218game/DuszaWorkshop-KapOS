@@ -49,16 +49,16 @@
 
 <table class="center">
     <tr>
-        <th style="width:40%"><h5>The</h5></th>
-        <th style="width:20%"><img src="/Media/kek_logo_00000.png" width="70%"></th>
-        <th style="width:40%"><h6>Team</h6></th>
+        <th class="hidden" style="width:40%"><h5>The</h5></th>
+        <th class="hidden" style="width:20%"><img src="/Media/kek_logo_00000.png" width="70%"></th>
+        <th class="hidden" style="width:40%"><h6>Team</h6></th>
     </tr>
 </table>
 
-<img src="/Media/team.jpg" alt="team" width="100%">
+<img class="hidden" src="/Media/team.jpg" alt="team" width="100%">
 
 <div class="card-container">
-    <div class="card">
+    <div class="card hidden">
         <img src="/Media/david.jpg" alt="Dávid">
         <h3>Tóth Dávid</h3>
         <p class="card-title">Full Stack Developer</p>
@@ -72,7 +72,7 @@
         </p>
     </div>
 
-    <div class="card">
+    <div class="card hidden">
         <img src="/Media/zsombi.jpg" alt="hype-logo">
         <h3>Török Zsombor</h3>
         <p class="card-title">Database & Backend Developer</p>
@@ -85,7 +85,7 @@
         </p>
     </div>
 
-    <div class="card">
+    <div class="card hidden">
         <img src="/Media/bazsiactionman.jpeg" alt="hype-logo">
         <h3>Nagy Balázs</h3>
         <p class="card-title">Frontend Developer</p>
@@ -98,7 +98,7 @@
         </p>
     </div>
 
-    <div class="card">
+    <div class="card hidden">
         <img src="/Media/daveszko.jpg" alt="hype-logo">
         <h3>Magyarcsik Dávid</h3>
         <p class="card-title">Designer, Frontend Developer</p>
@@ -112,7 +112,7 @@
         </p>
     </div>
 
-    <div class="card">
+    <div class="card hidden">
         <img src="/Media/logo.png" alt="hype-logo">
         <h3>Kiss Péter</h3>
         <p class="card-title">Frontend & Backend Developer</p>
@@ -128,14 +128,14 @@
 </div>
 
 <div class="project">
-    <h2>DuszaWorkshop - KapOS</h2>
+    <h2 class="hidden">DuszaWorkshop - KapOS</h2>
 
-    <p>
+    <p class="hidden">
         Rengeteg, direkt chatelésre fejlesztett alkalmazás érhető el a piacon napjainkban.
         A gond velük viszont az, hogy túlságosan <b>sok mellékes funkcionalitást</b> tartalmaznak.
     </p>
 
-    <p>
+    <p class="hidden">
         Vehetjük például azt, hogy a <b>Google Hangouts</b>-szal "együtt jár" a <b>Gmail</b>, vagy
         a <b>Facebook Messenger</b> mellé <b>Facebook fiókot</b> is akaratlanul létrehoz a felhasználó.<br>
 
@@ -149,7 +149,7 @@
         funkcionalitásokat, értesítési beállításokat teljesen személyre lehessen szabni.</b>
     </p>
 
-    <p>
+    <p class="hidden">
     Minden felhasználó <b>létrehozhat szabályokat az értesítésekre,</b>
         akár egy adott szobára, akár különböző személy(ek)re való figyelemmel, egy saját feltételrendszer definiálásával.
 
@@ -157,15 +157,27 @@
     feliratkozás stb.
         </p>
 
-    <h2>Technology Stack</h2>
-    <p>Java, Spring Boot, MariaDB, GitHub, Trello, Discord</p>
+    <h2 class="hidden">Technology Stack</h2>
+    <p class="hidden">Java, Spring Boot, MariaDB, GitHub, Trello, Discord</p>
 </div>
 
 <div class="footer">
-    <img src="/Media/logo.png" onclick="hype()" alt="hype:DD" width="25%">
+    <img class="hidden" src="/Media/logo.png" onclick="hype()" alt="hype:DD" width="25%">
 </div>
 
 <script>
+    const observer = new IntersectionObserver((entries)=> {
+        entries.forEach((entry)=>{
+            console.log(entry)
+            if (entry.isIntersecting){
+                entry.target.classList.add('show');
+            }
+        });
+    });
+
+    const hiddenElements = document.querySelectorAll(".hidden");
+    hiddenElements.forEach((el) => observer.observe(el));
+
     function chat() {
         window.location.replace("/chat")
     }

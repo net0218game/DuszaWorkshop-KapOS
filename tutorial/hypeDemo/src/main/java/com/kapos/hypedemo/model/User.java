@@ -1,35 +1,24 @@
 package com.kapos.hypedemo.model;
-
-
 import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
 import java.util.Objects;
 
 @Entity
 public class User {
 
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    @NotBlank(message = "Please fill in the required datas!")
     private String userName;
-    @NotBlank(message = "Please fill in the required datas!")
     private String firstName;
-    @NotBlank(message = "Please fill in the required datas!")
     private String secondName;
-    @NotBlank(message = "Please fill in the required datas!")
     private String email;
-    @NotBlank(message = "Please fill in the required datas!")
     private String password;
-    @NotBlank(message = "Please fill in the required datas!")
     private String gender;
     private String born;
 
-    public User(User user) {
-
-    }
-
     public User(String userName, String firstName, String secondName, String email, String password, String gender, String born) {
+        this.id = id;
         this.userName = userName;
         this.firstName = firstName;
         this.secondName = secondName;
@@ -37,6 +26,24 @@ public class User {
         this.password = password;
         this.gender = gender;
         this.born = born;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", userName='" + userName + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", secondName='" + secondName + '\'' +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", gender='" + gender + '\'' +
+                ", born='" + born + '\'' +
+                '}';
+    }
+
+    public User(User user) {
+
     }
 
     public User() {

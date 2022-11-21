@@ -5,10 +5,14 @@ import com.kapos.hypedemo.model.User;
 import com.kapos.hypedemo.model.repo.MessagesRepository;
 import com.kapos.hypedemo.model.repo.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.core.Ordered;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -16,6 +20,7 @@ import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 
 import java.util.List;
 
+@Configuration
 @RestController
 public class SimpleController {
     private final UserRepository userRepository;
@@ -28,6 +33,11 @@ public class SimpleController {
     public SimpleController(UserRepository userRepository, MessagesRepository messagesRepository) {
         this.userRepository = userRepository;
         this.messagesRepository = messagesRepository;
+    }
+
+    @Bean
+    public BCryptPasswordEncoder bCryptPasswordEncoder() {
+        return new BCryptPasswordEncoder();
     }
 
 
@@ -83,7 +93,7 @@ public class SimpleController {
     // Regisztralas
     @PostMapping("/register")
     public User insertUser(User user) {
-        return userRepository.save(new User(user.getUserName(), user.getFirstName(), user.getSecondName(), user.getEmail(), user.getPassword(), user.getGender(), user.getBorn()));
+        return userRepository.save(new User(user.getUserName(), user.getFirstName(), user.getSecondName(), user.getEmail(), bCryptPasswordEncoder().encode(user.getPassword()), user.getGender(), user.getBorn()));
     }
 
     // Felhasznalo Lekerdezese ID Alapjan

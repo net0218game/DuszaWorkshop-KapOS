@@ -68,7 +68,8 @@ public class Chat {
     public enum MessageType {
         CHAT,
         JOIN,
-        SYSTEMMESSAGE
+        SYSTEMMESSAGE,
+        FILE
     }
 
     public MessageType getType() {

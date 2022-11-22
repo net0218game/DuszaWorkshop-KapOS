@@ -19,20 +19,6 @@ var colors = [
     '#ffc107', '#ff85af', '#FF9800', '#39bbb0'
 ];
 
-/*
-function connect(event) {
-    username = document.querySelector('.name').value.trim();
-
-    if (username) {
-        chatPage.classList.remove('hidden');
-
-        var socket = new SockJS('/ws');
-        stompClient = Stomp.over(socket);
-
-        stompClient.connect({}, onConnected, onError);
-    }
-    event.preventDefault();
-}*/
 username = document.querySelector('.dropbtn').textContent.trim();
 
 chatPage.classList.remove('hidden');
@@ -74,6 +60,7 @@ function sendMessage(event) {
 
         if (receiver !== username) {
             displayMessage(username, messageInput.value)
+            console.log(replaceURLs(messageInput.value))
         }
 
         stompClient.send("/app/private", {}, JSON.stringify(chatMessage));
@@ -81,7 +68,6 @@ function sendMessage(event) {
     }
     event.preventDefault();
 }
-
 
 function onMessageReceived(payload) {
     var message = JSON.parse(payload.body);
@@ -141,8 +127,9 @@ function displayMessage(username, content) {
     messageElement.appendChild(usernameElement);
 
     var textElement = document.createElement('p');
-    var messageText = document.createTextNode(content);
-    textElement.appendChild(messageText);
+
+    // Ha van a szovegben URL akkor beteszi <a> tagba.
+    textElement.innerHTML = (replaceURLs(content));
 
     messageElement.appendChild(textElement);
 
@@ -169,4 +156,18 @@ function getAvatarColor(messageSender) {
     var index = Math.abs(hash % colors.length);
     return colors[index];
 }
+
+function replaceURLs(message) {
+    if(!message) return;
+
+    var urlRegex = /(((https?:\/\/)|(www\.))[^\s]+)/g;
+    return message.replace(urlRegex, function (url) {
+        var hyperlink = url;
+        if (!hyperlink.match('^https?:\/\/')) {
+            hyperlink = 'http://' + hyperlink;
+        }
+        return '<a href="' + hyperlink + '" target="_blank" rel="noopener noreferrer">' + url + '</a>'
+    });
+}
+
 messageForm.addEventListener('submit', sendMessage, true)

@@ -23,6 +23,7 @@ import java.util.List;
 @Configuration
 @RestController
 public class SimpleController {
+
     private final UserRepository userRepository;
     private final MessagesRepository messagesRepository;
 
@@ -88,12 +89,22 @@ public class SimpleController {
         return modelAndView;
     }
 
+    @GetMapping("/me")
+    public ModelAndView profile() {
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("profile.html");
+        return modelAndView;
+    }
+
     // ========== Eleresi utak vege ==========
 
     // Regisztralas
     @PostMapping("/register")
-    public User insertUser(User user) {
-        return userRepository.save(new User(user.getUserName(), user.getFirstName(), user.getSecondName(), user.getEmail(), bCryptPasswordEncoder().encode(user.getPassword()), user.getGender(), user.getBorn()));
+    public ModelAndView insertUser(User user) {
+        userRepository.save(new User(user.getUserName(), user.getFirstName(), user.getSecondName(), user.getEmail(), bCryptPasswordEncoder().encode(user.getPassword()), user.getGender(), user.getBorn()));
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("index.html");
+        return modelAndView;
     }
 
     // Felhasznalo Lekerdezese ID Alapjan
@@ -102,8 +113,8 @@ public class SimpleController {
         return userRepository.findById(id).orElse(null);
     }
 
-
-    /* // A Public Chat Része
+    /*
+    // A Public Chat Része
     @MessageMapping("/application")
     @SendTo("/all/messages")
     public Chat sendMessage(@Payload Chat chatMessage) {
@@ -133,10 +144,9 @@ public class SimpleController {
 
     // Contactok Kilistazasa
     @ModelAttribute("contacts")
-    public List<User> getUsers(){
+    public List<User> getUsers() {
         return userRepository.findAll();
     }
 
     // ========== Thymeleaf Részek vége ==========
-
 }

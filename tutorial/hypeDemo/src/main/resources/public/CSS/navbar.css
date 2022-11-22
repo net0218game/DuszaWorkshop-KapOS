@@ -89,7 +89,6 @@
 }
 
 .dropdown {
-    min-width: 200px;
     background: transparent;
     float: right;
     overflow: hidden;

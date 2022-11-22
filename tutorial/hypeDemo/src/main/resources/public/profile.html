@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>My Profile</title>
+</head>
+<body>
+<p sec:authentication="principal.email">username</p>
+<p sec:authentication="principal.id">email</p>
+</body>
+</html>

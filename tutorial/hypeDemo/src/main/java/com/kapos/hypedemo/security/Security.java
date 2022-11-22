@@ -1,31 +1,20 @@
 package com.kapos.hypedemo.security;
 
-import com.kapos.hypedemo.model.repo.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationProvider;
-import org.springframework.security.authentication.ProviderManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.web.SecurityFilterChain;
 
-import java.security.AuthProvider;
-import java.util.Arrays;
 
 @Configuration
 @EnableWebSecurity
 public class Security extends WebSecurityConfigurerAdapter{
-
-
-    /*@Override
-    protected void configure(HttpSecurity http) throws Exception*/
 
     @Autowired
     private UserDetailsService userDetailsService;
@@ -54,10 +43,6 @@ public class Security extends WebSecurityConfigurerAdapter{
                 .antMatchers("/CSS/**").permitAll()
                 .antMatchers("/Media/**").permitAll()
                 .antMatchers("/JS/**").permitAll()
-
-                // Minden oldal bejelentkezest igenyel
-
-
                 .and()
                 .formLogin()
                 .loginPage("/login")
@@ -66,5 +51,4 @@ public class Security extends WebSecurityConfigurerAdapter{
                 .and()
                 .logout( logout -> logout.logoutSuccessUrl("/"));
     }
-
 }

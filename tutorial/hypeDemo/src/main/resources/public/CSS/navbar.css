@@ -108,7 +108,6 @@
 
 .dropdown-content {
     float: right;
-    min-width: 200px;
     display: none;
     position: absolute;
     background-color: #f9f9f9;

@@ -11,6 +11,9 @@ var username = null;
 var sessionId = "";
 var receiver = "test"
 
+// Üzenet Maximum Hossza
+var maxLength = 64;
+
 const date = new Date();
 
 
@@ -87,7 +90,7 @@ function onMessageReceived(payload) {
         messageArea.appendChild(messageElement);
         messageArea.scrollTop = messageArea.scrollHeight;
 
-    } else if(message.type === "CHAT") {
+    } else if (message.type === "CHAT") {
 
         displayMessage(message.sender[0], message.content)
 
@@ -105,10 +108,26 @@ function onMessageReceived(payload) {
         usernameElement.appendChild(usernameText);
         messageElement.appendChild(usernameElement);*/
     }
-
-
 }
 
+// ========== Üzenet Hossz Ellenőrzése ==========
+function textLength(value) {
+    return value.length <= maxLength;
+}
+
+document.getElementById('message').onkeyup = function () {
+    if (!textLength(this.value)) {
+        // BoxShadow Pirosra Valtoztatasa
+        messageInput.style.boxShadow = "0 0px 30px rgba(255, 0, 0)";
+    } else {
+        // BoxShadow Visszavaltoztatasa Feherre
+        messageInput.style.boxShadow = "0 0px 30px rgba(255, 255, 255)";
+    }
+}
+
+// ========== Üzenet Hossz Ellenőrzése ==========
+
+// Üzenet Megjelenitese
 function displayMessage(username, content) {
     var messageElement = document.createElement('li');
     messageElement.classList.add('chat-message');
@@ -139,6 +158,7 @@ function displayMessage(username, content) {
     messageArea.scrollTop = messageArea.scrollHeight;
 }
 
+// Contactok Listazasa
 function getContactName(contact) {
     // Torli az elozo uzeneteket
     messageArea.innerHTML = ""
@@ -150,6 +170,7 @@ function getContactName(contact) {
     console.log(receiver)
 }
 
+// Avatar Letrehozasa Felhasznalonak
 function getAvatarColor(messageSender) {
     var hash = 0;
     for (var i = 0; i < messageSender.length; i++) {
@@ -159,21 +180,24 @@ function getAvatarColor(messageSender) {
     return colors[index];
 }
 
+// URLek Felismerese A Szovegben Es Beagyazasuk
 function replaceURLs(message) {
-    if(!message) return;
+    if (!message) return;
 
-    var youtube = /(https?\:\/\/)?((www\.)?youtube\.com|youtu\.be)\/.+$/g;
     var urlRegex = /(((https?:\/\/)|(www\.))[^\s]+)/g;
+    var youtube = /(https?\:\/\/)?((www\.)?youtube\.com|youtu\.be)\/.+$/g;
 
     return message.replace(urlRegex, function (url) {
         var hyperlink = url;
         if (!hyperlink.match('^https?:\/\/')) {
             hyperlink = 'http://' + hyperlink;
         }
-        if(message.match(youtube)) {
-            return '<a href="' + hyperlink + '" target="_blank" rel="noopener noreferrer">' + url + '</a><br><iframe width="560" height="315" src="' + hyperlink.replace("watch?v=", "embed/") + '" frameborder="0" allowfullscreen></iframe>'
+        if (message.match(youtube)) {
+            // Youtube Link Beagyazasa Videokent
+            return '<a href="' + hyperlink + '" target="_blank">' + url + '</a><br><iframe width="560" height="315" src="' + hyperlink.replace("watch?v=", "embed/") + '" frameborder="0" allowfullscreen></iframe>'
         } else {
-            return '<a href="' + hyperlink + '" target="_blank" rel="noopener noreferrer">' + url + '</a>'
+            // Atlagos Link Beagyazasa
+            return '<a href="' + hyperlink + '" target="_blank">' + url + '</a>'
         }
     });
 }

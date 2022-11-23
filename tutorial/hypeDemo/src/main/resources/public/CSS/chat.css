@@ -40,7 +40,6 @@ body {
     color: #777777;
     width: 80%;
     height: 40px;
-    border: none;
     outline: none;
     background: none;
     border: 1px solid #777777;
@@ -216,8 +215,6 @@ a {
 
 #chat-page #messageForm {
     padding: 20px;
-
-
 }
 
 #chat-page ul li {
@@ -249,7 +246,6 @@ a {
 
 }
 
-
 #chat-page .chat-message i {
     position: absolute;
     width: 42px;
@@ -265,7 +261,6 @@ a {
     border-radius: 50%;
     font-style: normal;
     text-transform: uppercase;
-
 }
 
 #chat-page .chat-message span {

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        font-weight: 400;
+        font-family: Comfortaa;
+        font-size: 1rem;
+        line-height: 1.58;
+        height: 100%;
+    }
+
+    table {
+        font-family: arial, sans-serif;
+        border-collapse: collapse;
+        width: 80%;
+    }
+
+    td, th {
+        border: 1px solid #dddddd;
+        text-align: left;
+        padding: 8px;
+    }
+
+    tr:nth-child(even) {
+        background-color: #dddddd;
+    }
+</style>
+<body>
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Sender</th>
+        <th>Receiver</th>
+        <th>Content</th>
+        <th>Date</th>
+    </tr>
+    <tr th:each="message : ${messages}">
+        <td th:text="${message.id}">id</td>
+        <td th:text="${message.sender}">sender</td>
+        <td th:text="${message.receiver}">receiver</td>
+        <td th:text="${message.content}">content</td>
+        <td th:text="${message.date}">date</td>
+    </tr>
+</table>
+</body>
+</html>

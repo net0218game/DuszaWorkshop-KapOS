@@ -4,6 +4,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.Objects;
 
 @Entity
@@ -16,12 +18,14 @@ public class Chat {
     private String sender;
     private String receiver;
     private String senderNickname;
+    private LocalDateTime date;
 
-    public Chat(Integer id, String content, String sender, String receiver) {
+    public Chat(Integer id, String content, String sender, String receiver, LocalDateTime date) {
         this.id = id;
         this.content = content;
         this.sender = sender;
         this.receiver = receiver;
+        this.date = date;
     }
 
     public Chat() {
@@ -63,6 +67,14 @@ public class Chat {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public LocalDateTime getDate() {
+        return date;
+    }
+
+    public void setDate(LocalDateTime date) {
+        this.date = date;
     }
 
     public enum MessageType {

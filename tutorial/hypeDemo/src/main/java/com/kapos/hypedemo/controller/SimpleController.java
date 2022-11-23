@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.Ordered;
+import org.springframework.messaging.Message;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Configuration
@@ -96,6 +98,13 @@ public class SimpleController {
         return modelAndView;
     }
 
+    @GetMapping("/messages")
+    public ModelAndView messages() {
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("messages.html");
+        return modelAndView;
+    }
+
     // ========== Eleresi utak vege ==========
 
     // Regisztralas
@@ -137,7 +146,7 @@ public class SimpleController {
         // Uzenetek eltarolasa db ben
         /* A kesobbiekben a sender-t es a receiver-t meg kell valtoztatnunk senderId és receiverId-re.
         Ezeket majd a Spring Security-vel bejelentkezett felhasznalonak az Id-jevel oldjuk meg.*/
-        messagesRepository.save(new Chat(chat.getId(), chat.getContent(), chat.getSender(), chat.getReceiver()));
+        messagesRepository.save(new Chat(chat.getId(), chat.getContent(), chat.getSender(), chat.getReceiver(), LocalDateTime.now()));
     }
 
     // ========== Thymeleaf Részek ==========

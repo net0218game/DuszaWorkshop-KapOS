@@ -94,7 +94,7 @@
     overflow: hidden;
 }
 
-.dropdown .dropbtn {
+.topnav .dropbtn {
     font-size: 16px;
     border: none;
     outline: none;
@@ -107,6 +107,7 @@
 
 
 .dropdown-content {
+    right: 0;
     float: right;
     min-width: 200px;
     display: none;

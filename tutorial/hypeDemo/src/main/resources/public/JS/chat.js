@@ -77,12 +77,21 @@ function onMessageReceived(payload) {
     if (message.type === 'JOIN') {
         messageElement.classList.add('event-message');
         message.content = message.sender + ' joined the Hype!';
-    } else if(message.type === 'SYSTEMMESSAGE') {
-        messageElement.classList.add('event-message');
-        message.content = message.content + ' This is a system message!';
 
-    } else {
-        messageElement.classList.add('chat-message');
+        var textElement = document.createElement('p');
+        var messageText = document.createTextNode(message.content);
+        textElement.appendChild(messageText);
+
+        messageElement.appendChild(textElement);
+
+        messageArea.appendChild(messageElement);
+        messageArea.scrollTop = messageArea.scrollHeight;
+
+    } else if(message.type === "CHAT") {
+
+        displayMessage(message.sender[0], message.content)
+
+        /*messageElement.classList.add('chat-message');
 
         var avatarElement = document.createElement('i');
         var avatarText = document.createTextNode(message.sender[0]);
@@ -94,17 +103,10 @@ function onMessageReceived(payload) {
         var usernameElement = document.createElement('span');
         var usernameText = document.createTextNode(message.sender);
         usernameElement.appendChild(usernameText);
-        messageElement.appendChild(usernameElement);
+        messageElement.appendChild(usernameElement);*/
     }
 
-    var textElement = document.createElement('p');
-    var messageText = document.createTextNode(message.content);
-    textElement.appendChild(messageText);
 
-    messageElement.appendChild(textElement);
-
-    messageArea.appendChild(messageElement);
-    messageArea.scrollTop = messageArea.scrollHeight;
 }
 
 function displayMessage(username, content) {
@@ -160,13 +162,19 @@ function getAvatarColor(messageSender) {
 function replaceURLs(message) {
     if(!message) return;
 
+    var youtube = /(https?\:\/\/)?((www\.)?youtube\.com|youtu\.be)\/.+$/g;
     var urlRegex = /(((https?:\/\/)|(www\.))[^\s]+)/g;
+
     return message.replace(urlRegex, function (url) {
         var hyperlink = url;
         if (!hyperlink.match('^https?:\/\/')) {
             hyperlink = 'http://' + hyperlink;
         }
-        return '<a href="' + hyperlink + '" target="_blank" rel="noopener noreferrer">' + url + '</a>'
+        if(message.match(youtube)) {
+            return '<a href="' + hyperlink + '" target="_blank" rel="noopener noreferrer">' + url + '</a><br><iframe width="560" height="315" src="' + hyperlink.replace("watch?v=", "embed/") + '" frameborder="0" allowfullscreen></iframe>'
+        } else {
+            return '<a href="' + hyperlink + '" target="_blank" rel="noopener noreferrer">' + url + '</a>'
+        }
     });
 }
 

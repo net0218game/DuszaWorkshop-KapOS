@@ -38,7 +38,15 @@
 }
 
 @media screen and (max-width: 600px) {
-    .topnav a:not(:first-child) {display: none;}
+
+    .topnav a:not(:first-child) {
+        display: none;
+    }
+
+    .dropdown-content a:not(:nth-child(1)) {
+        display: block;
+    }
+
     .topnav a.icon {
         float: right;
         display: block;
@@ -46,7 +54,9 @@
 }
 
 @media screen and (max-width: 600px) {
-    .topnav.responsive {position: relative;}
+    .topnav.responsive {
+        position: relative;
+    }
     .topnav.responsive .icon {
         position: absolute;
         right: 0;
@@ -72,6 +82,7 @@
 .topnav .logout {
     background-color: #ec1f1f;
     color: black;
+    display: block;
 }
 
 .topnav .logout:hover {
@@ -107,6 +118,7 @@
 
 
 .dropdown-content {
+    margin-top: 8px;
     right: 0;
     float: right;
     display: none;

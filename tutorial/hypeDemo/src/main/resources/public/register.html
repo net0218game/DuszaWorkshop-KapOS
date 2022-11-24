@@ -4,6 +4,8 @@
       xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+
     <title>Register to join the Hype</title>
     <link rel="stylesheet" href="/CSS/login.css"/>
     <link rel="stylesheet" href="/CSS/button.css"/>
@@ -30,7 +32,7 @@
         <div class="dropdown-content">
             <a href="#">My Profile</a>
             <!-- Login / Logout -->
-            <a href="/logout" class="logout" sec:authorize="isAuthenticated()"><i class="fa fa-sign-out" style="background: transparent"></i></a>
+            <a href="/logout" class="logout" sec:authorize="isAuthenticated()"><i class="fa fa-sign-out"></i></a>
         </div>
     </div>
     <a href="/login" class="login" sec:authorize="!isAuthenticated()"><i class="fa fa-sign-in"></i></a>
@@ -77,10 +79,10 @@
                 </div>
 
                 <div class="input-container">
-                    <label>
+                    <label style="width: 100%">
                         <p>Date Of Birth</p>
                         <i class="fa-solid fa-calendar-days"></i>
-                        <input type="date" placeholder="Date of Birth" name="born" required th:value="*{born}">
+                        <input type="date" placeholder="Date of Birth" name="born" required th:value="*{born}" style="width: 100%">
                     </label>
                 </div>
 

@@ -8,7 +8,6 @@ var inputBox = document.querySelector('#message');
 
 var stompClient = null;
 var username = null;
-var sessionId = "";
 var receiver = "test"
 
 // Üzenet Maximum Hossza
@@ -16,15 +15,12 @@ var maxLength = 64;
 
 const date = new Date();
 
-
 var colors = [
     '#2196F3', '#32c787', '#00BCD4', '#ff5652',
     '#ffc107', '#ff85af', '#FF9800', '#39bbb0'
 ];
 
 username = document.querySelector('.dropbtn').textContent.trim();
-
-chatPage.classList.remove('hidden');
 
 var socket = new SockJS('/ws');
 stompClient = Stomp.over(socket);
@@ -61,9 +57,9 @@ function sendMessage(event) {
             type: 'CHAT'
         };
 
+        // Uzenetek Megjelenitese Sajat Magadnak
         if (receiver !== username) {
             displayMessage(username, messageInput.value)
-            console.log(replaceURLs(messageInput.value))
         }
 
         stompClient.send("/app/private", {}, JSON.stringify(chatMessage));
@@ -91,22 +87,7 @@ function onMessageReceived(payload) {
         messageArea.scrollTop = messageArea.scrollHeight;
 
     } else if (message.type === "CHAT") {
-
         displayMessage(message.sender[0], message.content)
-
-        /*messageElement.classList.add('chat-message');
-
-        var avatarElement = document.createElement('i');
-        var avatarText = document.createTextNode(message.sender[0]);
-        avatarElement.appendChild(avatarText);
-        avatarElement.style['background-color'] = getAvatarColor(message.sender);
-
-        messageElement.appendChild(avatarElement);
-
-        var usernameElement = document.createElement('span');
-        var usernameText = document.createTextNode(message.sender);
-        usernameElement.appendChild(usernameText);
-        messageElement.appendChild(usernameElement);*/
     }
 }
 
@@ -167,10 +148,9 @@ function getContactName(contact) {
     contactName.innerHTML = receiver;
     // Beallitja az input box placeholder-jét
     inputBox.placeholder = "Send a message to " + receiver + "!"
-    console.log(receiver)
 }
 
-// Avatar Letrehozasa Felhasznalonak
+// Avatar Szin Letrehozasa Felhasznalonak
 function getAvatarColor(messageSender) {
     var hash = 0;
     for (var i = 0; i < messageSender.length; i++) {
@@ -203,3 +183,15 @@ function replaceURLs(message) {
 }
 
 messageForm.addEventListener('submit', sendMessage, true)
+
+function openNav() {
+    document.getElementById("mySidenav").style.width = "400px";
+    document.getElementById("chat-page").style.marginLeft = "400px";
+    document.body.style.backgroundColor = "rgba(0,0,0,0.4)";
+}
+
+function closeNav() {
+    document.getElementById("mySidenav").style.width = "0";
+    document.getElementById("chat-page").style.marginLeft= "0";
+    document.body.style.backgroundColor = "white";
+}

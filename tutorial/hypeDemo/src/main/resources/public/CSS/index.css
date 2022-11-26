@@ -23,37 +23,71 @@ body {
     src: url("../Media/Comfortaa-Bold.ttf");
 }
 
-.card {
-    box-shadow: 0 4px 8px 0 rgb(255, 255, 255);
-    max-width: 300px;
+.column {
+    float: left;
+    width: 25%;
+    padding: 0 10px;
+    margin-top: 20px;
+}
+
+.row {
     margin: auto;
+    width: 80%;
+}
+
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+@media screen and (max-width: 600px) {
+    .team {
+        display: none;
+    }
+
+    .project {
+        width: 90%;
+    }
+}
+
+@media screen and (max-width: 1000px) {
+    .column {
+        width: 90%;
+        display: block;
+        margin-bottom: 20px;
+    }
+}
+
+.card {
+    box-shadow: -5px 5px 5px 0 rgba(255, 255, 255, 0.2);
+    padding: 16px;
     text-align: center;
-    font-family: Comfortaa;
-    position: static;
+    background-color: #111;
+    border-radius: 6px;
 }
 
 .card img {
-    height: 300px;
     width: 100%;
 }
 
-.card-container {
-    padding: 50px;
-    display: flex;
+.card h3, p, i {
+    color: white;
+    background: transparent;
 }
 
-.card-title {
-    color: grey;
-    font-size: 18px;
+.card h3 {
+    font-size: 25px;
 }
 
-button {
+
+.card button {
     border: none;
     outline: 0;
     display: inline-block;
     padding: 8px;
-    color: #000000;
-    background-color: #ffffff;
+    color: white;
+    background-color: #282828;
     text-align: center;
     cursor: pointer;
     width: 100%;
@@ -118,7 +152,7 @@ h2 {
 .project p {
     font-family: Arial;
     margin: auto;
-    text-align: left;
+    text-align: justify;
     width: 60%;
     font-size: 20px;
     letter-spacing: 2px;
@@ -134,6 +168,12 @@ table {
     font-family: Comfortaa;
     border-collapse: collapse;
     width: 100%;
+}
+.techStack {
+    font-size: 30px;
+    margin: auto;
+    text-align: center;
+    width: 33%;
 }
 
 th {

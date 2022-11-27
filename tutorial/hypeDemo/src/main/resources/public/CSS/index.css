@@ -44,6 +44,7 @@ body {
 @media screen and (max-width: 600px) {
     .team {
         display: none;
+        transform: translateY(-1vh);
     }
 
     .project {
@@ -183,4 +184,58 @@ th {
 
 i {
     background: transparent;
+}
+
+.hidden{
+    opacity: 0;
+    transition: all 2s;
+    transform: translateX(-10vw);
+}
+.hidden2{
+    opacity: 0;
+    transition: all 2s;
+    transform: translateX(10vw);
+}
+.hidden3{
+    opacity: 0;
+    transition: all 2s;
+    transform: translateY(10vh);
+}
+.show{
+    opacity: 1;
+    transform: translateX(0vw);
+    transform: translateY(0vh);
+}
+
+.card:nth-child(2){
+    transition-delay: 200ms;
+}
+.card:nth-child(3){
+    transition-delay: 400ms
+}
+.card:nth-child(4){
+    transition-delay: 600ms
+}
+.card:nth-child(5){
+    transition-delay: 800ms
+}
+
+.text:nth-child(2){
+    transition-delay: 400ms
+}
+
+.text:nth-child(3){
+    transition-delay: 800ms
+}
+.text:nth-child(4){
+    transition-delay: 1200ms
+}
+.text:nth-child(5){
+    transition-delay: 1600ms
+}
+.text:nth-child(6){
+    transition-delay: 2000ms
+}
+.text:nth-child(7){
+    transition-delay: 2400ms
 }

@@ -72,5 +72,5 @@ if len(listOfProcessIds) > 0:
 else :
    naplozas("A folyamat nem futott")
 
-os.system("nohup java -jar "+ project_path+"/"+jar_name +" &")
-
+os.system("cd " + project_path + "; nohup java -jar "+ project_path+"/"+jar_name +" &")
+naplozas("nohup java -jar "+ project_path+"/"+jar_name +" &")

@@ -2,17 +2,14 @@ import datetime
 import os.path
 import signal
 import sys
-
 import git
 import shutil
 import psutil
-
 
 project_path = "/proj"
 jar_name = "hypeDemo-0.0.1-SNAPSHOT.jar"
 repo_path = "/opt/DuszaWorkshop-KapOS"
 java_project_path = "/tutorial/hypeDemo"
-
 
 def git_pull_change(path):
     repo = git.Repo(path)
@@ -26,7 +23,6 @@ def git_pull_change(path):
     else:
         naplozas("A repo valtozott.")
         return True
-
 
 def naplozas(szoveg):
     print(str(datetime.time) + "\t" + szoveg)
@@ -50,6 +46,7 @@ def findProcessIdByName(processName):
 
 
 git_valtozas_volt_e=git_pull_change(repo_path)
+
 if (git_valtozas_volt_e):
     maven_return_val = os.system("cd " + repo_path + java_project_path+"; maven clean install")
     if (maven_return_val != 0):
@@ -68,7 +65,7 @@ if len(listOfProcessIds) > 0:
            os.kill(processID, signal.SIGINT)
    else:
         naplozas("A program fut és változás sincs. Marad minden ahogy volt.")
-        sys.exit()
+        exit()
 else :
    naplozas("A folyamat nem futott")
 

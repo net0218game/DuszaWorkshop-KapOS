@@ -82,4 +82,4 @@ else:
 # Elindul a .jar file nohup-al
 os.system("nohup java -jar /opt/" + jar_name + " &")
 
-# Valtoztatas test commithoz
+# Valtoztatas test commithoz 2

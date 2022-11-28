@@ -1,6 +1,7 @@
 import datetime
 import os.path
 import signal
+import subprocess
 import sys
 import git
 import shutil
@@ -62,14 +63,15 @@ if (git_valtozas_volt_e):
     # Majd átmásolja
     shutil.copyfile(repo_path + java_project_path + "/target/" + jar_name, project_path + "/" + jar_name)
 
-pid_number = os.getpid(jar_name)
+listOfProcessIds = findProcessIdByName(jar_name)
 
 # Ha volt git valtozas, es van jar_name nevu folyamat, megoli
-if pid_number != 0:
+if len(listOfProcessIds) > 0:
     naplozas("Fut a folyamat, leallitom")
-    if (git_valtozas_volt_e):
-        os.system("kill " + str(pid_number))
-        naplozas("Folyamat leallitva.")
+    proc = subprocess.Popen(["pgrep", jar_name], stdout=subprocess.PIPE)
+    if(git_valtozas_volt_e):
+        pid_number = subprocess.check_output("pgrep -f " + jar_name)
+        os.system("kill " + pid_number)
     # Ha nincs git valtozas, a kod kilep
     else:
         naplozas("A program fut és változás sincs. Marad minden ahogy volt.")

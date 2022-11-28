@@ -51,7 +51,7 @@ git_valtozas_volt_e = git_pull_change(repo_path)
 
 if (git_valtozas_volt_e):
     # Letrehozza az uj (friss) .jar file-t
-    maven_return_val = os.system("cd " + repo_path + java_project_path + "; maven clean install")
+    maven_return_val = os.system("cd " + repo_path + java_project_path + "; mvn clean install")
     # Ha hiba tortent akkor kilep
     if (maven_return_val != 0):
         naplozas("maven clean install sikertelen")

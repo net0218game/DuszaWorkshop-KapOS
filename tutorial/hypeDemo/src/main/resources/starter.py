@@ -54,7 +54,7 @@ if (git_valtozas_volt_e):
     maven_return_val = os.system("cd " + repo_path + java_project_path + "; mvn clean install")
     # Ha hiba tortent akkor kilep
     if (maven_return_val != 0):
-        naplozas("maven clean install sikertelen")
+        naplozas("MVN clean install sikertelen")
         sys.exit()
     # Ha mar letezik a copy deatination-ben a .jar file, kitorli
     if (os.path.exists(project_path + "/" + jar_name)):

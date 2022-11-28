@@ -80,5 +80,6 @@ else:
     naplozas("A folyamat nem futott")
 
 # Elindul a .jar file nohup-al
-os.system("cd " + project_path + "; nohup java -jar " + project_path + "/" + jar_name + " &")
-naplozas("nohup java -jar " + project_path + "/" + jar_name + " &")
+os.system("nohup java -jar /opt/" + jar_name + " &")
+
+# Valtoztatas test commithoz

@@ -23,7 +23,7 @@
     <a href="/" class="hype">HYPE</a>
     <a href="/register"><i class="fa fa-key"></i> Register</a>
     <a href="/chat"><i class="fa fa-comment-dots"></i> Chat</a>
-    <a href="/contacts"><i class="fa fa-user"></i> Contacts</a>
+    <a href="/admin"><i class="fa fa-user"></i> Admin Page</a>
 
     <!-- Profil -->
     <div class="dropdown" style="right: 0">
@@ -48,10 +48,10 @@
     <button class="button" sec:authorize="!isAuthenticated()" onclick="login()">Sign In <i class="fa fa-sign-in"></i></button>
 </div>
 
-<div class="alert">
-    <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
-    <strong>INFO!</strong><br>We are now live! Chat with <span class="hype">HYPE</span>, and enjoy every feature of it!<br><i>Stay <span class="hype">HYPED</span> everyone:D</i>
-    <br><span class="signature">(The Hype Team)</span><br>
+<div class="alert" th:each="warning : ${warnings}">
+    <span class="closebtn">&times;</span>
+    <strong th:text="${warning.warningType}">TYPE</strong><br><span th:utext="${warning.title}">Title Comes here</span><br><span th:utext="${warning.content}">Warning Content</span>
+    <br><span th:utext="${warning.signature}" class="signature">Warning Signature</span><br>
 </div>
 
 <table class="center">

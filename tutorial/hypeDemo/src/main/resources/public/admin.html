@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Page</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="/Media/hype.gif">
+    <link rel="stylesheet" href="/CSS/hype.css"/>
+    <link rel="stylesheet" href="/CSS/navbar.css"/>
+    <link rel="stylesheet" href="/CSS/admin.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://kit.fontawesome.com/02ff1d2c53.js" crossorigin="anonymous"></script>
+    <script src="/JS/navbar.js"></script>
+</head>
+<body>
+<div class="topnav" id="myTopnav">
+    <a href="/" class="hype">HYPE</a>
+    <a href="/register"><i class="fa fa-key"></i> Register</a>
+    <a href="/chat"><i class="fa fa-comment-dots"></i> Chat</a>
+    <a href="/admin" class="active"><i class="fa fa-user"></i> Admin Page</a>
+    <!-- Profil -->
+    <div class="dropdown" style="right: 0">
+        <button class="dropbtn" sec:authorize="isAuthenticated()">
+          <i class="fa fa-user"></i> <span sec:authentication="name">USERNAME</span></a>
+        </button>
+        <div class="dropdown-content">
+          <a href="#">My Profile</a>
+          <!-- Login / Logout -->
+          <a href="/logout" class="logout" sec:authorize="isAuthenticated()"><i class="fa fa-sign-out" style="background: transparent"></i></a>
+        </div>
+    </div>
+    <a href="/login" class="login" sec:authorize="!isAuthenticated()"><i class="fa fa-sign-in"></i></a>
+    <a href="javascript:void(0);" class="icon" onclick="navbar()"><i class="fa fa-bars"></i></a>
+</div>
+<h1><span class="hype">HYPE</span> Admin Page</h1>
+
+<div class="warnings">
+    <form id="warningForm" name="warningForm" method="post" th:action="@{/warning}" th:object="${warning}">
+        <h2>Generate a warning</h2>
+        <h4>Warnings will show up at the <a href="/">index.html</a> document.</h4>
+        <select name="warningType" id="warningType" required th:value="*{warningType}">
+            <option value="INFO">INFO</option>
+            <option value="WARNING">WARNING</option>
+            <option value="NOTICE">NOTICE</option>
+        </select>
+
+        <input type="text" required autocomplete="off" name="title" placeholder="Title of the warning" th:value="*{title}">
+        <input type="text" required autocomplete="off" name="content" placeholder="Content of the warning" th:value="*{content}">
+        <input type="text" required autocomplete="off" name="signature" placeholder="Signature of the warning" th:value="*{signature}">
+
+        <button type="submit" id="submitButton">Set Warning</button>
+
+        <h4>Current Warnings:</h4>
+
+    </form>
+
+    <div class="alert" th:each="warning : ${warnings}">
+        <form method="post" th:action="@{/delete}">
+            <button type="submit" class="closebtn">&times;</button>
+            <strong th:text="${warning.warningType}">TYPE</strong><br><span th:utext="${warning.title}">Title Comes here</span><br><span th:utext="${warning.content}">Warning Content</span>
+            <br><span th:utext="${warning.signature}" class="signature">Warning Signature</span><br>
+        </form>
+    </div>
+</div>
+
+<h1>Users Table</h1>
+
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Username</th>
+        <th>Email</th>
+    </tr>
+    <tr th:each="contact : ${contacts}">
+        <td th:text="${contact.id}">id</td>
+        <td th:text="${contact.userName}">username</td>
+        <td th:text="${contact.email}">email</td>
+    </tr>
+</table>
+</body>
+</html>

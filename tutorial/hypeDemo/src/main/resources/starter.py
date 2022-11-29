@@ -81,6 +81,10 @@ else:
     # Ha nem fut a program elinditja.
     if len(listOfProcessIds) == 0:
         naplozas("Nincs Git változtatás. A program nem fut. Elindítás...")
+
+        # Program elinditasa
+        os.system("cd /proj/; nohup java -jar " + jar_name + " &")
+        naplozas("Parancs Lefuttatva: cd /proj/; nohup java -jar " + jar_name + " &")
     sys.exit()
 
 

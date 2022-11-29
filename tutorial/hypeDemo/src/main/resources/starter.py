@@ -62,7 +62,9 @@ if (git_valtozas_volt_e):
         os.remove(project_path + "/" + jar_name)
     # Majd átmásolja
     shutil.copyfile(repo_path + java_project_path + "/target/" + jar_name, project_path + "/" + jar_name)
-
+else:
+    naplozas("A program fut és változás sincs. Marad minden ahogy volt. Kilépés...")
+    sys.exit()
 listOfProcessIds = findProcessIdByName(jar_name)
 
 # Ha volt git valtozas, es van jar_name nevu folyamat, megoli

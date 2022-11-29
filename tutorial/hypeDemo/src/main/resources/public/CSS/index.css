@@ -252,6 +252,14 @@ strong {
     color: white;
 }
 
+.alert .signature {
+    font-size: 12px;
+    font-style: italic;
+    background: transparent;
+    float: right;
+    text-align: right;
+}
+
 .closebtn {
     margin-left: 15px;
     color: white;

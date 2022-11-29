@@ -32,7 +32,6 @@ def naplozas(szoveg):
     print(str(current_time) + " >>> " + szoveg)
 
 
-# Processek megkeresese
 def findProcessIdByName(processName):
     '''
     Check if there is any running process that contains the given name processName.
@@ -41,12 +40,11 @@ def findProcessIdByName(processName):
     for proc in psutil.process_iter():
         try:
             # Check if process name contains the given name string.
-            if processName.lower() in proc.name().lower():
+            if processName in proc.cmdline():
                 return True
         except (psutil.NoSuchProcess, psutil.AccessDenied, psutil.ZombieProcess):
             pass
     return False
-
 
 git_valtozas_volt_e = git_pull_change(repo_path)
 
@@ -63,10 +61,10 @@ if (git_valtozas_volt_e):
     # Majd átmásolja
     shutil.copyfile(repo_path + java_project_path + "/target/" + jar_name, project_path + "/" + jar_name)
 
-    listOfProcessIds = findProcessIdByName(jar_name)
+    fut_e = findProcessIdByName(jar_name)
 
     # Ha fut jar_name nevu folyamat, megoli
-    if (listOfProcessIds):
+    if (fut_e):
         pid_number = subprocess.check_output("pgrep -f " + jar_name)
         os.system("kill " + pid_number)
         naplozas("Parancs Lefuttatva: kill " + pid_number)
@@ -76,10 +74,10 @@ if (git_valtozas_volt_e):
     naplozas("Parancs Lefuttatva: cd /proj/; nohup java -jar " + jar_name + " &")
 else:
     # Ha nincs git valtoztatas
-    listOfProcessIds = findProcessIdByName(jar_name)
-    naplozas("Futo-e a jar folyamat?: " + str(listOfProcessIds))
+    fut_e = findProcessIdByName(jar_name)
+    naplozas("Futo-e a jar folyamat?: " + str(fut_e))
     # Ha nem fut a program elinditja.
-    if (listOfProcessIds == False):
+    if (fut_e == False):
         naplozas("Nincs Git változtatás. A program nem fut. Elindítás...")
 
         # Program elinditasa

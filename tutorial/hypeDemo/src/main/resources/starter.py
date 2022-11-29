@@ -62,27 +62,32 @@ if (git_valtozas_volt_e):
         os.remove(project_path + "/" + jar_name)
     # Majd átmásolja
     shutil.copyfile(repo_path + java_project_path + "/target/" + jar_name, project_path + "/" + jar_name)
-else:
-    naplozas("A program fut és változás sincs. Marad minden ahogy volt. Kilépés...")
-    sys.exit()
-listOfProcessIds = findProcessIdByName(jar_name)
 
-# Ha volt git valtozas, es van jar_name nevu folyamat, megoli
-if len(listOfProcessIds) > 0:
-    naplozas("Fut a folyamat, leallitom")
-    if(git_valtozas_volt_e):
+    listOfProcessIds = findProcessIdByName(jar_name)
+
+    # Ha fut jar_name nevu folyamat, megoli
+    if len(listOfProcessIds) > 0:
         pid_number = subprocess.check_output("pgrep -f " + jar_name)
         os.system("kill " + pid_number)
         naplozas("Parancs Lefuttatva: kill " + pid_number)
-    # Ha nincs git valtozas, a kod kilep
-    else:
-        naplozas("A program fut és változás sincs. Marad minden ahogy volt.")
-        sys.exit()
-else:
-    naplozas("A folyamat nem futott.")
 
-# Elindul a .jar file nohup-al
-os.system("cd /proj/; nohup java -jar " + jar_name + " &")
-naplozas("Parancs Lefuttatva: cd /proj/; nohup java -jar " + jar_name + " &")
+    # Elindul a .jar file nohup-al
+    os.system("cd /proj/; nohup java -jar " + jar_name + " &")
+    naplozas("Parancs Lefuttatva: cd /proj/; nohup java -jar " + jar_name + " &")
+else:
+    # Ha nincs git valtoztatas
+    listOfProcessIds = findProcessIdByName(jar_name)
+
+    # Ha nem fut a program elinditja.
+    if len(listOfProcessIds) == 0:
+        naplozas("Nincs Git változtatás. A program nem fut. Elindítás...")
+    sys.exit()
+
+
+
+
+
+
+
 
 # konyorgom mukodj teszt

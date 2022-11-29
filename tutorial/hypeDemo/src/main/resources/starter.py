@@ -1,6 +1,6 @@
 import datetime
 import os.path
-import signal
+import time
 import subprocess
 import sys
 import git
@@ -12,7 +12,7 @@ jar_name = "hypeDemo-0.0.1-SNAPSHOT.jar"
 repo_path = "/opt/DuszaWorkshop-KapOS"
 java_project_path = "/tutorial/hypeDemo"
 
-
+t = time.localtime()
 # Ha van valtozas akkor true
 def git_pull_change(path):
     repo = git.Repo(path)
@@ -29,7 +29,9 @@ def git_pull_change(path):
 
 
 def naplozas(szoveg):
-    print(str(datetime.time) + "\t" + szoveg)
+    current_time = time.strptime("%H:%M:%S", t)
+
+    print(str(current_time) + " >>> " + szoveg)
 
 
 # Processek megkeresese
@@ -71,6 +73,7 @@ if len(listOfProcessIds) > 0:
     if(git_valtozas_volt_e):
         pid_number = subprocess.check_output("pgrep -f " + jar_name)
         os.system("kill " + pid_number)
+        naplozas("Parancs Lefuttatva: kill " + pid_number)
     # Ha nincs git valtozas, a kod kilep
     else:
         naplozas("A program fut és változás sincs. Marad minden ahogy volt.")
@@ -80,5 +83,4 @@ else:
 
 # Elindul a .jar file nohup-al
 os.system("nohup java -jar /proj/" + jar_name + " &")
-
-# Valtoztatas test commithoz 2
+naplozas("Parancs Lefuttatva: nohup java -jar /proj/" + jar_name + " &")

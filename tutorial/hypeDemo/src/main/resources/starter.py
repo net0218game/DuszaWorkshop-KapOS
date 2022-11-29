@@ -83,3 +83,4 @@ else:
 # Elindul a .jar file nohup-al
 os.system("nohup java -jar /proj/" + jar_name + " &")
 naplozas("Parancs Lefuttatva: nohup java -jar /proj/" + jar_name + " &")
+# Valtoztatas test commithoz

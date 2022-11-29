@@ -31,15 +31,16 @@ def naplozas(szoveg):
     current_time = time.strftime("%H:%M:%S", t)
     print(str(current_time) + " >>> " + szoveg)
 
+def startJar():
+    os.system("cd /proj/; nohup java -jar " + jar_name + " &")
+    naplozas("Parancs Lefuttatva: cd /proj/; nohup java -jar " + jar_name + " &")
+
 
 def findProcessIdByName(processName):
-    '''
-    Check if there is any running process that contains the given name processName.
-    '''
-    #Iterate over the all the running process
+    # Vegigmegy a futo folyamatokon
     for proc in psutil.process_iter():
         try:
-            # Check if process name contains the given name string.
+            # Megnezi hogy benne van e a jar_name a folyamat neveben
             if processName in proc.cmdline():
                 return True
         except (psutil.NoSuchProcess, psutil.AccessDenied, psutil.ZombieProcess):
@@ -49,15 +50,19 @@ def findProcessIdByName(processName):
 git_valtozas_volt_e = git_pull_change(repo_path)
 
 if (git_valtozas_volt_e):
+
     # Letrehozza az uj (friss) .jar file-t
     maven_return_val = os.system("cd " + repo_path + java_project_path + "; mvn clean install")
+
     # Ha hiba tortent akkor kilep
     if (maven_return_val != 0):
         naplozas("MVN clean install sikertelen")
         sys.exit()
+
     # Ha mar letezik a copy deatination-ben a .jar file, kitorli
     if (os.path.exists(project_path + "/" + jar_name)):
         os.remove(project_path + "/" + jar_name)
+
     # Majd átmásolja
     shutil.copyfile(repo_path + java_project_path + "/target/" + jar_name, project_path + "/" + jar_name)
 
@@ -70,28 +75,18 @@ if (git_valtozas_volt_e):
         naplozas("Parancs Lefuttatva: kill " + pid_number)
 
     # Elindul a .jar file nohup-al
-    os.system("cd /proj/; nohup java -jar " + jar_name + " &")
-    naplozas("Parancs Lefuttatva: cd /proj/; nohup java -jar " + jar_name + " &")
+    startJar()
 else:
     # Ha nincs git valtoztatas
     fut_e = findProcessIdByName(jar_name)
     naplozas("Futo-e a jar folyamat?: " + str(fut_e))
+
     # Ha nem fut a program elinditja.
     if (fut_e == False):
         naplozas("Nincs Git változtatás. A program nem fut. Elindítás...")
 
         # Program elinditasa
-        os.system("cd /proj/; nohup java -jar " + jar_name + " &")
-        naplozas("Parancs Lefuttatva: cd /proj/; nohup java -jar " + jar_name + " &")
+        startJar()
     else:
         naplozas("Nincs Git változtatás. A program fut. Kilépés...")
     sys.exit()
-
-
-
-
-
-
-
-
-# konyorgom mukodj teszt

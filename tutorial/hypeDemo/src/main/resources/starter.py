@@ -77,7 +77,7 @@ if (git_valtozas_volt_e):
 else:
     # Ha nincs git valtoztatas
     listOfProcessIds = findProcessIdByName(jar_name)
-    naplozas("Futo jar folyamatok id-je: " + listOfProcessIds)
+    naplozas("Futo jar folyamatok id-je: " + str(listOfProcessIds))
     # Ha nem fut a program elinditja.
     if len(listOfProcessIds) == 0:
         naplozas("Nincs Git változtatás. A program nem fut. Elindítás...")

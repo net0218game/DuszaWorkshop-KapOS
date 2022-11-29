@@ -29,8 +29,7 @@ def git_pull_change(path):
 
 
 def naplozas(szoveg):
-    current_time = time.strptime("%H:%M:%S", t)
-
+    current_time = time.strftime("%H:%M:%S", t)
     print(str(current_time) + " >>> " + szoveg)
 
 

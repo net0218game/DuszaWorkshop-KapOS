@@ -68,7 +68,6 @@ listOfProcessIds = findProcessIdByName(jar_name)
 # Ha volt git valtozas, es van jar_name nevu folyamat, megoli
 if len(listOfProcessIds) > 0:
     naplozas("Fut a folyamat, leallitom")
-    proc = subprocess.Popen(["pgrep", jar_name], stdout=subprocess.PIPE)
     if(git_valtozas_volt_e):
         pid_number = subprocess.check_output("pgrep -f " + jar_name)
         os.system("kill " + pid_number)
@@ -78,8 +77,10 @@ if len(listOfProcessIds) > 0:
         naplozas("A program fut és változás sincs. Marad minden ahogy volt.")
         sys.exit()
 else:
-    naplozas("A folyamat nem futott")
+    naplozas("A folyamat nem futott.")
 
 # Elindul a .jar file nohup-al
 os.system("cd /proj/; nohup java -jar " + jar_name + " &")
 naplozas("Parancs Lefuttatva: cd /proj/; nohup java -jar " + jar_name + " &")
+
+# AAA

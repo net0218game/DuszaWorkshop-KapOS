@@ -85,4 +85,4 @@ else:
 os.system("cd /proj/; nohup java -jar " + jar_name + " &")
 naplozas("Parancs Lefuttatva: cd /proj/; nohup java -jar " + jar_name + " &")
 
-# AAA
+# konyorgom mukodj

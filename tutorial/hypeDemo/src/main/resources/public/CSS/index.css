@@ -246,3 +246,41 @@ i {
 .text:nth-child(7){
     transition-delay: 2400ms
 }
+
+strong {
+    background: transparent;
+}
+
+.alert {
+    text-align: center;
+    padding: 20px;
+    background-color: #2196F3;
+    color: white;
+}
+.alert span {
+    background: transparent;
+}
+
+.alert .signature {
+    font-size: 12px;
+    font-style: italic;
+    background: transparent;
+    float: right;
+    text-align: right;
+}
+
+.closebtn {
+    margin-left: 15px;
+    color: white;
+    font-weight: bold;
+    float: right;
+    font-size: 22px;
+    line-height: 20px;
+    cursor: pointer;
+    transition: 0.3s;
+    background-color: transparent;
+}
+
+.closebtn:hover {
+    color: black;
+}

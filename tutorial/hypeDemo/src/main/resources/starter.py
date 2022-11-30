@@ -1,6 +1,6 @@
-import datetime
 import os.path
-import signal
+import time
+import subprocess
 import sys
 import git
 import shutil
@@ -11,6 +11,8 @@ jar_name = "hypeDemo-0.0.1-SNAPSHOT.jar"
 repo_path = "/opt/DuszaWorkshop-KapOS"
 java_project_path = "/tutorial/hypeDemo"
 
+t = time.localtime()
+# Ha van valtozas akkor true
 def git_pull_change(path):
     repo = git.Repo(path)
     current = repo.head.commit
@@ -24,50 +26,67 @@ def git_pull_change(path):
         naplozas("A repo valtozott.")
         return True
 
+
 def naplozas(szoveg):
-    print(str(datetime.time) + "\t" + szoveg)
+    current_time = time.strftime("%H:%M:%S", t)
+    print(str(current_time) + " >>> " + szoveg)
+
+def startJar():
+    os.system("cd /proj/; nohup java -jar " + jar_name + " &")
+    naplozas("Parancs Lefuttatva: cd /proj/; nohup java -jar " + jar_name + " &")
+
 
 def findProcessIdByName(processName):
-    '''
-    Get a list of all the PIDs of a all the running process whose name contains
-    the given string processName
-    '''
-    listOfProcessObjects = []
-    #Iterate over the all the running process
+    # Vegigmegy a futo folyamatokon
     for proc in psutil.process_iter():
-       try:
-           pinfo = proc.as_dict(attrs=['pid', 'name', 'create_time'])
-           # Check if process name contains the given name string.
-           if processName.lower() in pinfo['name'].lower() :
-               listOfProcessObjects.append(pinfo)
-       except (psutil.NoSuchProcess, psutil.AccessDenied , psutil.ZombieProcess) :
-           pass
-    return listOfProcessObjects
+        try:
+            # Megnezi hogy benne van e a jar_name a folyamat neveben
+            if processName in proc.cmdline():
+                return True
+        except (psutil.NoSuchProcess, psutil.AccessDenied, psutil.ZombieProcess):
+            pass
+    return False
 
-
-git_valtozas_volt_e=git_pull_change(repo_path)
+git_valtozas_volt_e = git_pull_change(repo_path)
 
 if (git_valtozas_volt_e):
-    maven_return_val = os.system("cd " + repo_path + java_project_path+"; maven clean install")
+
+    # Letrehozza az uj (friss) .jar file-t
+    maven_return_val = os.system("cd " + repo_path + java_project_path + "; mvn clean install")
+
+    # Ha hiba tortent akkor kilep
     if (maven_return_val != 0):
-        naplozas("maven clean install sikertelen")
+        naplozas("MVN clean install sikertelen")
         sys.exit()
-    if(os.path.exists(project_path + "/" + jar_name)):
+
+    # Ha mar letezik a copy deatination-ben a .jar file, kitorli
+    if (os.path.exists(project_path + "/" + jar_name)):
         os.remove(project_path + "/" + jar_name)
-    shutil.copyfile(repo_path+java_project_path+"/target/"+jar_name, project_path+"/"+jar_name)
 
-listOfProcessIds = findProcessIdByName(jar_name)
-if len(listOfProcessIds) > 0:
-   naplozas("Fut a folyamat, leallitom")
-   if(git_valtozas_volt_e):
-       for elem in listOfProcessIds:
-           processID = elem['pid']
-           os.kill(processID, signal.SIGINT)
-   else:
-        naplozas("A program fut és változás sincs. Marad minden ahogy volt.")
-        exit()
-else :
-   naplozas("A folyamat nem futott")
+    # Majd átmásolja
+    shutil.copyfile(repo_path + java_project_path + "/target/" + jar_name, project_path + "/" + jar_name)
 
-os.system("cd " + project_path + "; nohup java -jar "+ project_path+"/"+jar_name +" &")
-naplozas("nohup java -jar "+ project_path+"/"+jar_name +" &")
+    fut_e = findProcessIdByName(jar_name)
+
+    # Ha fut jar_name nevu folyamat, megoli
+    if (fut_e):
+        pid_number = subprocess.check_output("pgrep -f " + jar_name)
+        os.system("kill " + pid_number)
+        naplozas("Parancs Lefuttatva: kill " + pid_number)
+
+    # Elindul a .jar file nohup-al
+    startJar()
+else:
+    # Ha nincs git valtoztatas
+    fut_e = findProcessIdByName(jar_name)
+    naplozas("Futo-e a jar folyamat?: " + str(fut_e))
+
+    # Ha nem fut a program elinditja.
+    if (fut_e == False):
+        naplozas("Nincs Git változtatás. A program nem fut. Elindítás...")
+
+        # Program elinditasa
+        startJar()
+    else:
+        naplozas("Nincs Git változtatás. A program fut. Kilépés...")
+    sys.exit()

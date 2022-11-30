@@ -14,6 +14,7 @@
     <script src="https://kit.fontawesome.com/02ff1d2c53.js" crossorigin="anonymous">
     </script>
     <script src="/JS/navbar.js"></script>
+    <script src="/JS/scroll_anim.js"></script>
 </head>
 <body>
 
@@ -22,7 +23,7 @@
     <a href="/" class="hype hidden">HYPE</a>
     <a href="/register"><i class="fa fa-key"></i> Register</a>
     <a href="/chat"><i class="fa fa-comment-dots"></i> Chat</a>
-    <a href="/contacts"><i class="fa fa-user"></i> Contacts</a>
+    <a href="/admin"><i class="fa fa-user"></i> Admin Page</a>
 
     <!-- Profil -->
     <div class="dropdown" style="right: 0">
@@ -45,6 +46,12 @@
     <button class="button hidden3" onclick="register()">Register <i class="fa fa-key"></i></button>
     <button class="button hidden2" sec:authorize="isAuthenticated()" onclick="logout()">Sign Out <i class="fa fa-sign-out"></i></button>
     <button class="button hidden2" sec:authorize="!isAuthenticated()" onclick="login()">Sign In <i class="fa fa-sign-in"></i></button>
+</div>
+
+<div class="alert" th:each="warning : ${warnings}">
+    <span class="closebtn">&times;</span>
+    <strong th:text="${warning.warningType}">TYPE</strong><br><span th:utext="${warning.title}">Title Comes here</span><br><span th:utext="${warning.content}">Warning Content</span>
+    <br><span th:utext="${warning.signature}" class="signature">Warning Signature</span><br>
 </div>
 
 <table class="center">

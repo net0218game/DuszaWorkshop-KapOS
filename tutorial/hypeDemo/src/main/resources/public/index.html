@@ -18,6 +18,16 @@
 </head>
 <body>
 
+<div id="load">
+    <div>G</div>
+    <div>N</div>
+    <div>I</div>
+    <div>D</div>
+    <div>A</div>
+    <div>O</div>
+    <div>L</div>
+</div>
+
 <!-- NAV(nemzeti ado- es vamhivatal)(elf)BAR -->
 <div class="topnav" id="myTopnav">
     <a href="/" class="hype">HYPE</a>
@@ -201,6 +211,12 @@
     function logout() {
         window.location.replace("/logout")
     }
+
+    //hide the loader after page is loaded fully
+    var loader = document.getElementById("load");
+    window.addEventListener("load", function () {
+        loader.style.display = "none";
+    });
 </script>
 </body>
 </html>

@@ -71,12 +71,12 @@
 
 .topnav .login {
     background-color: #29ce5e;
-    color: black;
+    color: white;
     float: right;
 }
 
 .login i {
-    color: black;
+    color: white;
 }
 
 .topnav .logout {

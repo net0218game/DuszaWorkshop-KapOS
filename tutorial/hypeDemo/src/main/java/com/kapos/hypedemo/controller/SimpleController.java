@@ -2,8 +2,10 @@ package com.kapos.hypedemo.controller;
 
 import com.kapos.hypedemo.model.Chat;
 import com.kapos.hypedemo.model.User;
+import com.kapos.hypedemo.model.Warning;
 import com.kapos.hypedemo.model.repo.MessagesRepository;
 import com.kapos.hypedemo.model.repo.UserRepository;
+import com.kapos.hypedemo.model.repo.WarningsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -23,14 +25,16 @@ public class SimpleController {
 
     private final UserRepository userRepository;
     private final MessagesRepository messagesRepository;
+    private final WarningsRepository warningsRepository;
 
     @Autowired
     private SimpMessagingTemplate simpMessagingTemplate;
 
     @Autowired
-    public SimpleController(UserRepository userRepository, MessagesRepository messagesRepository) {
+    public SimpleController(UserRepository userRepository, MessagesRepository messagesRepository, WarningsRepository warningsRepository) {
         this.userRepository = userRepository;
         this.messagesRepository = messagesRepository;
+        this.warningsRepository = warningsRepository;
     }
 
     @Bean
@@ -72,10 +76,12 @@ public class SimpleController {
     }
 
 
-    @GetMapping("/contacts")
-    public ModelAndView contact() {
+    @GetMapping("/admin")
+    public ModelAndView admin(@ModelAttribute Warning warning, Model model) {
+        model.addAttribute("warning", warning);
+
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("contacts.html");
+        modelAndView.setViewName("admin.html");
         return modelAndView;
     }
 
@@ -106,6 +112,24 @@ public class SimpleController {
     @PostMapping("/register")
     public ModelAndView insertUser(User user) {
         userRepository.save(new User(user.getUserName(), user.getFirstName(), user.getSecondName(), user.getEmail(), bCryptPasswordEncoder().encode(user.getPassword()), user.getGender(), user.getBorn()));
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("index.html");
+        return modelAndView;
+    }
+
+    @PostMapping("/warning")
+    public ModelAndView insertWarning(Warning warning) {
+        warningsRepository.save(new Warning(warning.getId(), warning.getWarningType(), warning.getTitle(), warning.getContent(), warning.getSignature()));
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("index.html");
+        return modelAndView;
+    }
+
+    @PostMapping("/delete")
+    public ModelAndView deleteWarning() {
+
+        warningsRepository.deleteAll();
+
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("index.html");
         return modelAndView;
@@ -150,6 +174,12 @@ public class SimpleController {
     @ModelAttribute("contacts")
     public List<User> getUsers() {
         return userRepository.findAll();
+    }
+
+    // Warningok Kilistazasa
+    @ModelAttribute("warnings")
+    public List<Warning> getWarnings() {
+        return warningsRepository.findAll();
     }
 
     // ========== Thymeleaf Részek vége ==========

@@ -173,9 +173,15 @@ table {
 
 .techStack {
     font-size: 30px;
-    margin: auto;
+    margin-left: auto;
+    margin-right: auto;
     text-align: center;
-    width: 33%;
+    width: 60%;
+    transform: translateY(-5vh);
+    padding-left: 2vh;
+}
+.java{
+    text-align: center;
 }
 
 th {
@@ -200,7 +206,7 @@ i {
 .hidden3{
     opacity: 0;
     transition: all 2s;
-    transform: translateY(10vh);
+    transform: translateY(  10vh);
 }
 .show{
     opacity: 1;

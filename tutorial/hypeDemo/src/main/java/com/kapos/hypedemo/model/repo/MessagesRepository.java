@@ -12,7 +12,8 @@ import java.util.List;
 public interface MessagesRepository extends CrudRepository<Chat, Integer> {
     List<Chat> findTopBySenderOrReceiver(String sender, String receiver);
 
-    @Query(value = "SELECT * FROM chat WHERE chat.receiver = :user or chat.sender = :user",
+    @Query(value = "SELECT * FROM chat WHERE (chat.receiver = :receiver and chat.sender = :sender) or " +
+            "(chat.receiver = :sender and chat.sender = :receiver)",
             nativeQuery = true)
-    List<Chat> findChatMessages(@Param("user") String user);
+    List<Chat> findChatMessages(@Param("sender") String sender, @Param("receiver") String receiver);
 }

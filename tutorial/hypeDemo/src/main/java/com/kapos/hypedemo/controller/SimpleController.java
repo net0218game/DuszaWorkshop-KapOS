@@ -146,10 +146,10 @@ public class SimpleController {
         return modelAndView;
     }
 
-    @GetMapping("/listMessages/{receiver}")
-    public List<Chat> getAllMessages(@PathVariable String receiver) {
+    @GetMapping("/listMessages/{receiver}/{sender}")
+    public List<Chat> getAllMessages(@PathVariable String receiver, @PathVariable String sender) {
         logger.info(receiver);
-        return messagesRepository.findChatMessages(receiver);
+        return messagesRepository.findChatMessages(sender, receiver);
     }
 
     // Felhasznalo Lekerdezese ID Alapjan

@@ -202,7 +202,7 @@ function closeNav() {
 }
 
 function displayAllMessages() {
-    fetch('/listMessages/' + receiver, {
+    fetch('/listMessages/' + receiver + '/' + username, {
         method: 'GET',
     })
         .then((response) => response.json())

@@ -76,13 +76,14 @@
         </div>
         <div class="connecting">
             <p class="hype">ERROR</p>
-            <p>Connecting...<br>Please Log In Or Connect To The Internet</p>
+            <p>Connecting...<br>Please <a href="/login">Log In</a> Or Connect To The Internet</p>
         </div>
         <ul id="messageArea">
-            <li class="chat-message" th:each="message : ${messages}" th:id="${message.sender}">
+            <li class="chat-message" sec:authorize="isAuthenticated()">
                 <i style="background-color: rgb(200,0,255);">T</i>
-                <span th:text="${message.sender}">username comes here</span>
-                <p th:text="${message.content}">Uzenet</p>
+                <span>The Hype Team</span>
+                <p>Welcome to <b class="hype">HYPE</b>!<br>Start chatting, by clicking on the <b style="background-color: white; padding: 2px; color: black">&#9776; Contacts</b>
+                    button, and select your chat partner!<br>You're in for some epic conversations! 😎</p>
             </li>
         </ul>
         <form id="messageForm" name="messageForm">

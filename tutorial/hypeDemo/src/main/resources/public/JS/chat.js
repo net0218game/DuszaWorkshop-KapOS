@@ -87,7 +87,9 @@ function onMessageReceived(payload) {
         messageArea.scrollTop = messageArea.scrollHeight;
 
     } else if (message.type === "CHAT") {
-        displayMessage(message.sender[0], message.content)
+        if(message.sender === username || message.sender === receiver) {
+            displayMessage(message.sender[0], message.content)
+        }
     }
 }
 
@@ -109,20 +111,20 @@ document.getElementById('message').onkeyup = function () {
 // ========== Üzenet Hossz Ellenőrzése ==========
 
 // Üzenet Megjelenitese
-function displayMessage(username, content) {
+function displayMessage(messageUsername, content) {
     if (receiver !== "") {
         var messageElement = document.createElement('li');
         messageElement.classList.add('chat-message');
 
         var avatarElement = document.createElement('i');
-        var avatarText = document.createTextNode(username[0]);
+        var avatarText = document.createTextNode(messageUsername[0]);
         avatarElement.appendChild(avatarText);
-        avatarElement.style['background-color'] = getAvatarColor(username);
+        avatarElement.style['background-color'] = getAvatarColor(messageUsername);
 
         messageElement.appendChild(avatarElement);
 
         var usernameElement = document.createElement('span');
-        var usernameText = document.createTextNode(username);
+        var usernameText = document.createTextNode(messageUsername);
         var dateText = document.createTextNode(" - " + date.getHours() + ":" + date.getMinutes());
 
         usernameElement.appendChild(usernameText);

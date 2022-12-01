@@ -8,7 +8,7 @@ var inputBox = document.querySelector('#message');
 
 var stompClient = null;
 var username = null;
-var receiver = "test"
+var receiver = ""
 
 // Üzenet Maximum Hossza
 var maxLength = 64;
@@ -110,37 +110,40 @@ document.getElementById('message').onkeyup = function () {
 
 // Üzenet Megjelenitese
 function displayMessage(username, content) {
-    var messageElement = document.createElement('li');
-    messageElement.classList.add('chat-message');
+    if (receiver !== "") {
+        var messageElement = document.createElement('li');
+        messageElement.classList.add('chat-message');
 
-    var avatarElement = document.createElement('i');
-    var avatarText = document.createTextNode(username[0]);
-    avatarElement.appendChild(avatarText);
-    avatarElement.style['background-color'] = getAvatarColor(username);
+        var avatarElement = document.createElement('i');
+        var avatarText = document.createTextNode(username[0]);
+        avatarElement.appendChild(avatarText);
+        avatarElement.style['background-color'] = getAvatarColor(username);
 
-    messageElement.appendChild(avatarElement);
+        messageElement.appendChild(avatarElement);
 
-    var usernameElement = document.createElement('span');
-    var usernameText = document.createTextNode(username);
-    var dateText = document.createTextNode(" - " + date.getHours() + ":" + date.getMinutes());
+        var usernameElement = document.createElement('span');
+        var usernameText = document.createTextNode(username);
+        var dateText = document.createTextNode(" - " + date.getHours() + ":" + date.getMinutes());
 
-    usernameElement.appendChild(usernameText);
-    usernameElement.appendChild(dateText);
-    messageElement.appendChild(usernameElement);
+        usernameElement.appendChild(usernameText);
+        usernameElement.appendChild(dateText);
+        messageElement.appendChild(usernameElement);
 
-    var textElement = document.createElement('p');
+        var textElement = document.createElement('p');
 
-    // Ha van a szovegben URL akkor beteszi <a> tagba.
-    textElement.innerHTML = (replaceURLs(content));
+        // Ha van a szovegben URL akkor beteszi <a> tagba.
+        textElement.innerHTML = (replaceURLs(content));
 
-    messageElement.appendChild(textElement);
+        messageElement.appendChild(textElement);
 
-    messageArea.appendChild(messageElement);
-    messageArea.scrollTop = messageArea.scrollHeight;
+        messageArea.appendChild(messageElement);
+        messageArea.scrollTop = messageArea.scrollHeight;
+    }
 }
 
 // Contactok Listazasa
 function getContactName(contact) {
+
     // Torli az elozo uzeneteket
     messageArea.innerHTML = ""
     // Beallitja az uzenet fogadojat, es a contact cimet
@@ -148,6 +151,8 @@ function getContactName(contact) {
     contactName.innerHTML = receiver;
     // Beallitja az input box placeholder-jét
     inputBox.placeholder = "Send a message to " + receiver + "!"
+
+    displayAllMessages();
 }
 
 // Avatar Szin Letrehozasa Felhasznalonak
@@ -192,6 +197,18 @@ function openNav() {
 
 function closeNav() {
     document.getElementById("mySidenav").style.width = "0";
-    document.getElementById("chat-page").style.marginLeft= "0";
+    document.getElementById("chat-page").style.marginLeft = "0";
     document.body.style.backgroundColor = "white";
+}
+
+function displayAllMessages() {
+    fetch('/listMessages/' + receiver, {
+        method: 'GET',
+    })
+        .then((response) => response.json())
+        .then((data) => {
+            for(let i = 0; i < Object.keys(data).length; i++) {
+                displayMessage(data[i].sender, data[i].content)
+            }
+        });
 }

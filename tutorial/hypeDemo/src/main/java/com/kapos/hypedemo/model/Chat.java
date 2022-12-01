@@ -81,7 +81,8 @@ public class Chat {
         CHAT,
         JOIN,
         SYSTEMMESSAGE,
-        FILE
+        FILE,
+        RECEIVER
     }
 
     public MessageType getType() {

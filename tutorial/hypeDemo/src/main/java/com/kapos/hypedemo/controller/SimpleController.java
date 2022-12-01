@@ -6,9 +6,15 @@ import com.kapos.hypedemo.model.Warning;
 import com.kapos.hypedemo.model.repo.MessagesRepository;
 import com.kapos.hypedemo.model.repo.UserRepository;
 import com.kapos.hypedemo.model.repo.WarningsRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.messaging.Message;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
@@ -16,7 +22,9 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Configuration
@@ -26,6 +34,9 @@ public class SimpleController {
     private final UserRepository userRepository;
     private final MessagesRepository messagesRepository;
     private final WarningsRepository warningsRepository;
+
+
+    Logger logger = LoggerFactory.getLogger(SimpleController.class);
 
     @Autowired
     private SimpMessagingTemplate simpMessagingTemplate;
@@ -135,6 +146,12 @@ public class SimpleController {
         return modelAndView;
     }
 
+    @GetMapping("/listMessages/{receiver}")
+    public List<Chat> getAllMessages(@PathVariable String receiver) {
+        logger.info(receiver);
+        return messagesRepository.findChatMessages(receiver);
+    }
+
     // Felhasznalo Lekerdezese ID Alapjan
     @GetMapping("/user/{id}")
     public User findById(@PathVariable Integer id) {
@@ -181,6 +198,8 @@ public class SimpleController {
     public List<Warning> getWarnings() {
         return warningsRepository.findAll();
     }
+
+
 
     // ========== Thymeleaf Részek vége ==========
 }

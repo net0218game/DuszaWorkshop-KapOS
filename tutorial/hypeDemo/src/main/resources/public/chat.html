@@ -26,12 +26,13 @@
         <!--EZ IGY NEM MARADHAT!!!! AZ ID BEALLITASANAL, MERT HA 2 UGYAN OLYAN NEVU FELHASZNALO VAN AKKOR MEGHAL!!
         KI KELL MAJD CSERELNI FELHASZNALO ID-RE (contact.id) ES AZ UZENET KULDESI MODOT MEGVALTOZTATNI FELHASZNALO
          NEVROL ID RE.-->
-        <li  class="chat-message" th:each="contact : ${contacts}" th:id="${contact.userName}"
+        <li class="chat-message" th:each="contact : ${contacts}" th:id="${contact.userName}"
             onclick="getContactName(this)">
             <i style="background-color: rgb(200,0,255);">T</i>
             <span th:text="${contact.userName}">username comes here</span>
             <p>Utolso uzenet</p>
         </li>
+
         <hr>
         <!-- Thymeleaf megszerzi a bejelentkezesi tokent, ha be vagy jelentkezve
          fontos dolog, a kesobbiekben hasznalni fogjuk. -->
@@ -60,7 +61,8 @@
         <div class="dropdown-content">
             <a href="#">My Profile</a>
             <!-- Login / Logout -->
-            <a href="/logout" class="logout" sec:authorize="isAuthenticated()"><i class="fa fa-sign-out" style="background: transparent"></i></a>
+            <a href="/logout" class="logout" sec:authorize="isAuthenticated()"><i class="fa fa-sign-out"
+                                                                                  style="background: transparent"></i></a>
         </div>
     </div>
     <a href="/login" class="login" sec:authorize="!isAuthenticated()"><i class="fa fa-sign-in"></i></a>
@@ -70,14 +72,18 @@
 <div id="chat-page">
     <div class="chat-container">
         <div class="chat-header">
-            <h2 class="contactName" th:text="${receiver}"><span class="hype">HYPE</span> Chat Demo</h2>
+            <h2 class="contactName"><span class="hype">HYPE</span> Chat Demo</h2>
         </div>
         <div class="connecting">
             <p class="hype">ERROR</p>
             <p>Connecting...<br>Please Log In Or Connect To The Internet</p>
         </div>
         <ul id="messageArea">
-
+            <li class="chat-message" th:each="message : ${messages}" th:id="${message.sender}">
+                <i style="background-color: rgb(200,0,255);">T</i>
+                <span th:text="${message.sender}">username comes here</span>
+                <p th:text="${message.content}">Uzenet</p>
+            </li>
         </ul>
         <form id="messageForm" name="messageForm">
             <div class="form-group">

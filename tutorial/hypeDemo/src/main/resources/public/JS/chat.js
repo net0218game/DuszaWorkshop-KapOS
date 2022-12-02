@@ -88,7 +88,11 @@ function onMessageReceived(payload) {
 
     } else if (message.type === "CHAT") {
         if(message.sender === username || message.sender === receiver) {
-            displayMessage(message.sender[0], message.content)
+            displayMessage(message.sender, message.content)
+        }
+
+        if(message.sender !== receiver) {
+            displayNotification(message.sender, message.content)
         }
     }
 }
@@ -155,6 +159,7 @@ function getContactName(contact) {
     inputBox.placeholder = "Send a message to " + receiver + "!"
 
     displayAllMessages();
+    document.getElementById('notification-div').innerHTML = "";
 }
 
 // Avatar Szin Letrehozasa Felhasznalonak
@@ -213,4 +218,32 @@ function displayAllMessages() {
                 displayMessage(data[i].sender, data[i].content)
             }
         });
+}
+
+function closeNotification(meik) {
+    var x = document.getElementById(meik.parentElement);
+    if (x.style.display === "none") {
+        x.style.display = "block";
+    } else {
+        x.style.display = "none";
+    }
+}
+
+let notificationId = 0;
+
+function displayNotification(sender, content) {
+
+    document.getElementById('notification-div').innerHTML = '<label class="alert-message" id="notification-' + notificationId.toString() + '" onclick="getContactName(' + sender +')">\n' +
+        '    <strong class="hype"> <i class="fa fa-message"></i> NEW MESSAGE</strong><br><span id="notification-text">' + sender.toUpperCase() + ': ' + content + '</span>\n' +
+        '    <button onclick="closeNotification(this)" class="close"><i class="fa fa-close"></i></button>\n' +
+        '</label>'
+
+    setTimeout(function () {
+
+        document.getElementById('notification-div').innerHTML = '<label class="hidden" id="notification-' + notificationId.toString() + '" onclick="getContactName(' + sender +')">\n' +
+            '    <strong class="hype"> <i class="fa fa-message"></i> NEW MESSAGE</strong><br><span id="notification-text">' + sender.toUpperCase() + ': ' + content + '</span>\n' +
+            '    <button onclick="closeNotification(this)" class="close"><i class="fa fa-close"></i></button>\n' +
+            '</label>'
+
+    }, 5000)
 }

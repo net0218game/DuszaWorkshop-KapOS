@@ -13,9 +13,22 @@
     <script src="/JS/navbar.js"></script>
 </head>
 <body>
+
 <noscript>
     <h2>Sorry! Your browser doesn't support Javascript</h2>
 </noscript>
+<!--
+<label class="alert-message" id="notification-1">
+    <strong class="hype"> <i class="fa fa-message"></i> NEW MESSAGE</strong><br><span id="notification-text">Someone sent you a message. Go and check it out!</span>
+    <button onclick="closeNotification(this)" class="close"><i class="fa fa-close"></i></button>
+</label>
+-->
+
+
+
+<div id="notification-div">
+
+</div>
 
 <div id="mySidenav" class="sidenav">
     <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
@@ -39,10 +52,6 @@
         <div sec:authorize="isAuthenticated()">
             Signed In As <span sec:authentication="name"></span></div>
     </ul>
-</div>
-
-<div class="main">
-
 </div>
 
 <!-- NAV(nemzeti ado- es vamhivatal)(elf)BAR -->

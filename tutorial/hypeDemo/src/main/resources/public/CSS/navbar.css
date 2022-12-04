@@ -105,20 +105,8 @@
     overflow: hidden;
 }
 
-.topnav .dropbtn {
-    font-size: 16px;
-    border: none;
-    outline: none;
-    color: white;
-    padding: 14px 16px;
-    background-color: inherit;
-    font-family: inherit;
-    margin: 0;
-}
-
-
 .dropdown-content {
-    margin-top: 8px;
+    margin-top: 54.5px;
     right: 0;
     float: right;
     display: none;
@@ -145,3 +133,4 @@
 .dropdown:hover .dropdown-content {
     display: block;
 }
+

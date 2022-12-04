@@ -219,6 +219,13 @@ a {
 #chat-page .chat-message, .sidenav .chat-message {
     padding-left: 68px;
     position: relative;
+    margin-top: 15px;
+    padding-bottom: 10px;
+}
+
+.sidenav .chat-message {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+
 }
 
 #chat-page .chat-message i, .sidenav i {

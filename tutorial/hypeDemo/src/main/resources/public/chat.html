@@ -24,8 +24,6 @@
 </label>
 -->
 
-
-
 <div id="notification-div">
 
 </div>
@@ -39,6 +37,14 @@
         <!--EZ IGY NEM MARADHAT!!!! AZ ID BEALLITASANAL, MERT HA 2 UGYAN OLYAN NEVU FELHASZNALO VAN AKKOR MEGHAL!!
         KI KELL MAJD CSERELNI FELHASZNALO ID-RE (contact.id) ES AZ UZENET KULDESI MODOT MEGVALTOZTATNI FELHASZNALO
          NEVROL ID RE.-->
+
+        <li class="chat-message" id="DuszaGroupChat"
+            onclick="getContactName(this)">
+            <i style="background-color: rgb(255,183,0);">D</i>
+            <span>Dusza-Workshop Group</span>
+            <p>Utolso Uzenet</p>
+        </li>
+
         <li class="chat-message" th:each="contact : ${contacts}" th:id="${contact.userName}"
             onclick="getContactName(this)">
             <i style="background-color: rgb(200,0,255);">T</i>
@@ -64,9 +70,9 @@
 
     <!-- Profil -->
     <div class="dropdown">
-        <button class="dropbtn" sec:authorize="isAuthenticated()">
+        <a class="dropbtn" sec:authorize="isAuthenticated()">
             <i class="fa fa-user"></i> <span sec:authentication="name">USERNAME</span></a>
-        </button>
+        </a>
         <div class="dropdown-content">
             <a href="#">My Profile</a>
             <!-- Login / Logout -->
@@ -89,10 +95,16 @@
         </div>
         <ul id="messageArea">
             <li class="chat-message" sec:authorize="isAuthenticated()">
-                <i style="background-color: rgb(200,0,255);">T</i>
+                <i style="background-color: rgb(0,247,255);" class="fa-solid fa-face-laugh-wink"></i>
+                <span>The Hype Team</span>
+                <p>Szeretettel köszönt mindenkit, a 2022/23-as Dusza-Workshop December 11.én megrendezett 2. bemutatóján, a <b>KapOS csapat</b>.</p>
+            </li>
+            <li class="chat-message" sec:authorize="isAuthenticated()">
+                <i style="background-color: rgb(0,247,255);" class="fa-solid fa-face-laugh-wink"></i>
                 <span>The Hype Team</span>
                 <p>Welcome to <b class="hype">HYPE</b>!<br>Start chatting, by clicking on the <b style="background-color: white; padding: 2px; color: black">&#9776; Contacts</b>
                     button, and select your chat partner!<br>You're in for some epic conversations! 😎</p>
+                <img src="/Media/logo.png" alt="Hype Logo">
             </li>
         </ul>
         <form id="messageForm" name="messageForm">

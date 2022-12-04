@@ -30,13 +30,9 @@ stompClient.connect({}, onConnected, onError);
 
 function onConnected() {
     // Subscribe to the Public Chat
-    //stompClient.subscribe('/all/messages', onMessageReceived);
+    stompClient.subscribe('/all/messages', onMessageReceived);
     stompClient.subscribe('/user/specific', onMessageReceived);
 
-    /*stompClient.send("/app/application.addUser",
-        {},
-        JSON.stringify({sender: username, type: 'JOIN'})
-    )*/
     connectingElement.classList.add('hidden');
 }
 
@@ -61,8 +57,12 @@ function sendMessage(event) {
         if (receiver !== username) {
             displayMessage(username, messageInput.value)
         }
+        if(receiver === "DuszaGroupChat") {
+            stompClient.send("/app/application", {}, JSON.stringify(chatMessage));
+        } else {
+            stompClient.send("/app/private", {}, JSON.stringify(chatMessage));
+        }
 
-        stompClient.send("/app/private", {}, JSON.stringify(chatMessage));
         messageInput.value = '';
     }
     event.preventDefault();

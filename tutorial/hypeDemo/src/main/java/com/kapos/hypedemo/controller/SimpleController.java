@@ -17,6 +17,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.messaging.Message;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.Payload;
+import org.springframework.messaging.handler.annotation.SendTo;
+import org.springframework.messaging.simp.SimpMessageHeaderAccessor;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.ui.Model;
@@ -158,21 +160,14 @@ public class SimpleController {
         return userRepository.findById(id).orElse(null);
     }
 
-    /*
+
     // A Public Chat Része
     @MessageMapping("/application")
     @SendTo("/all/messages")
-    public Chat sendMessage(@Payload Chat chatMessage) {
+    public Chat sendMessage(@Payload Chat chatMessage, Chat chat) {
+        messagesRepository.save(new Chat(chat.getId(), chat.getContent(), chat.getSender(), chat.getReceiver(), LocalDateTime.now()));
         return chatMessage;
     }
-
-    @MessageMapping("/application.addUser")
-    @SendTo("/chat/public")
-    public Chat addUser(@Payload Chat chatMessage, SimpMessageHeaderAccessor headerAccessor, Chat chat) {
-        // felhasznalo hozzaadasa session-höz (????)
-        headerAccessor.getSessionAttributes().put("username", chat.getSender());
-        return chatMessage;
-    }*/
 
     // Handling Private Messages
     @MessageMapping("/private")

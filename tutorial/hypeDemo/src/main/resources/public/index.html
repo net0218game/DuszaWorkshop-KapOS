@@ -41,12 +41,13 @@
             <i class="fa fa-user"></i>
             <span sec:authentication="name">USERNAME
             </span>
-            </a>
+        </a>
         </a>
         <div class="dropdown-content">
             <a href="#">My Profile</a>
             <!-- Login / Logout -->
-            <a href="/logout" class="logout" sec:authorize="isAuthenticated()"><i class="fa fa-sign-out" style="background: transparent"></i></a>
+            <a href="/logout" class="logout" sec:authorize="isAuthenticated()"><i class="fa fa-sign-out"
+                                                                                  style="background: transparent"></i></a>
         </div>
     </div>
     <a href="/login" class="login" sec:authorize="!isAuthenticated()"><i class="fa fa-sign-in"></i></a>
@@ -57,13 +58,17 @@
     <h1 class="hype">HYPE</h1>
     <button class="button hidden" onclick="chat()">Chat with <span class="hype">HYPE</span></button>
     <button class="button hidden3" onclick="register()">Register <i class="fa fa-key"></i></button>
-    <button class="button hidden2" sec:authorize="isAuthenticated()" onclick="logout()">Sign Out <i class="fa fa-sign-out"></i></button>
-    <button class="button hidden2" sec:authorize="!isAuthenticated()" onclick="login()">Sign In <i class="fa fa-sign-in"></i></button>
+    <button class="button hidden2" sec:authorize="isAuthenticated()" onclick="logout()">Sign Out <i
+            class="fa fa-sign-out"></i></button>
+    <button class="button hidden2" sec:authorize="!isAuthenticated()" onclick="login()">Sign In <i
+            class="fa fa-sign-in"></i></button>
 </div>
 
 <div class="alert" th:each="warning : ${warnings}">
     <span class="closebtn">&times;</span>
-    <strong th:text="${warning.warningType}">TYPE</strong><br><span th:utext="${warning.title}">Title Comes here</span><br><span th:utext="${warning.content}">Warning Content</span>
+    <strong th:text="${warning.warningType}">TYPE</strong><br><span
+        th:utext="${warning.title}">Title Comes here</span><br><span
+        th:utext="${warning.content}">Warning Content</span>
     <br><span th:utext="${warning.signature}" class="signature">Warning Signature</span><br>
 </div>
 
@@ -77,77 +82,46 @@
 
 <img class="team hidden" src="/Media/team.jpg" alt="team" width="100%">
 
-<div class="row">
-    <div class="column">
-        <div class="card">
-        <div class="card-image">
-            <a href="#">
-                <img src="/Media/david.png" alt="img.jpg" />
-            </a>
-        </div>
-        <div class="card-description">
-            <h3>Tóth Dávid</h3>
-            <p>Full Stack Developer</p>
-            <a href="https://www.w3schools.com/howto/howto_css_column_cards.asp"><i style="color: black" class="fa-brands fa-instagram"></i></a>
-        </div>
-    </div>
-    </div>
-    <div class="column">
-        <div class="card">
-            <div class="card-image">
-                <a href="#">
-                    <img src="/Media/dave.png" alt="img.jpg" />
-                </a>
-            </div>
-            <div class="card-description">
-                <h3>Bmw m3 Yellow</h3>
-                <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit.</p>
-                <a href="#">Read More</a>
+<div class="wrapper">
+
+    <div class="cards_wrap">
+        <div class="card_item">
+            <div class="card_inner">
+                <div class="nev">Tóth Dávid</div>
+                <div class="presentation">Full Stack Developer</div>
             </div>
         </div>
-    </div>
-    <div class="column">
-        <div class="card">
-            <div class="card-image">
-                <a href="#">
-                    <img src="../Media/P.png" alt="img.jpg" />
-                </a>
-            </div>
-            <div class="card-description">
-                <h3>Bmw m3 Yellow</h3>
-                <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit.</p>
-                <a href="#">Read More</a>
+
+        <div class="card_item">
+            <div class="card_inner">
+                <div class="nev">Magyarcsik Dávid</div>
+                <div class="presentation">Frontend Developer & Designer</div>
             </div>
         </div>
-    </div>
-    <div class="column">
-        <div class="card">
-            <div class="card-image">
-                <a href="#">
-                    <img src="../Media/P.png" alt="img.jpg" />
-                </a>
-            </div>
-            <div class="card-description">
-                <h3>Bmw m3 Yellow</h3>
-                <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit.</p>
-                <a href="#">Read More</a>
+
+        <div class="card_item">
+            <div class="card_inner">
+                <div class="nev">Kiss Péter</div>
+                <div class="presentation">Backend & Database Developer</div>
             </div>
         </div>
-    </div>
-    <div class="column">
-        <div class="card">
-            <div class="card-image">
-                <a href="#">
-                    <img src="../Media/P.png" alt="img.jpg" />
-                </a>
-            </div>
-            <div class="card-description">
-                <h3>Bmw m3 Yellow</h3>
-                <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit.</p>
-                <a href="#">Read More</a>
+
+        <div class="card_item">
+            <div class="card_inner">
+                <div class="nev">Nagy Balázs</div>
+                <div class="presentation">Backend & Database Developer</div>
             </div>
         </div>
+
+        <div class="card_item">
+            <div class="card_inner">
+                <div class="nev">Török Zsombor</div>
+                <div class="presentation">Backend & Database Developer</div>
+            </div>
+        </div>
+
     </div>
+
 </div>
 
 <div class="project">
@@ -173,12 +147,14 @@
     </p>
 
     <p class="hidden">
-    Minden felhasználó <b>létrehozhat szabályokat az értesítésekre,</b>
-        akár egy adott szobára, akár különböző személy(ek)re való figyelemmel, egy saját feltételrendszer definiálásával.
+        Minden felhasználó <b>létrehozhat szabályokat az értesítésekre,</b>
+        akár egy adott szobára, akár különböző személy(ek)re való figyelemmel, egy saját feltételrendszer
+        definiálásával.
 
-    A chat természetesen tartalmazhat extra funkcionalitásokat is, mint pl.: valós idejű vagy körökre osztott játék, fájlküldés,
-    feliratkozás stb.
-        </p>
+        A chat természetesen tartalmazhat extra funkcionalitásokat is, mint pl.: valós idejű vagy körökre osztott játék,
+        fájlküldés,
+        feliratkozás stb.
+    </p>
 
     <h2 class="hidden">Technology Stack</h2>
     <table class="techStack">
@@ -208,10 +184,10 @@
 
 <script>
     const observer = new IntersectionObserver((entries) => {
-        entries.forEach((entry)=>{
-            if(entry.isIntersecting){
+        entries.forEach((entry) => {
+            if (entry.isIntersecting) {
                 entry.target.classList.add('show');
-            }else{
+            } else {
                 entry.target.classList.remove('show');
             }
         });

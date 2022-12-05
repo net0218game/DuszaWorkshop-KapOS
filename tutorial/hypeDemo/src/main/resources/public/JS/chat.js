@@ -244,6 +244,5 @@ function displayNotification(sender, content) {
             '    <strong class="hype"> <i class="fa fa-message"></i> NEW MESSAGE</strong><br><span id="notification-text">' + sender.toUpperCase() + ': ' + content + '</span>\n' +
             '    <button onclick="closeNotification(this)" class="close"><i class="fa fa-close"></i></button>\n' +
             '</label>'
-
     }, 5000)
 }

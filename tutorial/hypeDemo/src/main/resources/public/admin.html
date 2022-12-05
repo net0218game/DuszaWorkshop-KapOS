@@ -22,9 +22,9 @@
     <a href="/admin" class="active"><i class="fa fa-user"></i> Admin Page</a>
     <!-- Profil -->
     <div class="dropdown" style="right: 0">
-        <button class="dropbtn" sec:authorize="isAuthenticated()">
+        <a class="dropbtn" sec:authorize="isAuthenticated()">
           <i class="fa fa-user"></i> <span sec:authentication="name">USERNAME</span></a>
-        </button>
+        </a>
         <div class="dropdown-content">
           <a href="#">My Profile</a>
           <!-- Login / Logout -->

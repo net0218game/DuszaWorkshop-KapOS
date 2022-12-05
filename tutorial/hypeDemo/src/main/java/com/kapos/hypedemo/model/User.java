@@ -18,7 +18,6 @@ public class User {
     private String born;
 
     public User(String userName, String firstName, String secondName, String email, String password, String gender, String born) {
-        this.id = id;
         this.userName = userName;
         this.firstName = firstName;
         this.secondName = secondName;
@@ -42,9 +41,6 @@ public class User {
                 '}';
     }
 
-    public User(User user) {
-
-    }
 
     public User() {
     }

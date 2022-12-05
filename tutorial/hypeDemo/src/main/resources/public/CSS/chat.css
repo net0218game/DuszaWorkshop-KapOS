@@ -47,11 +47,6 @@ body {
     border-radius: 10px;
 }
 
-
-.form-group {
-    margin-bottom: 15px;
-}
-
 input {
     padding-left: 10px;
     outline: none;
@@ -219,13 +214,12 @@ a {
 #chat-page .chat-message, .sidenav .chat-message {
     padding-left: 68px;
     position: relative;
-    margin-top: 15px;
-    padding-bottom: 10px;
 }
 
 .sidenav .chat-message {
+    margin-top: 15px;
+    padding-bottom: 10px;
     border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-
 }
 
 #chat-page .chat-message i, .sidenav i {
@@ -255,13 +249,12 @@ a {
 }
 
 #messageForm .input-group {
-    width: 90%;
+    width: 100%;
 }
 
 #messageForm .input-group input {
     float: left;
     width: calc(100% - 85px);
-    margin-bottom: 10px;
 }
 
 #messageForm .input-group button {
@@ -292,8 +285,8 @@ a {
 }
 
 @media screen and (max-width: 730px) {
-    .chat-container {
-
+    .form-group {
+        width: 90%;
     }
 }
 
@@ -317,13 +310,17 @@ a {
     .chat-header h2 {
         font-size: 1.1em;
     }
+
+    .input-group {
+        width: 100%;
+    }
 }
 
-.hidden{
+.hidden {
     display:none;
 }
 
-.pointer-cursor{
+.pointer-cursor {
     cursor: pointer; cursor: hand;
 }
 
@@ -336,7 +333,7 @@ a {
     font-size: 25px;
 }
 
-.alert-message{
+.alert-message {
     z-index: 2;
     background-color: #f2dede;
     color: #b94b45;
@@ -367,4 +364,8 @@ a {
 @keyframes moving {
     0%, 90% { top: 0; left: 0; }
     100%  { top: -100px; left: 0; }
+}
+
+#messageArea {
+    max-height: 80%;
 }

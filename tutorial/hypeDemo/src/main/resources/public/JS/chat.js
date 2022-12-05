@@ -238,6 +238,8 @@ function displayNotification(sender, content) {
         '    <button onclick="closeNotification(this)" class="close"><i class="fa fa-close"></i></button>\n' +
         '</label>'
 
+    notificationAudio()
+
     setTimeout(function () {
 
         document.getElementById('notification-div').innerHTML = '<label class="hidden" id="notification-' + notificationId.toString() + '" onclick="getContactName(' + sender +')">\n' +
@@ -245,4 +247,9 @@ function displayNotification(sender, content) {
             '    <button onclick="closeNotification(this)" class="close"><i class="fa fa-close"></i></button>\n' +
             '</label>'
     }, 5000)
+}
+
+function notificationAudio() {
+    var audio = new Audio("Media/notification.mp3");
+    audio.play();
 }

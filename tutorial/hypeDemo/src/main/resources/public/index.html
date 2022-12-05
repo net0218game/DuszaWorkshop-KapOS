@@ -38,7 +38,10 @@
     <!-- Profil -->
     <div class="dropdown" style="right: 0">
         <button class="dropbtn" sec:authorize="isAuthenticated()">
-            <i class="fa fa-user"></i> <span sec:authentication="name">USERNAME</span></a>
+            <i class="fa fa-user"></i>
+            <span sec:authentication="name">USERNAME
+            </span>
+            </a>
         </button>
         <div class="dropdown-content">
             <a href="#">My Profile</a>
@@ -77,39 +80,71 @@
 <div class="row">
     <div class="column">
         <div class="card">
-            <img src="Media/P.png" alt="Jane" style="width:100%">
-            <div class="card-container">
-                <h2>Kiss Péter</h2>
-                <p class="title">Backend & Frontend</p>
-                <p>Some text that describes me lorem ipsum ipsum lorem.</p>
-                <p>example@example.com</p>
-                <p><button class="button">Contact</button></p>
+        <div class="card-image">
+            <a href="#">
+                <img src="/Media/david.png" alt="img.jpg" />
+            </a>
+        </div>
+        <div class="card-description">
+            <h3>Tóth Dávid</h3>
+            <p>Full Stack Developer</p>
+            <a href="https://www.w3schools.com/howto/howto_css_column_cards.asp"><i style="color: black" class="fa-brands fa-instagram"></i></a>
+        </div>
+    </div>
+    </div>
+    <div class="column">
+        <div class="card">
+            <div class="card-image">
+                <a href="#">
+                    <img src="/Media/dave.png" alt="img.jpg" />
+                </a>
+            </div>
+            <div class="card-description">
+                <h3>Bmw m3 Yellow</h3>
+                <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit.</p>
+                <a href="#">Read More</a>
             </div>
         </div>
     </div>
-
     <div class="column">
         <div class="card">
-            <img src="Media/logo.png" alt="Mike" style="width:100%">
-            <div class="container">
-                <h2>Mike Ross</h2>
-                <p class="title">Art Director</p>
-                <p>Some text that describes me lorem ipsum ipsum lorem.</p>
-                <p>example@example.com</p>
-                <p><button class="button">Contact</button></p>
+            <div class="card-image">
+                <a href="#">
+                    <img src="../Media/P.png" alt="img.jpg" />
+                </a>
+            </div>
+            <div class="card-description">
+                <h3>Bmw m3 Yellow</h3>
+                <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit.</p>
+                <a href="#">Read More</a>
             </div>
         </div>
     </div>
-
     <div class="column">
         <div class="card">
-            <img src="Media/logo.png" alt="John" style="width:100%">
-            <div class="container">
-                <h2>John Doe</h2>
-                <p class="title">Designer</p>
-                <p>Some text that describes me lorem ipsum ipsum lorem.</p>
-                <p>example@example.com</p>
-                <p><button class="button">Contact</button></p>
+            <div class="card-image">
+                <a href="#">
+                    <img src="../Media/P.png" alt="img.jpg" />
+                </a>
+            </div>
+            <div class="card-description">
+                <h3>Bmw m3 Yellow</h3>
+                <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit.</p>
+                <a href="#">Read More</a>
+            </div>
+        </div>
+    </div>
+    <div class="column">
+        <div class="card">
+            <div class="card-image">
+                <a href="#">
+                    <img src="../Media/P.png" alt="img.jpg" />
+                </a>
+            </div>
+            <div class="card-description">
+                <h3>Bmw m3 Yellow</h3>
+                <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit.</p>
+                <a href="#">Read More</a>
             </div>
         </div>
     </div>

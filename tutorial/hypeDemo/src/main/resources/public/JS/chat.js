@@ -2,6 +2,7 @@ var chatPage = document.querySelector('#chat-page');
 var messageForm = document.querySelector('#messageForm');
 var messageInput = document.querySelector('#message');
 var messageArea = document.querySelector('#messageArea');
+var contactArea = document.querySelector('#contactArea');
 var connectingElement = document.querySelector('.connecting');
 var contactName = document.querySelector('.contactName');
 var inputBox = document.querySelector('#message');
@@ -34,6 +35,8 @@ function onConnected() {
     stompClient.subscribe('/user/specific', onMessageReceived);
 
     connectingElement.classList.add('hidden');
+
+    displayAllContacts()
 }
 
 
@@ -207,6 +210,44 @@ function closeNav() {
     document.getElementById("chat-page").style.marginLeft = "0";
     document.body.style.backgroundColor = "white";
 }
+
+function displayAllContacts() {
+    fetch('/contacts', {
+        method: 'GET',
+    })
+        .then((response) => response.json())
+        .then((data) => {
+            console.log(data)
+            for(let i = 0; i < Object.keys(data).length; i++) {
+                var messageElement = document.createElement('li');
+                messageElement.classList.add('chat-message');
+
+                var avatarElement = document.createElement('i');
+                var avatarText = document.createTextNode(data[i].userName.substring(0, 1));
+                avatarElement.appendChild(avatarText);
+                avatarElement.style['background-color'] = getAvatarColor(data[i].userName);
+
+                messageElement.appendChild(avatarElement);
+
+                var usernameElement = document.createElement('span');
+                var usernameText = document.createTextNode(data[i].userName);
+
+                usernameElement.appendChild(usernameText);
+                messageElement.appendChild(usernameElement);
+
+                var textElement = document.createElement('p');
+
+                // Ha van a szovegben URL akkor beteszi <a> tagba.
+                textElement.innerHTML = "Utolso uzenet";
+
+                messageElement.appendChild(textElement);
+
+                contactArea.appendChild(messageElement);
+                contactArea.scrollTop = messageArea.scrollHeight;
+            }
+        });
+}
+
 
 function displayAllMessages() {
     fetch('/listMessages/' + receiver + '/' + username, {

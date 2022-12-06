@@ -154,12 +154,16 @@ public class SimpleController {
         return messagesRepository.findChatMessages(sender, receiver);
     }
 
+    @GetMapping("/contacts")
+    public List<User> getAllUsers() {
+        return userRepository.findAll();
+    }
+
     // Felhasznalo Lekerdezese ID Alapjan
     @GetMapping("/user/{id}")
     public User findById(@PathVariable Integer id) {
         return userRepository.findById(id).orElse(null);
     }
-
 
     // A Public Chat Része
     @MessageMapping("/application")
@@ -193,8 +197,6 @@ public class SimpleController {
     public List<Warning> getWarnings() {
         return warningsRepository.findAll();
     }
-
-
 
     // ========== Thymeleaf Részek vége ==========
 }

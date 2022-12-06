@@ -45,18 +45,11 @@
             <p>Utolso Uzenet</p>
         </li>
 
-        <li class="chat-message" th:each="contact : ${contacts}" th:id="${contact.userName}"
-            onclick="getContactName(this)">
-            <i style="background-color: rgb(200,0,255);">T</i>
-            <span th:text="${contact.userName}">username comes here</span>
-            <p>Utolso uzenet</p>
-        </li>
-
-        <hr>
         <!-- Thymeleaf megszerzi a bejelentkezesi tokent, ha be vagy jelentkezve
-         fontos dolog, a kesobbiekben hasznalni fogjuk. -->
+         fontos dolog, a kesobbiekben hasznalni fogjuk.
         <div sec:authorize="isAuthenticated()">
             Signed In As <span sec:authentication="name"></span></div>
+            -->
     </ul>
 </div>
 

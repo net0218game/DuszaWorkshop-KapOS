@@ -67,6 +67,8 @@ function sendMessage(event) {
         }
 
         messageInput.value = '';
+
+        displayLastMessages(receiver, username)
     }
     event.preventDefault();
 }
@@ -97,7 +99,8 @@ function onMessageReceived(payload) {
         if(message.sender !== receiver) {
             displayNotification(message.sender, message.content)
         }
-        displayLastMessages(receiver, username)
+
+        displayLastMessages(message.sender, username)
     }
 }
 
@@ -164,7 +167,6 @@ function getContactName(contact) {
 
     displayAllMessages();
     document.getElementById('notification-div').innerHTML = "";
-    displayLastMessages(receiver, username);
 }
 
 // Avatar Szin Letrehozasa Felhasznalonak
@@ -223,6 +225,10 @@ function displayAllContacts() {
             for(let i = 0; i < Object.keys(data).length; i++) {
                 var messageElement = document.createElement('li');
                 messageElement.classList.add('chat-message');
+                messageElement.addEventListener('click', function () {
+                    getContactName(this)
+                });
+                messageElement.setAttribute('id', data[i].userName)
 
                 var avatarElement = document.createElement('i');
                 var avatarText = document.createTextNode(data[i].userName.substring(0, 1));
@@ -246,6 +252,8 @@ function displayAllContacts() {
 
                 contactArea.appendChild(messageElement);
                 contactArea.scrollTop = messageArea.scrollHeight;
+
+                displayLastMessages(data[i].userName, username)
             }
         });
 }
@@ -272,7 +280,7 @@ function displayLastMessages(receiver, username){
         .then((data) => {
             console.log(data)
             for(let i = 0; i < Object.keys(data).length; i++) {
-                document.querySelectorAll('#' + receiver)[i].innerHTML += '<p>' + data[i].content +'</p>'
+                document.querySelectorAll('#' + receiver)[i].getElementsByTagName('p').item(0).innerText= data[i].sender.toUpperCase() + ': ' + data[i].content
             }
         });
 }

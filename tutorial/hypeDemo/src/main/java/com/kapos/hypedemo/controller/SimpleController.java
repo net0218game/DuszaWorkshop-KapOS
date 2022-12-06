@@ -150,7 +150,6 @@ public class SimpleController {
 
     @GetMapping("/listMessages/{receiver}/{sender}")
     public List<Chat> getAllMessages(@PathVariable String receiver, @PathVariable String sender) {
-        logger.info(receiver);
         return messagesRepository.findChatMessages(sender, receiver);
     }
 
@@ -159,6 +158,10 @@ public class SimpleController {
         return userRepository.findAll();
     }
 
+    @GetMapping("/lastMessage/{receiver}/{sender}")
+    public List<Chat> getLastMessages(@PathVariable String receiver, @PathVariable String sender) {
+        return messagesRepository.findLastChatMessages(sender, receiver);
+    }
     // Felhasznalo Lekerdezese ID Alapjan
     @GetMapping("/user/{id}")
     public User findById(@PathVariable Integer id) {

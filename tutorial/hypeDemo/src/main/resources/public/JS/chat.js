@@ -97,6 +97,7 @@ function onMessageReceived(payload) {
         if(message.sender !== receiver) {
             displayNotification(message.sender, message.content)
         }
+        displayLastMessages(receiver, username)
     }
 }
 
@@ -163,6 +164,7 @@ function getContactName(contact) {
 
     displayAllMessages();
     document.getElementById('notification-div').innerHTML = "";
+    displayLastMessages(receiver, username);
 }
 
 // Avatar Szin Letrehozasa Felhasznalonak
@@ -260,6 +262,21 @@ function displayAllMessages() {
             }
         });
 }
+function displayLastMessages(receiver, username){
+
+
+    fetch('/lastMessage/' + receiver + '/' + username, {
+        method: 'GET',
+    })
+        .then((response) => response.json())
+        .then((data) => {
+            console.log(data)
+            for(let i = 0; i < Object.keys(data).length; i++) {
+                document.querySelectorAll('#' + receiver)[i].innerHTML += '<p>' + data[i].content +'</p>'
+            }
+        });
+}
+
 
 function closeNotification(meik) {
     var x = document.getElementById(meik.parentElement);

@@ -557,9 +557,10 @@ div.card-image img:hover {
     flex-wrap: wrap;
 }
 
+
 .cards_wrap .card_item{
     padding: 15px 25px;
-    width: 25%;
+    width: 20%;
     transition: all 0.6s;
 }
 
@@ -622,7 +623,20 @@ div.card-image img:hover {
 }
 
 .cards_wrap .card_item a {
+    color: #777777;
     font-size: 30px;
+}
+.cards_wrap .card_item .contact {
+    width: 100%;
+    text-align: center;
+    margin-top: 10px;
+    margin-bottom: -20px;
+}
+
+.cards_wrap .card_item .contact a {
+    text-align: center;
+    color: #777777;
+    font-size: 20px;
 }
 
 @media screen and (max-width: 1024px){

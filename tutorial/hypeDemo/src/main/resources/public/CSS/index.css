@@ -172,16 +172,16 @@ i {
     transform: translateY(0vh);
 }
 
-.card:nth-child(2){
+.card_item:nth-child(2){
     transition-delay: 200ms;
 }
-.card:nth-child(3){
+.card_item:nth-child(3){
     transition-delay: 400ms
 }
-.card:nth-child(4){
+.card_item:nth-child(4){
     transition-delay: 600ms
 }
-.card:nth-child(5){
+.card_item:nth-child(5){
     transition-delay: 800ms
 }
 

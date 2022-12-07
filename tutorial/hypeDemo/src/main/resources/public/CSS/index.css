@@ -663,3 +663,7 @@ div.card-image img:hover {
         font-size: 14px;
     }
 }
+
+.features .card_item:nth-child(2n) {
+    margin-top: 60px;
+}

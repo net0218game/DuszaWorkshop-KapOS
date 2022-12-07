@@ -222,7 +222,10 @@ function displayAllContacts() {
         .then((response) => response.json())
         .then((data) => {
             console.log(data)
+            console.log(username)
             for(let i = 0; i < Object.keys(data).length; i++) {
+                //if(data[i].sender.trim().toUpperCase() === username.trim().toUpperCase()) continue;
+
                 var messageElement = document.createElement('li');
                 messageElement.classList.add('chat-message');
                 messageElement.addEventListener('click', function () {
@@ -271,8 +274,6 @@ function displayAllMessages() {
         });
 }
 function displayLastMessages(receiver, username){
-
-
     fetch('/lastMessage/' + receiver + '/' + username, {
         method: 'GET',
     })
@@ -280,7 +281,11 @@ function displayLastMessages(receiver, username){
         .then((data) => {
             console.log(data)
             for(let i = 0; i < Object.keys(data).length; i++) {
-                document.querySelectorAll('#' + receiver)[i].getElementsByTagName('p').item(0).innerText= data[i].sender.toUpperCase() + ': ' + data[i].content
+                var msg = data[i].content
+                if (msg.length > 20) {
+                    msg = msg.substring(0, 20) + "..."
+                }
+                document.querySelectorAll('#' + receiver)[i].getElementsByTagName('p').item(0).innerText = data[i].sender.toUpperCase() + ': ' + msg
             }
         });
 }

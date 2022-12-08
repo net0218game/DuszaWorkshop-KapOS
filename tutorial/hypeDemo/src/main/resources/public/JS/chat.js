@@ -14,6 +14,8 @@ var receiver = ""
 // Üzenet Maximum Hossza
 var maxLength = 64;
 
+var group_chat = "DuszaGroupChat"
+
 const date = new Date();
 
 var colors = [
@@ -31,7 +33,7 @@ stompClient.connect({}, onConnected, onError);
 
 function onConnected() {
     // Subscribe to the Public Chat
-    stompClient.subscribe('/all/messages', onMessageReceived);
+    stompClient.subscribe('/all/dusza-group', onMessageReceived);
     stompClient.subscribe('/user/specific', onMessageReceived);
 
     connectingElement.classList.add('hidden');
@@ -60,15 +62,16 @@ function sendMessage(event) {
         if (receiver !== username) {
             displayMessage(username, messageInput.value)
         }
-        if(receiver === "DuszaGroupChat") {
-            stompClient.send("/app/application", {}, JSON.stringify(chatMessage));
+        if(receiver === group_chat) {
+            stompClient.send("/app/chat.sendMessage", {}, JSON.stringify(chatMessage));
         } else {
             stompClient.send("/app/private", {}, JSON.stringify(chatMessage));
+            displayLastMessages(receiver, username)
+
         }
 
         messageInput.value = '';
 
-        displayLastMessages(receiver, username)
     }
     event.preventDefault();
 }
@@ -92,15 +95,24 @@ function onMessageReceived(payload) {
         messageArea.scrollTop = messageArea.scrollHeight;
 
     } else if (message.type === "CHAT") {
-        if(message.sender === username || message.sender === receiver) {
-            displayMessage(message.sender, message.content)
+        console.log();
+        if(message.sender === username || message.sender === receiver || message.receiver === group_chat) {
+            if(message.sender !== username) {
+                console.log("MEG KELL JELENITENI.")
+                displayMessage(message.sender, message.content)
+            }
+            else {
+                console.log("Te kuldtel uzenetet, NEM KELL MEGJELENITENI")
+            }
         }
 
-        if(message.sender !== receiver) {
+        if(message.sender !== receiver && message.receiver !== group_chat) {
             displayNotification(message.sender, message.content)
         }
 
-        displayLastMessages(message.sender, username)
+        if(message.receiver !== group_chat) {
+            displayLastMessages(message.sender, username)
+        }
     }
 }
 
@@ -165,8 +177,14 @@ function getContactName(contact) {
     // Beallitja az input box placeholder-jét
     inputBox.placeholder = "Send a message to " + receiver + "!"
 
-    displayAllMessages();
     document.getElementById('notification-div').innerHTML = "";
+
+    if(receiver === group_chat) {
+        displayAllMessages(group_chat, group_chat);
+    } else {
+        displayAllMessages(receiver, username);
+    }
+
 }
 
 // Avatar Szin Letrehozasa Felhasznalonak
@@ -221,58 +239,68 @@ function displayAllContacts() {
     })
         .then((response) => response.json())
         .then((data) => {
-            console.log(data)
-            console.log(username)
             for(let i = 0; i < Object.keys(data).length; i++) {
-                //if(data[i].sender.trim().toUpperCase() === username.trim().toUpperCase()) continue;
+                if(data[i].userName !== username) {
+                    var messageElement = document.createElement('li');
+                    messageElement.classList.add('chat-message');
+                    messageElement.addEventListener('click', function () {
+                        getContactName(this)
+                    });
+                    messageElement.setAttribute('id', data[i].userName)
 
-                var messageElement = document.createElement('li');
-                messageElement.classList.add('chat-message');
-                messageElement.addEventListener('click', function () {
-                    getContactName(this)
-                });
-                messageElement.setAttribute('id', data[i].userName)
+                    var avatarElement = document.createElement('i');
+                    var avatarText = document.createTextNode(data[i].userName.substring(0, 1));
+                    avatarElement.appendChild(avatarText);
+                    avatarElement.style['background-color'] = getAvatarColor(data[i].userName);
 
-                var avatarElement = document.createElement('i');
-                var avatarText = document.createTextNode(data[i].userName.substring(0, 1));
-                avatarElement.appendChild(avatarText);
-                avatarElement.style['background-color'] = getAvatarColor(data[i].userName);
+                    messageElement.appendChild(avatarElement);
 
-                messageElement.appendChild(avatarElement);
+                    var usernameElement = document.createElement('span');
+                    var usernameText = document.createTextNode(data[i].userName);
 
-                var usernameElement = document.createElement('span');
-                var usernameText = document.createTextNode(data[i].userName);
+                    usernameElement.appendChild(usernameText);
+                    messageElement.appendChild(usernameElement);
 
-                usernameElement.appendChild(usernameText);
-                messageElement.appendChild(usernameElement);
+                    var textElement = document.createElement('p');
 
-                var textElement = document.createElement('p');
+                    textElement.innerHTML = "No messages yet.";
+                    textElement.style.fontSize = "0.8rem";
 
-                // Ha van a szovegben URL akkor beteszi <a> tagba.
-                textElement.innerHTML = "Utolso uzenet";
+                    messageElement.appendChild(textElement);
 
-                messageElement.appendChild(textElement);
+                    contactArea.appendChild(messageElement);
 
-                contactArea.appendChild(messageElement);
-                contactArea.scrollTop = messageArea.scrollHeight;
-
-                displayLastMessages(data[i].userName, username)
+                    displayLastMessages(data[i].userName, username)
+                }
             }
         });
 }
 
+function displayAllMessages(msgreceiver, msgusername) {
+    if(receiver === group_chat) {
+        fetch('/listGroupMessages/' + msgreceiver, {
+            method: 'GET',
+        })
+            .then((response) => response.json())
+            .then((data) => {
+                for(let i = 0; i < Object.keys(data).length; i++) {
+                    displayMessage(data[i].sender, data[i].content)
+                }
+            });
+    } else {
+        fetch('/listMessages/' + msgreceiver + '/' + msgusername, {
+            method: 'GET',
+        })
+            .then((response) => response.json())
+            .then((data) => {
+                for(let i = 0; i < Object.keys(data).length; i++) {
+                    displayMessage(data[i].sender, data[i].content)
+                }
+            });
+    }
 
-function displayAllMessages() {
-    fetch('/listMessages/' + receiver + '/' + username, {
-        method: 'GET',
-    })
-        .then((response) => response.json())
-        .then((data) => {
-            for(let i = 0; i < Object.keys(data).length; i++) {
-                displayMessage(data[i].sender, data[i].content)
-            }
-        });
 }
+
 function displayLastMessages(receiver, username){
     fetch('/lastMessage/' + receiver + '/' + username, {
         method: 'GET',

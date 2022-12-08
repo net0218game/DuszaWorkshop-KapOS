@@ -239,6 +239,19 @@ a {
     text-transform: uppercase;
 }
 
+.sidenav .notice i {
+    position: unset;
+    width: unset;
+    height: unset;
+    overflow: unset;
+    left: unset;
+    display: unset;
+    font-size: unset;
+    line-height: unset;
+    color: #ffffff;
+    text-align: unset;
+}
+
 #chat-page .chat-message span, .sidenav .chat-message span {
     color: #ffffff;
     font-weight: 600;

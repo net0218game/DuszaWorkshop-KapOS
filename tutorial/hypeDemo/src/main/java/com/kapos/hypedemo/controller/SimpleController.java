@@ -153,6 +153,11 @@ public class SimpleController {
         return messagesRepository.findChatMessages(sender, receiver);
     }
 
+    @GetMapping("/listGroupMessages/{receiver}")
+    public List<Chat> getGroupMessages(@PathVariable String receiver) {
+        return messagesRepository.findGroupMessages(receiver);
+    }
+
     @GetMapping("/contacts")
     public List<User> getAllUsers() {
         return userRepository.findAll();
@@ -169,8 +174,8 @@ public class SimpleController {
     }
 
     // A Public Chat Része
-    @MessageMapping("/application")
-    @SendTo("/all/messages")
+    @MessageMapping("/chat.sendMessage")
+    @SendTo("/all/dusza-group")
     public Chat sendMessage(@Payload Chat chatMessage, Chat chat) {
         messagesRepository.save(new Chat(chat.getId(), chat.getContent(), chat.getSender(), chat.getReceiver(), LocalDateTime.now()));
         return chatMessage;

@@ -16,6 +16,13 @@ public interface MessagesRepository extends CrudRepository<Chat, Integer> {
             "(chat.receiver = :sender and chat.sender = :receiver)",
             nativeQuery = true)
     List<Chat> findChatMessages(@Param("sender") String sender, @Param("receiver") String receiver);
+
+
+    @Query(value = "SELECT * FROM chat WHERE (chat.receiver = :receiver)",
+            nativeQuery = true)
+    List<Chat> findGroupMessages(@Param("receiver") String receiver);
+
+
     @Query(value = "SELECT * FROM chat WHERE (chat.receiver = :receiver and chat.sender = :sender) or " +
             "(chat.receiver = :sender and chat.sender = :receiver) ORDER BY chat.id DESC LIMIT 1",
             nativeQuery = true)

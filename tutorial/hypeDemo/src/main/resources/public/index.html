@@ -33,7 +33,6 @@
     <a href="/" class="hype">HYPE</a>
     <a href="/register"><i class="fa fa-key"></i> Register</a>
     <a href="/chat"><i class="fa fa-comment-dots"></i> Chat</a>
-    <a href="/admin"><i class="fa fa-user"></i> Admin Page</a>
 
     <!-- Profil -->
     <div class="dropdown" style="right: 0">
@@ -166,38 +165,41 @@
 <h2>Features</h2>
 <div class="wrapper">
     <div class="cards_wrap features" >
-        <div class="card_item hidden">
-            <div class="card_inner hidden">
-                <div class="nev hidden">Features #1</div>
-                <div class="presentation hidden">Description of the feature comes here.</div>
-            </div>
-        </div>
-
-        <div class="card_item hidden">
+        <div class="card_item hidden4">
             <div class="card_inner">
-                <div class="nev hidden3">Features #2</div>
-                <div class="presentation hidden">Description of the feature comes here.</div>
+                <div class="nev hidden3">Responsive Design</div>
+                <div class="presentation hidden">The design of our website is compatible with any of your devices.
+                You can chat with your friends on your computer, or hit them up on the go, with your mobile devices.</div>
             </div>
         </div>
 
-        <div class="card_item hidden3">
+        <div class="card_item hidden4">
             <div class="card_inner">
-                <div class="nev hidden3">Features #3</div>
-                <div class="presentation hidden">Description of the feature comes here.</div>
+                <div class="nev hidden3">Highly Customizeable</div>
+                <div class="presentation hidden">The point of this project, is to create a chat application, different from others on the market.
+                Check out our <a href="">description</a> to read more about <span class="hype">HYPE</span>.</div>
             </div>
         </div>
 
-        <div class="card_item hidden2">
+        <div class="card_item hidden4">
+            <div class="card_inner">
+                <div class="nev hidden3">Secure & Safe</div>
+                <div class="presentation hidden">We encode your sensitive personal information, so we won't get access to them. Your privacy is valued here.</div>
+            </div>
+        </div>
+
+        <div class="card_item hidden4">
             <div class="card_inner">
                 <div class="nev hidden2">Features #4</div>
                 <div class="presentation hidden">Description of the feature comes here.</div>
             </div>
         </div>
 
-        <div class="card_item hidden2">
+        <div class="card_item hidden4">
             <div class="card_inner">
-                <div class="nev hidden2">Features #5</div>
-                <div class="presentation hidden">Description of the feature comes here.</div>
+                <div class="nev hidden2">Developed By Students</div>
+                <div class="presentation hidden">The <span class="hype">HYPE</span> project is developed by only CS highschool students, and a mentor, who helps us, if needed. This project is a submission for
+                    <a href="https://isze.hu/dusza-muhely-mentorprogram/">Dusza-Workshop</a>.</div>
             </div>
         </div>
 
@@ -237,7 +239,7 @@
     </p>
 
     <h2 class="hidden">Technology Stack</h2>
-    <table class="techStack">
+    <table class="techStack" style="width: 30%">
         <tr>
             <td>Java,</td>
         </tr>
@@ -281,6 +283,9 @@
 
     const hiddenelements3 = document.querySelectorAll('.hidden3');
     hiddenelements3.forEach((el) => (observer.observe(el)));
+
+    const hiddenelements4 = document.querySelectorAll('.hidden4');
+    hiddenelements4.forEach((el) => (observer.observe(el)));
 
     function chat() {
         window.location.replace("/chat")

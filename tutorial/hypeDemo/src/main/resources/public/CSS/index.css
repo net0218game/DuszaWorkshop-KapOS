@@ -164,7 +164,13 @@ i {
 .hidden3{
     opacity: 0;
     transition: all 2s;
-    transform: translateY(  10vh);
+    transform: translateY(10vh);
+}
+
+.hidden4{
+    opacity: 0;
+    transition: all 2s;
+    transform: translateY(-10vh);
 }
 .show{
     opacity: 1;
@@ -549,7 +555,7 @@ div.card-image img:hover {
     font-weight: 900;
 }
 
-.cards_wrap{
+.cards_wrap {
     padding: 20px;
     width: 100%;
     display: flex;
@@ -662,6 +668,21 @@ div.card-image img:hover {
     .wrapper .header{
         font-size: 14px;
     }
+}
+
+.features .card_item {
+    transition: all 0.8s;
+}
+
+.features .card_item .presentation {
+    margin-top: 20px;
+    font-size: 0.8rem;
+    line-height: normal;
+}
+
+.features .card_item .presentation a {
+    font-size: 0.8rem;
+    color: #002bff;
 }
 
 .features .card_item:nth-child(2n) {

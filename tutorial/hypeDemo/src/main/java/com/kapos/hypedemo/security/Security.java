@@ -47,7 +47,7 @@ public class Security extends WebSecurityConfigurerAdapter{
                 .formLogin()
                 .loginPage("/login")
                 .permitAll()
-                .defaultSuccessUrl("/")
+                .defaultSuccessUrl("/chat")
                 .and()
                 .logout( logout -> logout.logoutSuccessUrl("/"));
     }

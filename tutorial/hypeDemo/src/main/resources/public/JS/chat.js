@@ -84,22 +84,7 @@ function sendMessage(event) {
 function onMessageReceived(payload) {
     var message = JSON.parse(payload.body);
 
-    var messageElement = document.createElement('li');
-
-    if (message.type === 'JOIN') {
-        messageElement.classList.add('event-message');
-        message.content = message.sender + ' joined the Hype!';
-
-        var textElement = document.createElement('p');
-        var messageText = document.createTextNode(message.content);
-        textElement.appendChild(messageText);
-
-        messageElement.appendChild(textElement);
-
-        messageArea.appendChild(messageElement);
-        messageArea.scrollTop = messageArea.scrollHeight;
-
-    } else if (message.type === "CHAT") {
+    if (message.type === "CHAT") {
         console.log();
         if(message.sender === username || message.sender === receiver || message.receiver === group_chat) {
             if(message.sender !== username) {
@@ -142,6 +127,7 @@ document.getElementById('message').onkeyup = function () {
 function displayMessage(messageUsername, content, time) {
     if (receiver !== "") {
         var messageElement = document.createElement('li');
+
         messageElement.classList.add('chat-message');
 
         var avatarElement = document.createElement('i');
@@ -170,6 +156,20 @@ function displayMessage(messageUsername, content, time) {
         messageArea.appendChild(messageElement);
         messageArea.scrollTop = messageArea.scrollHeight;
     }
+}
+
+function displayEventMessage(message) {
+    var messageElement = document.createElement('li');
+    messageElement.classList.add('event-message');
+
+    var textElement = document.createElement('p');
+    var messageText = document.createTextNode(message);
+    textElement.appendChild(messageText);
+
+    messageElement.appendChild(textElement);
+
+    messageArea.appendChild(messageElement);
+    messageArea.scrollTop = messageArea.scrollHeight;
 }
 
 // Contactok Listazasa
@@ -289,8 +289,12 @@ function displayAllMessages(msgreceiver, msgusername) {
         })
             .then((response) => response.json())
             .then((data) => {
-                for(let i = 0; i < Object.keys(data).length; i++) {
-                    displayMessage(data[i].sender, data[i].content, data[i].date)
+                if(Object.keys(data).length === 0) {
+                    displayEventMessage("There are no messages in this group. Send a message to " + receiver + " and fire up the conversation!")
+                } else {
+                    for(let i = 0; i < Object.keys(data).length; i++) {
+                        displayMessage(data[i].sender, data[i].content, data[i].date)
+                    }
                 }
             });
     } else {
@@ -299,12 +303,15 @@ function displayAllMessages(msgreceiver, msgusername) {
         })
             .then((response) => response.json())
             .then((data) => {
-                for(let i = 0; i < Object.keys(data).length; i++) {
-                    displayMessage(data[i].sender, data[i].content, data[i].date)
+                if(Object.keys(data).length === 0) {
+                    displayEventMessage("You don't have any messages with user " + receiver + ". Send them a message and fire up the conversation!")
+                } else {
+                    for(let i = 0; i < Object.keys(data).length; i++) {
+                        displayMessage(data[i].sender, data[i].content, data[i].date)
+                    }
                 }
             });
     }
-
 }
 
 function displayLastMessages(receiver, username){

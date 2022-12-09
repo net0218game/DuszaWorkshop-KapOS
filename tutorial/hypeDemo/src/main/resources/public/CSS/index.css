@@ -688,3 +688,27 @@ div.card-image img:hover {
 .features .card_item:nth-child(2n) {
     margin-top: 60px;
 }
+
+.floating_card{
+    transform: translateY(-10%);
+    animation: floating 5s infinite;
+    transition: ease 0.3s;
+}
+
+.floating_cardd2{
+    transform: translateY(10%);
+    animation: floatingg2 5s infinite;
+    transition: ease 0.3s;
+}
+
+
+
+@keyframes floating {
+    0%{transform: translateY(-10%);transition: ease 0.5s;}
+    50%{transform: translateY(10%);transition: ease 0.5s;}
+}
+
+@keyframes floatingg2 {
+    0%{transform: translateY(10%);transition: ease 0.5s;}
+    50%{transform: translateY(-10%);transition: ease 0.5s;}
+}

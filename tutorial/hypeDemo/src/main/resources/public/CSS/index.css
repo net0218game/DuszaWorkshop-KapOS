@@ -690,13 +690,13 @@ div.card-image img:hover {
 }
 
 .floating_card{
-    transform: translateY(-10%);
+    transform: translateY(-7%);
     animation: floating 5s infinite;
     transition: ease 0.3s;
 }
 
 .floating_cardd2{
-    transform: translateY(10%);
+    transform: translateY(7%);
     animation: floatingg2 5s infinite;
     transition: ease 0.3s;
 }
@@ -704,11 +704,11 @@ div.card-image img:hover {
 
 
 @keyframes floating {
-    0%{transform: translateY(-10%);transition: ease 0.5s;}
-    50%{transform: translateY(10%);transition: ease 0.5s;}
+    0%{transform: translateY(-7%);transition: ease 0.5s;}
+    50%{transform: translateY(7%);transition: ease 0.5s;}
 }
 
 @keyframes floatingg2 {
-    0%{transform: translateY(10%);transition: ease 0.5s;}
-    50%{transform: translateY(-10%);transition: ease 0.5s;}
+    0%{transform: translateY(7%);transition: ease 0.5s;}
+    50%{transform: translateY(-7%);transition: ease 0.5s;}
 }

@@ -18,9 +18,9 @@ public class Chat {
     private String sender;
     private String receiver;
     private String senderNickname;
-    private LocalDateTime date;
+    private String date;
 
-    public Chat(Integer id, String content, String sender, String receiver, LocalDateTime date) {
+    public Chat(Integer id, String content, String sender, String receiver, String date) {
         this.id = id;
         this.content = content;
         this.sender = sender;
@@ -69,11 +69,11 @@ public class Chat {
         this.id = id;
     }
 
-    public LocalDateTime getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(LocalDateTime date) {
+    public void setDate(String date) {
         this.date = date;
     }
 

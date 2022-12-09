@@ -177,7 +177,7 @@ public class SimpleController {
     @MessageMapping("/chat.sendMessage")
     @SendTo("/all/dusza-group")
     public Chat sendMessage(@Payload Chat chatMessage, Chat chat) {
-        messagesRepository.save(new Chat(chat.getId(), chat.getContent(), chat.getSender(), chat.getReceiver(), LocalDateTime.now()));
+        messagesRepository.save(new Chat(chat.getId(), chat.getContent(), chat.getSender(), chat.getReceiver(), chat.getDate()));
         return chatMessage;
     }
 
@@ -189,7 +189,7 @@ public class SimpleController {
         // Uzenetek eltarolasa db ben
         /* A kesobbiekben a sender-t es a receiver-t meg kell valtoztatnunk senderId és receiverId-re.
         Ezeket majd a Spring Security-vel bejelentkezett felhasznalonak az Id-jevel oldjuk meg.*/
-        messagesRepository.save(new Chat(chat.getId(), chat.getContent(), chat.getSender(), chat.getReceiver(), LocalDateTime.now()));
+        messagesRepository.save(new Chat(chat.getId(), chat.getContent(), chat.getSender(), chat.getReceiver(), chat.getDate()));
     }
 
     // ========== Thymeleaf Részek ==========

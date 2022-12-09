@@ -16,8 +16,6 @@ var maxLength = 64;
 
 var group_chat = "DuszaGroupChat"
 
-const date = new Date();
-
 var colors = [
     '#2196F3', '#32c787', '#00BCD4', '#ff5652',
     '#ffc107', '#ff85af', '#FF9800', '#39bbb0'
@@ -51,16 +49,23 @@ function onError(error) {
 function sendMessage(event) {
     var messageContent = messageInput.value.trim();
     if (messageContent && stompClient) {
+
+        const date = new Date();
+        let hours = date.getHours();
+        let minutes = String(date.getMinutes()).padStart(2, '0');
+        var time = hours + ':' + minutes;
+
         var chatMessage = {
             sender: username,
             receiver: receiver,
             content: messageInput.value,
+            date: time,
             type: 'CHAT'
         };
 
         // Uzenetek Megjelenitese Sajat Magadnak
         if (receiver !== username) {
-            displayMessage(username, messageInput.value)
+            displayMessage(username, messageInput.value, time)
         }
         if(receiver === group_chat) {
             stompClient.send("/app/chat.sendMessage", {}, JSON.stringify(chatMessage));
@@ -99,7 +104,7 @@ function onMessageReceived(payload) {
         if(message.sender === username || message.sender === receiver || message.receiver === group_chat) {
             if(message.sender !== username) {
                 console.log("MEG KELL JELENITENI.")
-                displayMessage(message.sender, message.content)
+                displayMessage(message.sender, message.content, message.date)
             }
             else {
                 console.log("Te kuldtel uzenetet, NEM KELL MEGJELENITENI")
@@ -134,7 +139,7 @@ document.getElementById('message').onkeyup = function () {
 // ========== Üzenet Hossz Ellenőrzése ==========
 
 // Üzenet Megjelenitese
-function displayMessage(messageUsername, content) {
+function displayMessage(messageUsername, content, time) {
     if (receiver !== "") {
         var messageElement = document.createElement('li');
         messageElement.classList.add('chat-message');
@@ -148,7 +153,8 @@ function displayMessage(messageUsername, content) {
 
         var usernameElement = document.createElement('span');
         var usernameText = document.createTextNode(messageUsername);
-        var dateText = document.createTextNode(" - " + date.getHours() + ":" + date.getMinutes());
+
+        var dateText = document.createTextNode(" - " + time);
 
         usernameElement.appendChild(usernameText);
         usernameElement.appendChild(dateText);
@@ -284,7 +290,7 @@ function displayAllMessages(msgreceiver, msgusername) {
             .then((response) => response.json())
             .then((data) => {
                 for(let i = 0; i < Object.keys(data).length; i++) {
-                    displayMessage(data[i].sender, data[i].content)
+                    displayMessage(data[i].sender, data[i].content, data[i].date)
                 }
             });
     } else {
@@ -294,7 +300,7 @@ function displayAllMessages(msgreceiver, msgusername) {
             .then((response) => response.json())
             .then((data) => {
                 for(let i = 0; i < Object.keys(data).length; i++) {
-                    displayMessage(data[i].sender, data[i].content)
+                    displayMessage(data[i].sender, data[i].content, data[i].date)
                 }
             });
     }

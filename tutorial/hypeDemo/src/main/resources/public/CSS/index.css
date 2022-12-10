@@ -720,6 +720,9 @@ div.card-image img:hover {
 .techstimg:hover {
     transform: scale(1.03);
 }
+
+
+
 @keyframes floating {
     0%{transform: translateY(-7%);transition: ease 0.5s;}
     50%{transform: translateY(7%);transition: ease 0.5s;}

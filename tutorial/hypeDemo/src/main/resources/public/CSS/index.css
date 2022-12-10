@@ -102,7 +102,6 @@ h2 {
     text-align: center;
     padding-top: 20px;
     padding-bottom: 20px;
-    border-bottom: 1px solid white;
 }
 
 .button {
@@ -132,12 +131,13 @@ td{
 
 .techStack{
     font-family: Comfortaa;
-    font-size: 30px;
+    font-size: 32px;
     width: 110%;
     transform: translateY(-5vh);
 }
 .techStack tr td p{
-    height: 10vh;
+    height: 7vh;
+    text-align: center;
     vertical-align: middle;
 }
 
@@ -228,7 +228,7 @@ strong {
     text-align: center;
     padding: 20px;
     background-color: #2196F3;
-    color: white;
+    color: #000000;
 }
 .alert span {
     background: transparent;
@@ -710,8 +710,16 @@ div.card-image img:hover {
     transition: ease 0.3s;
 }
 
-
-
+.techstimg {
+    transition: all 0.8s;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+}
+.techstimg:hover {
+    transform: scale(1.03);
+}
 @keyframes floating {
     0%{transform: translateY(-7%);transition: ease 0.5s;}
     50%{transform: translateY(7%);transition: ease 0.5s;}

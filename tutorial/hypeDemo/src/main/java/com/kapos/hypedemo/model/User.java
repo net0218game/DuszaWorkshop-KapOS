@@ -5,7 +5,6 @@ import java.util.Objects;
 @Entity
 public class User {
 
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
@@ -16,6 +15,16 @@ public class User {
     private String password;
     private String gender;
     private String born;
+
+    public Boolean getOnline() {
+        return online;
+    }
+
+    public void setOnline(Boolean online) {
+        this.online = online;
+    }
+
+    private Boolean online;
 
     public User(String userName, String firstName, String secondName, String email, String password, String gender, String born) {
         this.userName = userName;

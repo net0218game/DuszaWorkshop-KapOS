@@ -31,9 +31,12 @@ public interface MessagesRepository extends CrudRepository<Chat, Integer> {
     @Query(value = "DELETE FROM chat WHERE (chat.receiver = :receiver and chat.sender = :sender) or  " +
                        "(chat.receiver = :sender and chat.sender = :receiver)",
             nativeQuery = true)
-    Chat deleteAllByReceiverOrSender(String receiver , String sender);
+    Chat deleteAllByReceiverOrSender(@Param("sender") String sender, @Param("receiver") String receiver);
+
+    @Query(value = "DELETE FROM chat WHERE (chat.id = :id)",
+            nativeQuery = true)
+    Chat deleteMessage(@Param("id") String id);
 
     //DELETE FROM chat WHERE ( chat.receiver = :receiver)
-    Chat deleteAllByContent(String content);
 
 }

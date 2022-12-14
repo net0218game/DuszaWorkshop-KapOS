@@ -128,11 +128,12 @@ document.getElementById('message').onkeyup = function () {
 // ========== Üzenet Hossz Ellenőrzése ==========
 
 // Üzenet Megjelenitese
-function displayMessage(messageUsername, content, time) {
+function displayMessage(messageUsername, content, time, messageId) {
     if (receiver !== "") {
         var messageElement = document.createElement('li');
 
         messageElement.classList.add('chat-message');
+        messageElement.setAttribute('id', messageId)
 
         var avatarElement = document.createElement('i');
         var avatarText = document.createTextNode(messageUsername[0]);
@@ -159,7 +160,15 @@ function displayMessage(messageUsername, content, time) {
         textElement.innerHTML = (replaceURLs(content));
 
         messageElement.appendChild(textElement);
-        messageElement.appendChild(deleteButton);
+
+        if(messageUsername === username) {
+            messageElement.appendChild(deleteButton);
+
+            deleteButton.addEventListener('click', function () {
+                deleteMessage(this.parentElement.getAttribute('id'))
+            });
+
+        }
 
         messageArea.appendChild(messageElement);
         messageArea.scrollTop = messageArea.scrollHeight;
@@ -261,6 +270,7 @@ function displayAllContacts() {
                     messageElement.addEventListener('click', function () {
                         getContactName(this)
                     });
+
                     messageElement.setAttribute('id', data[i].userName)
 
                     var avatarElement = document.createElement('i');
@@ -288,7 +298,7 @@ function displayAllContacts() {
                     displayLastMessages(data[i].userName, username)
                 }
             }
-        });
+        } );
 }
 
 function displayAllMessages(msgreceiver, msgusername) {
@@ -302,7 +312,7 @@ function displayAllMessages(msgreceiver, msgusername) {
                     displayEventMessage("There are no messages in this group. Send a message to " + receiver + " and fire up the conversation!")
                 } else {
                     for (let i = 0; i < Object.keys(data).length; i++) {
-                        displayMessage(data[i].sender, data[i].content, data[i].date)
+                        displayMessage(data[i].sender, data[i].content, data[i].date, data[i].id)
                     }
                 }
             });
@@ -313,10 +323,16 @@ function displayAllMessages(msgreceiver, msgusername) {
             .then((response) => response.json())
             .then((data) => {
                 if (Object.keys(data).length === 0) {
-                    displayEventMessage("You don't have any messages with user " + receiver + ". Send them a message and fire up the conversation!")
+                    if(receiver === "hypeBot") {
+                        displayEventMessage("If you don't know how to use me yet, use the .help command, and I'll let you know! :D")
+                    } else {
+                        displayEventMessage("You don't have any messages with user " + receiver + ". Send them a message and fire up the conversation!")
+                    }
                 } else {
+                    messageArea.innerHTML = "";
+
                     for (let i = 0; i < Object.keys(data).length; i++) {
-                        displayMessage(data[i].sender, data[i].content, data[i].date)
+                        displayMessage(data[i].sender, data[i].content, data[i].date, data[i].id)
                     }
                 }
             });
@@ -379,14 +395,14 @@ function deleteMessages() {
     fetch('/deleteMessages/' + receiver + '/'+ username, {
         method: 'POST',
     })
-    messageArea.innerHTML = "";
-
+    displayAllMessages(receiver, username);
 }
 
-function deleteMessage(content) {
-    fetch('/deleteMessage/' + content, {
+function deleteMessage(messageId) {
+    fetch('/deleteMessage/' + messageId, {
         method: 'POST',
     })
+    displayAllMessages(receiver, username);
 }
 
 function editMessage(message) {

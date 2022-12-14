@@ -158,9 +158,17 @@ public class SimpleController {
     public List<Chat> getGroupMessages(@PathVariable String receiver) {
         return messagesRepository.findGroupMessages(receiver);
     }
+
+    // Kesobbiekben felhasznalok helyett felhasznalok ID-ja
     @PostMapping("/deleteMessages/{receiver}/{sender}")
     public void deleteMessages (@PathVariable String receiver, @PathVariable String sender){
         messagesRepository.deleteAllByReceiverOrSender(receiver, sender);
+    }
+
+    // Content helyett kesobbiekben ID
+    @PostMapping("/deleteMessage/{messageId}")
+    public void deleteMessage (@PathVariable String messageId){
+        messagesRepository.deleteMessage(messageId);
     }
 
     @GetMapping("/contacts")
@@ -196,12 +204,35 @@ public class SimpleController {
     // Handling Private Messages
     @MessageMapping("/private")
     public void sendToSpecificUser(@Payload Chat chat) {
-        // Uzenet elkuldese felhasznalonak
-        simpMessagingTemplate.convertAndSendToUser(chat.getReceiver(), "/specific", chat);
-        // Uzenetek eltarolasa db ben
+
+        if(Objects.equals(chat.getReceiver(), "hypeBot")) {
+
+            String botMessage = "That's A Default Bot Answer";
+
+            if(Objects.equals(chat.getContent(), ".help")) {
+                botMessage = "Hey! My name is HYPE! I'm a chat bot. You can use these commands:" +
+                        ".help\tDisplays this mesage\n" +
+                        ".say [text]\tI'll say the message you specify in the [text] tag";
+            } else if (chat.getContent().contains(".say ")) {
+                botMessage = chat.getContent().replace(".say ", "");
+            }
+
+            // Üzenet visszaküldése Botként
+            chat.setContent(botMessage);
+            chat.setReceiver(chat.getSender());
+            chat.setSender("hypeBot");
+
+            simpMessagingTemplate.convertAndSendToUser(chat.getReceiver(), "/specific", chat);
+        } else {
+            // Uzenet elkuldese felhasznalonak
+            simpMessagingTemplate.convertAndSendToUser(chat.getReceiver(), "/specific", chat);
+            // Uzenetek eltarolasa db ben
+
         /* A kesobbiekben a sender-t es a receiver-t meg kell valtoztatnunk senderId és receiverId-re.
         Ezeket majd a Spring Security-vel bejelentkezett felhasznalonak az Id-jevel oldjuk meg.*/
-        messagesRepository.save(new Chat(chat.getId(), chat.getContent(), chat.getSender(), chat.getReceiver(), chat.getDate()));
+
+            messagesRepository.save(new Chat(chat.getId(), chat.getContent(), chat.getSender(), chat.getReceiver(), chat.getDate()));
+        }
     }
 
     // ========== Thymeleaf Részek ==========

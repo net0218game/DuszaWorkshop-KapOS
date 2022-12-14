@@ -36,15 +36,23 @@ function onConnected() {
 
     connectingElement.classList.add('hidden');
 
+    fetch('/userStatus/online', {
+        method: 'POST',
+    })
+
     displayAllContacts()
 }
-
 
 function onError(error) {
     connectingElement.textContent = 'NEM SIKERULT CSATLAKOZNI A WEBSOCKET SERVERHEZ! INDÍTSD EL AZ ALKALMAZÁST!';
     connectingElement.style.color = 'red';
 }
 
+socket.addEventListener('close', (event) => {
+    fetch('/userStatus/offline', {
+        method: 'POST',
+    })
+})
 
 function sendMessage(event) {
     var messageContent = messageInput.value.trim();
@@ -67,16 +75,13 @@ function sendMessage(event) {
         if (receiver !== username) {
             displayMessage(username, messageInput.value, time)
         }
-        if(receiver === group_chat) {
+        if (receiver === group_chat) {
             stompClient.send("/app/chat.sendMessage", {}, JSON.stringify(chatMessage));
         } else {
             stompClient.send("/app/private", {}, JSON.stringify(chatMessage));
             displayLastMessages(receiver, username)
-
         }
-
         messageInput.value = '';
-
     }
     event.preventDefault();
 }
@@ -86,21 +91,20 @@ function onMessageReceived(payload) {
 
     if (message.type === "CHAT") {
         console.log();
-        if(message.sender === username || message.sender === receiver || message.receiver === group_chat) {
-            if(message.sender !== username) {
+        if (message.sender === username || message.sender === receiver || message.receiver === group_chat) {
+            if (message.sender !== username) {
                 console.log("MEG KELL JELENITENI.")
                 displayMessage(message.sender, message.content, message.date)
-            }
-            else {
+            } else {
                 console.log("Te kuldtel uzenetet, NEM KELL MEGJELENITENI")
             }
         }
 
-        if(message.sender !== receiver && message.receiver !== group_chat) {
+        if (message.sender !== receiver && message.receiver !== group_chat) {
             displayNotification(message.sender, message.content)
         }
 
-        if(message.receiver !== group_chat) {
+        if (message.receiver !== group_chat) {
             displayLastMessages(message.sender, username)
         }
     }
@@ -189,7 +193,7 @@ function getContactName(contact) {
 
     document.getElementById('notification-div').innerHTML = "";
 
-    if(receiver === group_chat) {
+    if (receiver === group_chat) {
         displayAllMessages(group_chat, group_chat);
     } else {
         displayAllMessages(receiver, username);
@@ -249,8 +253,8 @@ function displayAllContacts() {
     })
         .then((response) => response.json())
         .then((data) => {
-            for(let i = 0; i < Object.keys(data).length; i++) {
-                if(data[i].userName !== username) {
+            for (let i = 0; i < Object.keys(data).length; i++) {
+                if (data[i].userName !== username) {
                     var messageElement = document.createElement('li');
                     messageElement.classList.add('chat-message');
                     messageElement.addEventListener('click', function () {
@@ -287,16 +291,16 @@ function displayAllContacts() {
 }
 
 function displayAllMessages(msgreceiver, msgusername) {
-    if(receiver === group_chat) {
+    if (receiver === group_chat) {
         fetch('/listGroupMessages/' + msgreceiver, {
             method: 'GET',
         })
             .then((response) => response.json())
             .then((data) => {
-                if(Object.keys(data).length === 0) {
+                if (Object.keys(data).length === 0) {
                     displayEventMessage("There are no messages in this group. Send a message to " + receiver + " and fire up the conversation!")
                 } else {
-                    for(let i = 0; i < Object.keys(data).length; i++) {
+                    for (let i = 0; i < Object.keys(data).length; i++) {
                         displayMessage(data[i].sender, data[i].content, data[i].date)
                     }
                 }
@@ -307,10 +311,10 @@ function displayAllMessages(msgreceiver, msgusername) {
         })
             .then((response) => response.json())
             .then((data) => {
-                if(Object.keys(data).length === 0) {
+                if (Object.keys(data).length === 0) {
                     displayEventMessage("You don't have any messages with user " + receiver + ". Send them a message and fire up the conversation!")
                 } else {
-                    for(let i = 0; i < Object.keys(data).length; i++) {
+                    for (let i = 0; i < Object.keys(data).length; i++) {
                         displayMessage(data[i].sender, data[i].content, data[i].date)
                     }
                 }
@@ -318,14 +322,14 @@ function displayAllMessages(msgreceiver, msgusername) {
     }
 }
 
-function displayLastMessages(receiver, username){
+function displayLastMessages(receiver, username) {
     fetch('/lastMessage/' + receiver + '/' + username, {
         method: 'GET',
     })
         .then((response) => response.json())
         .then((data) => {
             console.log(data)
-            for(let i = 0; i < Object.keys(data).length; i++) {
+            for (let i = 0; i < Object.keys(data).length; i++) {
                 var msg = data[i].content
                 if (msg.length > 20) {
                     msg = msg.substring(0, 20) + "..."
@@ -349,7 +353,7 @@ let notificationId = 0;
 
 function displayNotification(sender, content) {
 
-    document.getElementById('notification-div').innerHTML = '<label class="alert-message" id="notification-' + notificationId.toString() + '" onclick="getContactName(' + sender +')">\n' +
+    document.getElementById('notification-div').innerHTML = '<label class="alert-message" id="notification-' + notificationId.toString() + '" onclick="getContactName(' + sender + ')">\n' +
         '    <strong class="hype"> <i class="fa fa-message"></i> NEW MESSAGE</strong><br><span id="notification-text">' + sender.toUpperCase() + ': ' + content + '</span>\n' +
         '    <button onclick="closeNotification(this)" class="close"><i class="fa fa-close"></i></button>\n' +
         '</label>'
@@ -358,7 +362,7 @@ function displayNotification(sender, content) {
 
     setTimeout(function () {
 
-        document.getElementById('notification-div').innerHTML = '<label class="hidden" id="notification-' + notificationId.toString() + '" onclick="getContactName(' + sender +')">\n' +
+        document.getElementById('notification-div').innerHTML = '<label class="hidden" id="notification-' + notificationId.toString() + '" onclick="getContactName(' + sender + ')">\n' +
             '    <strong class="hype"> <i class="fa fa-message"></i> NEW MESSAGE</strong><br><span id="notification-text">' + sender.toUpperCase() + ': ' + content + '</span>\n' +
             '    <button onclick="closeNotification(this)" class="close"><i class="fa fa-close"></i></button>\n' +
             '</label>'
@@ -384,4 +388,6 @@ function deleteMessage(content) {
     })
 }
 
-
+function editMessage(message) {
+    console.log(message.getElementsByClassName())
+}

@@ -28,6 +28,7 @@ import org.springframework.web.servlet.ModelAndView;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Configuration
 @RestController
@@ -171,6 +172,13 @@ public class SimpleController {
     public List<Chat> getLastMessages(@PathVariable String receiver, @PathVariable String sender) {
         return messagesRepository.findLastChatMessages(sender, receiver);
     }
+
+    @PostMapping("/userStatus/{status}")
+    public void updateStatus(@PathVariable String status, User user) {
+        user.setOnline(Objects.equals(status, "online"));
+        logger.info(user.getOnline().toString());
+    }
+
     // Felhasznalo Lekerdezese ID Alapjan
     @GetMapping("/user/{id}")
     public User findById(@PathVariable Integer id) {
@@ -197,12 +205,6 @@ public class SimpleController {
     }
 
     // ========== Thymeleaf Részek ==========
-
-    // Contactok Kilistazasa
-    @ModelAttribute("contacts")
-    public List<User> getUsers() {
-        return userRepository.findAll();
-    }
 
     // Warningok Kilistazasa
     @ModelAttribute("warnings")

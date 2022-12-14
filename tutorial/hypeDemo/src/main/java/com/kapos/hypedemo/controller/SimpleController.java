@@ -157,6 +157,10 @@ public class SimpleController {
     public List<Chat> getGroupMessages(@PathVariable String receiver) {
         return messagesRepository.findGroupMessages(receiver);
     }
+    @PostMapping("/deleteMessages/{receiver}/{sender}")
+    public void deleteMessages (@PathVariable String receiver, @PathVariable String sender){
+        messagesRepository.deleteAllByReceiverOrSender(receiver, sender);
+    }
 
     @GetMapping("/contacts")
     public List<User> getAllUsers() {

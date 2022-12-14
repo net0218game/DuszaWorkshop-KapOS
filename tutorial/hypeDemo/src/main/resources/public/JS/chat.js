@@ -140,6 +140,9 @@ function displayMessage(messageUsername, content, time) {
         var usernameElement = document.createElement('span');
         var usernameText = document.createTextNode(messageUsername);
 
+        var deleteButton = document.createElement("button")
+        deleteButton.textContent = "delete"
+
         var dateText = document.createTextNode(" - " + time);
 
         usernameElement.appendChild(usernameText);
@@ -152,6 +155,7 @@ function displayMessage(messageUsername, content, time) {
         textElement.innerHTML = (replaceURLs(content));
 
         messageElement.appendChild(textElement);
+        messageElement.appendChild(deleteButton);
 
         messageArea.appendChild(messageElement);
         messageArea.scrollTop = messageArea.scrollHeight;
@@ -364,4 +368,20 @@ function displayNotification(sender, content) {
 function notificationAudio() {
     var audio = new Audio("Media/notification.mp3");
     audio.play();
+
 }
+function deleteMessages() {
+    fetch('/deleteMessages/' + receiver + '/'+ username, {
+        method: 'POST',
+    })
+    messageArea.innerHTML = "";
+
+}
+
+function deleteMessage(content) {
+    fetch('/deleteMessage/' + content, {
+        method: 'POST',
+    })
+}
+
+

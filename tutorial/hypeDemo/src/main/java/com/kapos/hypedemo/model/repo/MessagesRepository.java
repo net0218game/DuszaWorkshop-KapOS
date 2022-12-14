@@ -27,4 +27,13 @@ public interface MessagesRepository extends CrudRepository<Chat, Integer> {
             "(chat.receiver = :sender and chat.sender = :receiver) ORDER BY chat.id DESC LIMIT 1",
             nativeQuery = true)
     List<Chat> findLastChatMessages(@Param("sender") String sender, @Param("receiver") String receiver);
+
+    @Query(value = "DELETE FROM chat WHERE (chat.receiver = :receiver and chat.sender = :sender) or  " +
+                       "(chat.receiver = :sender and chat.sender = :receiver)",
+            nativeQuery = true)
+    Chat deleteAllByReceiverOrSender(String receiver , String sender);
+
+    //DELETE FROM chat WHERE ( chat.receiver = :receiver)
+    Chat deleteAllByContent(String content);
+
 }

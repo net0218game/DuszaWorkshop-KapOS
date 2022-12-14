@@ -38,20 +38,20 @@
             RADHAT!!!! AZ ID BEALLITASANAL, MERT HA 2 UGYAN OLYAN NEVU FELHASZNALO VAN AKKOR MEGHAL!!
         KI KELL MAJD CSERELNI FELHASZNALO ID-RE (contact.id) ES AZ UZENET KULDESI MODOT MEGVALTOZTATNI FELHASZNALO
          NEVROL ID RE.-->
-        <h3 class="notice"><i class="fa fa-exclamation-triangle"></i> Currently relevant: <i class="fa fa-exclamation-triangle"></i></h3>
+        <h3 class="notice"><i class="fa-solid fa-thumbtack"></i> Pinned Contacts:</h3>
         <li class="chat-message" id="DuszaGroupChat"
             onclick="getContactName(this)">
             <i style="background-color: rgb(255,183,0);">D</i>
             <span>Dusza-Workshop Group</span>
             <p style= "font-size: 0.8rem">Chat with Dusza Members!</p>
-        </li>
-        <hr>
         <li class="chat-message" id="hypeBot"
             onclick="getContactName(this)">
             <i style="background-color: rgb(255,183,0);" class="fa-solid fa-robot"></i>
             <span><span class="hype">HYPE</span>-Bot</span>
             <p style= "font-size: 0.8rem">Bip-Bup! Chat with me!</p>
         </li>
+        </li>
+        <hr>
         <!-- Thymeleaf megszerzi a bejelentkezesi tokent, ha be vagy jelentkezve
          fontos dolog, a kesobbiekben hasznalni fogjuk.
         <div sec:authorize="isAuthenticated()">

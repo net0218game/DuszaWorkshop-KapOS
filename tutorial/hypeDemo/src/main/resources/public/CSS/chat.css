@@ -382,3 +382,12 @@ a {
 #messageArea {
     max-height: 80%;
 }
+
+.edit {
+    float: right;
+    display: none;
+}
+
+.chat-message:hover .edit {
+    display: unset;
+}

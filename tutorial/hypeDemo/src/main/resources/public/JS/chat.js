@@ -255,6 +255,7 @@ function displayAllContacts() {
         .then((data) => {
             for (let i = 0; i < Object.keys(data).length; i++) {
                 if (data[i].userName !== username) {
+
                     var messageElement = document.createElement('li');
                     messageElement.classList.add('chat-message');
                     messageElement.addEventListener('click', function () {

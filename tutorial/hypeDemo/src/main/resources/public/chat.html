@@ -91,14 +91,16 @@
             <li class="chat-message" sec:authorize="isAuthenticated()">
                 <i style="background-color: rgb(0,247,255);" class="fa-solid fa-face-laugh-wink"></i>
                 <span>The Hype Team</span>
-                <p>Szeretettel köszönt mindenkit, a 2022/23-as Dusza-Workshop December 11.én megrendezett 2. bemutatóján, a <b>KapOS csapat</b>.</p>
+                <p class="message">Szeretettel köszönt mindenkit, a 2022/23-as Dusza-Workshop December 11.én megrendezett 2. bemutatóján, a <b>KapOS csapat</b>.</p>
+                <button class="edit" onclick="editMessage(this.parent)">Edit</button>
             </li>
             <li class="chat-message" sec:authorize="isAuthenticated()">
                 <i style="background-color: rgb(0,247,255);" class="fa-solid fa-face-laugh-wink"></i>
                 <span>The Hype Team</span>
-                <p>Welcome to <b class="hype">HYPE</b>!<br>Start chatting, by clicking on the <b style="background-color: white; padding: 2px; color: black">&#9776; Contacts</b>
+                <p class="message">Welcome to <b class="hype">HYPE</b>!<br>Start chatting, by clicking on the <b style="background-color: white; padding: 2px; color: black">&#9776; Contacts</b>
                     button, and select your chat partner!<br>You're in for some epic conversations! 😎</p>
                 <img src="/Media/logo.png" alt="Hype Logo">
+                <button class="edit" onclick="editMessage(this.parent)">Edit</button>
             </li>
         </ul>
         <form id="messageForm" name="messageForm">

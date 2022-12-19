@@ -272,6 +272,7 @@ a {
 #messageForm .input-group input {
     float: left;
     width: calc(100% - 85px);
+
 }
 
 #messageForm .input-group button {
@@ -384,7 +385,13 @@ a {
 }
 
 #messageArea {
-    max-height: 80%;
+    max-height: 72%;
+}
+
+@media screen and (max-width: 730px) {
+    #messageArea {
+        max-height: 77%;
+    }
 }
 
 .edit {

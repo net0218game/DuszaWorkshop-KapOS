@@ -79,11 +79,12 @@ public class Chat {
 
     public enum MessageType {
         CHAT,
-        JOIN,
         SYSTEMMESSAGE,
         FILE,
-        RECEIVER
+        EMBED
     }
+
+
 
     public MessageType getType() {
         return type;

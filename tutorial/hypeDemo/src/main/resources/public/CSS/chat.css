@@ -216,6 +216,10 @@ a {
     position: relative;
 }
 
+#chat-page .chat-message {
+    max-width: 700px;
+}
+
 .sidenav .chat-message {
     margin-top: 15px;
     padding-bottom: 10px;

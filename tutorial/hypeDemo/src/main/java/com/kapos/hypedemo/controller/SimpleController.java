@@ -1,5 +1,7 @@
 package com.kapos.hypedemo.controller;
-
+import at.mukprojects.giphy4j.Giphy;
+import at.mukprojects.giphy4j.entity.search.SearchFeed;
+import at.mukprojects.giphy4j.exception.GiphyException;
 import com.kapos.hypedemo.model.Chat;
 import com.kapos.hypedemo.model.User;
 import com.kapos.hypedemo.model.Warning;
@@ -11,22 +13,14 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
-import org.springframework.messaging.Message;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.messaging.handler.annotation.SendTo;
-import org.springframework.messaging.simp.SimpMessageHeaderAccessor;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
-
-import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -38,8 +32,10 @@ public class SimpleController {
     private final MessagesRepository messagesRepository;
     private final WarningsRepository warningsRepository;
 
-
     Logger logger = LoggerFactory.getLogger(SimpleController.class);
+
+    // Giphy API Key: t8gAiitRXmPGxIJQA3ESiqjWm9p98t1Q
+    Giphy giphy = new Giphy("t8gAiitRXmPGxIJQA3ESiqjWm9p98t1Q");
 
     @Autowired
     private SimpMessagingTemplate simpMessagingTemplate;
@@ -55,7 +51,6 @@ public class SimpleController {
     public BCryptPasswordEncoder bCryptPasswordEncoder() {
         return new BCryptPasswordEncoder();
     }
-
 
     // ========== Eleresi utak ==========
     @GetMapping("/")
@@ -88,7 +83,6 @@ public class SimpleController {
         modelAndView.setViewName("hype.html");
         return modelAndView;
     }
-
 
     @GetMapping("/admin")
     public ModelAndView admin(@ModelAttribute Warning warning, Model model) {
@@ -203,18 +197,23 @@ public class SimpleController {
 
     // Handling Private Messages
     @MessageMapping("/private")
-    public void sendToSpecificUser(@Payload Chat chat) {
+    public void sendToSpecificUser(@Payload Chat chat) throws GiphyException {
 
         if(Objects.equals(chat.getReceiver(), "hypeBot")) {
 
             String botMessage = "That's A Default Bot Answer";
 
             if(Objects.equals(chat.getContent(), ".help")) {
-                botMessage = "Hey! My name is HYPE! I'm a chat bot. You can use these commands:" +
-                        ".help\tDisplays this mesage\n" +
-                        ".say [text]\tI'll say the message you specify in the [text] tag";
+                botMessage = """
+                        Hey! My name is HYPE! I'm a chat bot. You can use these commands:
+                        .help\tDisplays this mesage
+                        .say [text]\tI'll say the message you specify in the [text] tag
+                        .gif [gif topic]\tRequest a gif about the specified topic after the .gif tag.""";
             } else if (chat.getContent().contains(".say ")) {
                 botMessage = chat.getContent().replace(".say ", "");
+            } else if (chat.getContent().contains(".gif ")) {
+                SearchFeed feed = giphy.search(chat.getContent().replace(".gif ", ""), 1, 0);
+                botMessage = feed.getDataList().get(0).getEmbedUrl();
             }
 
             // Üzenet visszaküldése Botként

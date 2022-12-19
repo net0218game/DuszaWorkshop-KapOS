@@ -223,12 +223,18 @@ public class SimpleController {
 
             simpMessagingTemplate.convertAndSendToUser(chat.getReceiver(), "/specific", chat);
         } else {
+
+            if (chat.getContent().contains(".gif ")) {
+                SearchFeed feed = giphy.search(chat.getContent().replace(".gif ", ""), 1, 0);
+                chat.setContent(feed.getDataList().get(0).getEmbedUrl());
+            }
+
             // Uzenet elkuldese felhasznalonak
             simpMessagingTemplate.convertAndSendToUser(chat.getReceiver(), "/specific", chat);
             // Uzenetek eltarolasa db ben
 
-        /* A kesobbiekben a sender-t es a receiver-t meg kell valtoztatnunk senderId és receiverId-re.
-        Ezeket majd a Spring Security-vel bejelentkezett felhasznalonak az Id-jevel oldjuk meg.*/
+            /* A kesobbiekben a sender-t es a receiver-t meg kell valtoztatnunk senderId és receiverId-re.
+            Ezeket majd a Spring Security-vel bejelentkezett felhasznalonak az Id-jevel oldjuk meg.*/
 
             messagesRepository.save(new Chat(chat.getId(), chat.getContent(), chat.getSender(), chat.getReceiver(), chat.getDate()));
         }

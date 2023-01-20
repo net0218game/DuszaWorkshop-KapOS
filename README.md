@@ -20,3 +20,4 @@ A chat természetesen tartalmazhat extra funkcionalitásokat: valós idejű vagy
 * [Google Doksi](https://docs.google.com/document/d/1S1kZUWX22djP9L3uQKY-pd8BRoKGmr6ybdIFsm7_TMg/edit?usp=sharing)
 
 :DDDD
+test change

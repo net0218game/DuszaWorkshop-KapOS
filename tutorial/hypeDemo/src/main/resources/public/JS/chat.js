@@ -72,14 +72,15 @@ function sendMessage(event) {
         };
 
         // Uzenetek Megjelenitese Sajat Magadnak
-        if (receiver !== username) {
+        /* if (receiver !== username) {
             displayMessage(username, messageInput.value, time)
-        }
+        } */
         if (receiver === group_chat) {
             stompClient.send("/app/chat.sendMessage", {}, JSON.stringify(chatMessage));
         } else {
             stompClient.send("/app/private", {}, JSON.stringify(chatMessage));
             displayLastMessages(receiver, username)
+            displayAllMessages(receiver, username)
         }
         messageInput.value = '';
     }
@@ -91,11 +92,7 @@ function onMessageReceived(payload) {
 
     if (message.type === "CHAT") {
         if (message.sender === username || message.sender === receiver || message.receiver === group_chat) {
-            if (message.sender !== username) {
-                displayMessage(message.sender, message.content, message.date)
-            } else {
-                console.log("Te kuldtel uzenetet, NEM KELL MEGJELENITENI")
-            }
+            displayMessage(message.sender, message.content, message.date)
         }
 
         if (message.sender !== receiver && message.receiver !== group_chat) {
@@ -356,7 +353,6 @@ function displayLastMessages(receiver, username) {
             }
         });
 }
-
 
 function closeNotification(meik) {
     var x = document.getElementById(meik.parentElement);

@@ -70,7 +70,7 @@ if (git_valtozas_volt_e):
 
     # Ha fut jar_name nevu folyamat, megoli
     if (fut_e):
-        pid_number = subprocess.check_output("pgrep -f hypeDemo-0.0.1-SNAPSHOT.jar")
+        pid_number = subprocess.check_output(["pgrep","-f", jar_name]).decode("utf-8")
         os.system("kill " + pid_number)
         naplozas("Parancs Lefuttatva: kill " + pid_number)
 

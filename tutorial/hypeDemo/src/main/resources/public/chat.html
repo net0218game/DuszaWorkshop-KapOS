@@ -93,7 +93,6 @@
     <div class="chat-container">
         <div class="chat-header">
             <h2 class="contactName"><span class="hype">HYPE</span> Chat Demo</h2>
-            <button onclick="deleteMessages()">Delete </button>
         </div>
         <div class="connecting">
             <p class="hype">ERROR</p>
@@ -103,16 +102,14 @@
             <li class="chat-message" sec:authorize="isAuthenticated()">
                 <i style="background-color: rgb(0,247,255);" class="fa-solid fa-face-laugh-wink"></i>
                 <span>The Hype Team</span>
-                <p class="message">Szeretettel köszönt mindenkit, a 2022/23-as Dusza-Workshop December 11.én megrendezett 2. bemutatóján, a <b>KapOS csapat</b>.</p>
-                <button class="edit" onclick="editMessage(this.parent)">Edit</button>
+                <p class="message">Welcome to <b class="hype">HYPE</b>!<br>Start chatting, by clicking on the <b style="background-color: white; padding: 2px; color: black">&#9776; Contacts</b>
+                    button, and select your chat partner!<br>You're in for some epic conversations! 😎</p>
             </li>
             <li class="chat-message" sec:authorize="isAuthenticated()">
                 <i style="background-color: rgb(0,247,255);" class="fa-solid fa-face-laugh-wink"></i>
                 <span>The Hype Team</span>
-                <p class="message">Welcome to <b class="hype">HYPE</b>!<br>Start chatting, by clicking on the <b style="background-color: white; padding: 2px; color: black">&#9776; Contacts</b>
-                    button, and select your chat partner!<br>You're in for some epic conversations! 😎</p>
-                <img src="/Media/logo.png" alt="Hype Logo">
-                <button class="edit" onclick="editMessage(this.parent)">Edit</button>
+                <p class="message">Ha van pár perced, és szeretnéd projektünk előrehaladását, és fejlődését elősegíteni, 
+                kerjük értékeld a <b class="hype">HYPE</b>-ot. <a href="https://docs.google.com/forms/d/e/1FAIpQLScMh7Cp-q28b6RnkVU_rUJD7vTUbkEuBcBKjQ6xmU0iwqE5zg/viewform?fbzx=-4144298480465207363">Google Forms Kérdőív</a></p>
             </li>
         </ul>
         <form id="messageForm" name="messageForm">

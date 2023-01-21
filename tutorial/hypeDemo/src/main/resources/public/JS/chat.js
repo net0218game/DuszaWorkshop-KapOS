@@ -203,6 +203,8 @@ function getContactName(contact) {
         displayAllMessages(receiver, username);
     }
 
+    closeNav();
+
 }
 
 // Avatar Szin Letrehozasa Felhasznalonak
@@ -404,4 +406,26 @@ function deleteMessage(messageId) {
 
 function editMessage(message) {
     console.log(message.getElementsByClassName())
+}
+
+function searchButton() {
+    document.getElementById('contacts-title').innerHTML = '<h2 id="contacts-title">All Users <span onclick="backButton()" style="cursor: pointer"><i class="fa-solid fa-arrow-left"></i></span></h2>'
+    for (const child of contactArea.children) {
+      child.style.display = "none";
+    }
+    document.getElementById('searchDiv').style.display = "inherit";
+
+    // Megmutatja az osszes felhasznalot, akji regisztralva van
+    //displayAllContacts();
+}
+
+function backButton() {
+    // Csak azokat mutatja, akik mar a kontakt listankon vannak, vagy mar beszelgettunk velunk
+    document.getElementById('contacts-title').innerHTML = '<h2>Contacts <span onclick="searchButton()" style="cursor: pointer"><i class="fa-solid fa-magnifying-glass"></i></span></h2>'
+
+    for (const child of contactArea.children) {
+          child.style.display = "inherit";
+    }
+
+    document.getElementById('searchDiv').style.display = "none";
 }

@@ -5,6 +5,12 @@
     padding-bottom: 10px;
     font-family: Comfortaa;
 }
+
+.hype2 {
+    animation: background-color-change 10s infinite;
+
+
+}
 @font-face {
     font-family: Comfortaa;
     src: url("../Media/Comfortaa-Bold.ttf");
@@ -22,4 +28,18 @@
     80% { color: #ff0000; }
     90% { color: #ff4400; }
     100% { color: #fc6cb5; }
+}
+
+@keyframes background-color-change {
+    0% { background-color: #fd6260; }
+    10% { background-color: #76fd76; }
+    20% { background-color: #8ab3fb; }
+    30% { background-color: #fd8afd; }
+    40% { background-color: #00ffd5; }
+    50% { background-color: #002bff; }
+    60% { background-color: #7a00ff; }
+    70% { background-color: #ff00c8; }
+    80% { background-color: #ff0000; }
+    90% { background-color: #ff4400; }
+    100% { background-color: #fc6cb5; }
 }

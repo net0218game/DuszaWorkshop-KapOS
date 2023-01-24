@@ -10,7 +10,7 @@
   - A célunk az az, hogy egy publikusan elérhető webservert készítsünk, ezért kalkulálni kell a látogatókkal. Annak érdekében hogy a szerveren zajló folyamatokat, és a látogatók igényeit is ki tudjuk szolgálni, elég sok RAM-ra lesz szükségünk.
 
 
-## 2. os config
+## 2. OS Config
 
 * Projektnek megfelelő JDK, és maven telepítése, az alapértelmezett JDK eltávolítása.
   - Fontos, hogy a projektünknek megfelelő verziójú JDK-t, és maven-t használjunk a szerveren is. Így elkerülhetünk kellemetlen bug-okat, melyek a használt verziók eltéréséből adódhatnak.
@@ -23,7 +23,7 @@
     - git
     - shutil
     - psutil
-* mappastruktura kiépítése
+* mappastruktúra kiépítése
   - ![This is an image](../DuszaWorkshop-KapOS/Dokumentumok/Képek/proj.png)
   - Hozzunk létre egy mappát, melyben a fontos fájlokat fogjuk tárolni.
   - A mi pédánkban ez a mappa a ```./proj``` mappa lesz. (létrehozásához használd az ```mkdir proj``` parancsot)
@@ -43,7 +43,7 @@
 
 ### Starter.py működési elve
 
-* github repo valtozatasok ellenőrzése, pullolasa
+* github repo valtozatasok ellenőrzése, pullolása
 
 * Ha nem volt változtatás:
   - Fut-e a jar file? 

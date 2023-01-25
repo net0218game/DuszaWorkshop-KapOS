@@ -265,20 +265,21 @@ a {
     color: #ffffff;
 }
 
-#messageForm .input-group {
-    height: 200px;
+#messageForm .form-group {
     width: 100%;
     position: relative;
+    top: 90%;
     bottom: 120px;
+    z-index: 3;
 }
 
-#messageForm .input-group input {
+#messageForm .form-group input {
     float: left;
     width: calc(100% - 85px);
 
 }
 
-#messageForm .input-group button {
+#messageForm .form-group button {
     float: left;
     width: 80px;
     height: 38px;
@@ -305,12 +306,6 @@ a {
     width: 100%;
 }
 
-@media screen and (max-width: 730px) {
-    .form-group {
-        width: 90%;
-    }
-}
-
 @media screen and (max-width: 480px) {
     .chat-container {
         height: calc(100% - 30px);
@@ -330,10 +325,6 @@ a {
 
     .chat-header h2 {
         font-size: 1.1em;
-    }
-
-    .input-group {
-        width: 100%;
     }
 }
 

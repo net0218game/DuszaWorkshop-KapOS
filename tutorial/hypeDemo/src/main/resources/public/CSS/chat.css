@@ -267,6 +267,9 @@ a {
 
 #messageForm .input-group {
     width: 100%;
+    position: relative;
+    bottom: 120px;
+
 }
 
 #messageForm .input-group input {
@@ -384,15 +387,7 @@ a {
     100%  { top: -100px; left: 0; }
 }
 
-#messageArea {
-    max-height: 72%;
-}
 
-@media screen and (max-width: 730px) {
-    #messageArea {
-        max-height: 77%;
-    }
-}
 
 .edit {
     float: right;

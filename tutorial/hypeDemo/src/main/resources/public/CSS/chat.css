@@ -266,10 +266,10 @@ a {
 }
 
 #messageForm .input-group {
+    height: 200px;
     width: 100%;
     position: relative;
     bottom: 120px;
-
 }
 
 #messageForm .input-group input {

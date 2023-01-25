@@ -9,7 +9,7 @@ import psutil
 project_path = "/proj"
 jar_name = "hypeDemo-0.0.1-SNAPSHOT.jar"
 repo_path = "/opt/DuszaWorkshop-KapOS"
-java_project_path = "/tutorial/hypeDemo"
+java_project_path = "/hypeDemo"
 
 t = time.localtime()
 # Ha van valtozas akkor true

@@ -7,7 +7,7 @@ Minden felhasználó létrehozhat szabályokat az értesítésekre akár szobár
 
 A chat természetesen tartalmazhat extra funkcionalitásokat: valós idejű vagy körökre osztott játék, fájlküldés, feliratkozás stb.
 
-# Technology Stack
+# Technology  Stack
 * Java
 * Javascript
 * MariaDB

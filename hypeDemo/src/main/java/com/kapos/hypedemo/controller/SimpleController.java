@@ -170,6 +170,11 @@ public class SimpleController {
         return userRepository.findAll();
     }
 
+    @GetMapping("/friends/{username}")
+    public List<User> getFriends(@PathVariable String username) {
+        return messagesRepository.findFriends(username);
+    }
+
     @GetMapping("/lastMessage/{receiver}/{sender}")
     public List<Chat> getLastMessages(@PathVariable String receiver, @PathVariable String sender) {
         return messagesRepository.findLastChatMessages(sender, receiver);

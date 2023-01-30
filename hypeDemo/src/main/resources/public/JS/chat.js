@@ -40,7 +40,8 @@ function onConnected() {
         method: 'POST',
     })
 
-    displayAllContacts()
+    displayAllFriends();
+    displayAllContacts();
 }
 
 function onError(error) {
@@ -156,7 +157,7 @@ function displayMessage(messageUsername, content, time, messageId) {
 
         messageElement.appendChild(textElement);
 
-        if(messageUsername === username) {
+        if (messageUsername === username) {
             messageElement.appendChild(deleteButton);
 
             deleteButton.addEventListener('click', function () {
@@ -233,7 +234,7 @@ function replaceURLs(message) {
         if (message.match(youtube)) {
             // Youtube Link Beagyazasa Videokent
             return '<a href="' + hyperlink + '" target="_blank">' + url + '</a><br><iframe width="560" height="315" src="' + hyperlink.replace("watch?v=", "embed/") + '" frameborder="0" allowfullscreen></iframe>'
-        } else if(message.match(giphy)) {
+        } else if (message.match(giphy)) {
             return '<a href="' + hyperlink + '" target="_blank">' + url + '</a><br><iframe width="560" height="315" src="' + hyperlink + '" frameborder="0" allowfullscreen></iframe>'
         } else {
             // Atlagos Link Beagyazasa
@@ -254,6 +255,50 @@ function closeNav() {
     document.getElementById("mySidenav").style.width = "0";
     document.getElementById("chat-page").style.marginLeft = "0";
     document.body.style.backgroundColor = "white";
+}
+
+function displayAllFriends() {
+    fetch('/friends/' + username, {
+        method: 'GET',
+    })
+        .then((response) => response.json())
+        .then((data) => {
+
+            for (let i = 0; i < Object.keys(data).length; i++) {
+                if (data[i] !== username) {
+
+                    var messageElement = document.createElement('li');
+                    messageElement.classList.add('chat-message');
+                    messageElement.addEventListener('click', function () {
+                        getContactName(this)
+                    });
+
+                    messageElement.setAttribute('id', data[i])
+
+                    var avatarElement = document.createElement('i');
+                    var avatarText = document.createTextNode(data[i].substring(0, 1));
+                    avatarElement.appendChild(avatarText);
+                    avatarElement.style['background-color'] = getAvatarColor(data[i]);
+
+                    messageElement.appendChild(avatarElement);
+
+                    var usernameElement = document.createElement('span');
+                    var usernameText = document.createTextNode(data[i]);
+
+                    usernameElement.appendChild(usernameText);
+                    messageElement.appendChild(usernameElement);
+
+                    var textElement = document.createElement('p');
+
+                    textElement.innerHTML = "No messages yet.";
+                    textElement.style.fontSize = "0.8rem";
+
+                    messageElement.appendChild(textElement);
+
+                    contactArea.appendChild(messageElement);
+                }
+            }
+        });
 }
 
 function displayAllContacts() {
@@ -293,12 +338,11 @@ function displayAllContacts() {
 
                     messageElement.appendChild(textElement);
 
-                    contactArea.appendChild(messageElement);
-
+                    document.getElementById('searchDiv').appendChild(messageElement);
                     displayLastMessages(data[i].userName, username)
                 }
             }
-        } );
+        });
 }
 
 function displayAllMessages(msgreceiver, msgusername) {
@@ -323,7 +367,7 @@ function displayAllMessages(msgreceiver, msgusername) {
             .then((response) => response.json())
             .then((data) => {
                 if (Object.keys(data).length === 0) {
-                    if(receiver === "hypeBot") {
+                    if (receiver === "hypeBot") {
                         displayEventMessage("If you don't know how to use me yet, use the .help command, and I'll let you know! :D")
                     } else {
                         displayEventMessage("You don't have any messages with user " + receiver + ". Send them a message and fire up the conversation!")
@@ -390,8 +434,9 @@ function notificationAudio() {
     audio.play();
 
 }
+
 function deleteMessages() {
-    fetch('/deleteMessages/' + receiver + '/'+ username, {
+    fetch('/deleteMessages/' + receiver + '/' + username, {
         method: 'POST',
     })
     displayAllMessages(receiver, username);
@@ -411,12 +456,9 @@ function editMessage(message) {
 function searchButton() {
     document.getElementById('contacts-title').innerHTML = '<h2 id="contacts-title">All Users <span onclick="backButton()" style="cursor: pointer"><i class="fa-solid fa-arrow-left"></i></span></h2>'
     for (const child of contactArea.children) {
-      child.style.display = "none";
+        child.style.display = "none";
     }
     document.getElementById('searchDiv').style.display = "inherit";
-
-    // Megmutatja az osszes felhasznalot, akji regisztralva van
-    //displayAllContacts();
 }
 
 function backButton() {
@@ -424,7 +466,7 @@ function backButton() {
     document.getElementById('contacts-title').innerHTML = '<h2>Contacts <span onclick="searchButton()" style="cursor: pointer"><i class="fa-solid fa-magnifying-glass"></i></span></h2>'
 
     for (const child of contactArea.children) {
-          child.style.display = "inherit";
+        child.style.display = "inherit";
     }
 
     document.getElementById('searchDiv').style.display = "none";

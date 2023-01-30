@@ -12,6 +12,11 @@ import java.util.List;
 public interface MessagesRepository extends CrudRepository<Chat, Integer> {
     List<Chat> findTopBySenderOrReceiver(String sender, String receiver);
 
+    @Query(value = "(SELECT receiver FROM chat WHERE sender = :username) UNION (SELECT sender FROM chat WHERE receiver = :username)",
+            nativeQuery = true)
+    List findFriends(@Param("username") String username);
+
+
     @Query(value = "SELECT * FROM chat WHERE (chat.receiver = :receiver and chat.sender = :sender) or " +
             "(chat.receiver = :sender and chat.sender = :receiver)",
             nativeQuery = true)

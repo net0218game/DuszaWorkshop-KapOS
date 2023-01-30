@@ -1,21 +1,28 @@
 # Szerverkonfigurálási dokumentáció
 
-## 1. Szerver bérlés
-#### Első, és legfontosabb lépés a számunkra megfelelő cloud hosting service megtalálása. Ehhez az alábbi szempontokat érdemes figyelembe venni:
-* Ár, számlázási módszerek
-  - Mivel szerverünk nem csak alkalmanként, hanem non-stop futni fog, érdemes számításba venni az árakat. Olyan szolgáltatást, vagy csomagot érdemes választani, amely ezt lehetővé teszi.
-* Tárhely
-  - Adatbázisunk mérete miatt fontos szerepet játszik a tárhely is, mivel rengeteg beszélgetést, csatolt fájlt, vagy profilképet kell eltárolnunk.
-* Memnória
-  - A célunk az az, hogy egy publikusan elérhető webservert készítsünk, ezért kalkulálni kell a látogatókkal. Annak érdekében hogy a szerveren zajló folyamatokat, és a látogatók igényeit is ki tudjuk szolgálni, elég sok RAM-ra lesz szükségünk.
+## --------------------------------------------------------------------- 1. Szerver bérlés -------------------------------------------------------------------------------
+
+#### Első és legfontosabb lépés, a számunkra megfelelő cloud hosting service megtalálása. 
+#### Ehhez az alábbi szempontokat érdemes figyelembe venni:
+
+  * Ár és számlázási módszerek
+    - Szerverünk nem csak alkalmanként, hanem "non-stop" fut, ezért érdemes figyelembe vennünk a bérlési árakat. Az utóbbi indokok miatt érdemes olyan szolgáltatást, avagy csomagot választanunk, amely ezt lehetővé teszi.
+
+  * Tárhely
+    - Rengeteg beszélgetést, csatolt fájlt vagy profilképet kell eltárolnunk, ezért fontos szerepet játszik a bérelt tárhely, ahol az egész adatbázist eltároljuk.
+  
+  * Memória
+    - Célunk, hogy egy publikusan elérhető webservert készítsünk, ezért kalkulálnunk kell a(z) (egyidejű) látogatókkal. Annak érdekében, hogy a szerveren futó folyamatok és a weboldalra látogatók igényei zökkenésmentesen zajlódjon, ezért több RAM-ra lesz szükségünk.
 
 
-## 2. OS Config
 
-* Projektnek megfelelő JDK, és maven telepítése, az alapértelmezett JDK eltávolítása.
-  - Fontos, hogy a projektünknek megfelelő verziójú JDK-t, és maven-t használjunk a szerveren is. Így elkerülhetünk kellemetlen bug-okat, melyek a használt verziók eltéréséből adódhatnak.
-* python konyvtárak telepítése
-  - Használt python konyvtárak: 
+## ---------------------------------------------------------------------- 2. OS Config -----------------------------------------------------------------------------------
+
+* Naprakész JDK és Maven verzió telepítés, az alapértelmezett JDK eltávolítása.
+  - Fontos, hogy a projektünknek megfelelő verziójú JDK-t és Maven-t használjunk magán a szerveren is. Így kiküszöbölhetünk kellemetlen bug-okat, hosszas hibaelhárításokat, amelyek a használt JDK és Maven verziók eltéréséből adódhatnak.
+
+* Python könyvtárak telepítése
+   Használt Python könyvtárak: 
     - os
     - time
     - subprocess
@@ -23,19 +30,24 @@
     - git
     - shutil
     - psutil
-* mappastruktúra kiépítése
+
+* Mappastruktúra kiépítése
   - ![This is an image](../DuszaWorkshop-KapOS/Dokumentumok/Képek/proj.png)
-  - Hozzunk létre egy mappát, melyben a fontos fájlokat fogjuk tárolni.
-  - A mi pédánkban ez a mappa a ```./proj``` mappa lesz. (létrehozásához használd az ```mkdir proj``` parancsot)
+
+  - Hozzunk létre egy mappát, melyben a fontos fájlokat fogjuk eltárolni.
+  - A mi pédánkban ez a mappa a ```./proj``` mappa lesz (Ennek az ominózus mappának a létrehozásához használjuk az ```mkdir proj``` parancsot).
+
   - A későbbiekben ebben a mappában fogjuk tárolni, például a(z):
-    - application.properties fájlt, amit az eredeti felülírására használunk majd  
-    - .jar fájlunkat
-    - nohup.out fájlt, mely a .jar output-ját fogja tartalmazni
-    - starter.log fájlt, mely a starter.py output-ját fogja tartalmazni.
+    - application.properties fájlt, amelyet az eredetinek a felülírására használunk majd a későbbiekben
+    - .jar fájlt
+    - nohup.out fájlt, amely a .jar output-ját fogja tartalmazni
+    - starter.log fájlt, amely a starter.py output-ját fogja tartalmazni.
 
-## 3. GitHub repository klónozása
 
-#### Fontos, hogy a verziókövető rendszerünk segítségével szinkronba hozzuk a kódbázisunkat. Ennek érdekében klónozzuk a GitHub-on található repo-t. Ennek frissítését a későbbiekben automatizálni fogjuk (látsd: 4. Pont).
+
+## ----------------------------------------------------------------- 3. GitHub repository klónozása ----------------------------------------------------------------------
+
+ - Fontos, hogy a verziókezelő rendszerünk segítségével szinkronba hozzuk a kódbázisunkat. Ennek érdekében klónozzuk a GitHub-on található repo-t. Ennek frissítését a későbbiekben automatizálni fogjuk (látsd: 4. Pont).
 
 ## 4. Szerver folyamatok automatizálása - starter.py
 

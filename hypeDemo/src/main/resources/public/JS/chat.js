@@ -15,6 +15,7 @@ var receiver = ""
 var maxLength = 64;
 
 var group_chat = "DuszaGroupChat"
+var hypeBot = "hypeBot"
 
 var colors = [
     '#2196F3', '#32c787', '#00BCD4', '#ff5652',
@@ -40,8 +41,7 @@ function onConnected() {
         method: 'POST',
     })
 
-    displayAllFriends();
-    displayAllContacts();
+    displayAllFriends()
 }
 
 function onError(error) {
@@ -72,16 +72,17 @@ function sendMessage(event) {
             type: 'CHAT'
         };
 
-        // Uzenetek Megjelenitese Sajat Magadnak
-        /* if (receiver !== username) {
-            displayMessage(username, messageInput.value, time)
-        } */
         if (receiver === group_chat) {
             stompClient.send("/app/chat.sendMessage", {}, JSON.stringify(chatMessage));
         } else {
-            stompClient.send("/app/private", {}, JSON.stringify(chatMessage));
-            displayLastMessages(receiver, username)
-            displayAllMessages(receiver, username)
+            stompClient.send("/app/private", {}, JSON.stringify(chatMessage))
+
+            if (receiver !== hypeBot) {
+                console.log("displayed")
+                displayLastMessages(receiver, username)
+                displayAllMessages(receiver, username)
+            }
+
         }
         messageInput.value = '';
     }
@@ -93,7 +94,8 @@ function onMessageReceived(payload) {
 
     if (message.type === "CHAT") {
         if (message.sender === username || message.sender === receiver || message.receiver === group_chat) {
-            displayMessage(message.sender, message.content, message.date)
+            displayAllMessages(receiver, username)
+            //displayMessage(message.sender, message.content, message.date)
         }
 
         if (message.sender !== receiver && message.receiver !== group_chat) {
@@ -163,15 +165,14 @@ function displayMessage(messageUsername, content, time, messageId) {
             deleteButton.addEventListener('click', function () {
                 deleteMessage(this.parentElement.getAttribute('id'))
             });
-
         }
-
         messageArea.appendChild(messageElement);
         messageArea.scrollTop = messageArea.scrollHeight;
     }
 }
 
 function displayEventMessage(message) {
+    messageArea.innerHTML = ''
     var messageElement = document.createElement('li');
     messageElement.classList.add('event-message');
 
@@ -198,14 +199,18 @@ function getContactName(contact) {
 
     document.getElementById('notification-div').innerHTML = "";
 
-    if (receiver === group_chat) {
-        displayAllMessages(group_chat, group_chat);
+    if (receiver === hypeBot) {
+        console.log("asdfghjkléá")
+        displayEventMessage("If you don't know how to use me yet, use the .help command, and I'll let you know! :D")
     } else {
-        displayAllMessages(receiver, username);
+        if (receiver === group_chat) {
+            displayAllMessages(group_chat, group_chat);
+        } else {
+            displayAllMessages(receiver, username);
+        }
     }
 
     closeNav();
-
 }
 
 // Avatar Szin Letrehozasa Felhasznalonak
@@ -265,7 +270,7 @@ function displayAllFriends() {
         .then((data) => {
 
             for (let i = 0; i < Object.keys(data).length; i++) {
-                if (data[i] !== username) {
+                if (data[i] !== username && data[i] !== group_chat && data[i] !== "") {
 
                     var messageElement = document.createElement('li');
                     messageElement.classList.add('chat-message');
@@ -296,6 +301,8 @@ function displayAllFriends() {
                     messageElement.appendChild(textElement);
 
                     contactArea.appendChild(messageElement);
+
+                    displayLastMessages(data[i], username)
                 }
             }
         });
@@ -338,7 +345,7 @@ function displayAllContacts() {
 
                     messageElement.appendChild(textElement);
 
-                    document.getElementById('searchDiv').appendChild(messageElement);
+                    contactArea.appendChild(messageElement);
                     displayLastMessages(data[i].userName, username)
                 }
             }
@@ -367,11 +374,7 @@ function displayAllMessages(msgreceiver, msgusername) {
             .then((response) => response.json())
             .then((data) => {
                 if (Object.keys(data).length === 0) {
-                    if (receiver === "hypeBot") {
-                        displayEventMessage("If you don't know how to use me yet, use the .help command, and I'll let you know! :D")
-                    } else {
-                        displayEventMessage("You don't have any messages with user " + receiver + ". Send them a message and fire up the conversation!")
-                    }
+                    displayEventMessage("You don't have any messages with user " + receiver + ". Send them a message and fire up the conversation!")
                 } else {
                     messageArea.innerHTML = "";
 
@@ -432,21 +435,22 @@ function displayNotification(sender, content) {
 function notificationAudio() {
     var audio = new Audio("Media/notification.mp3");
     audio.play();
-
 }
 
 function deleteMessages() {
     fetch('/deleteMessages/' + receiver + '/' + username, {
         method: 'POST',
+    }).then(() => {
+        displayAllMessages(receiver, username);
     })
-    displayAllMessages(receiver, username);
 }
 
 function deleteMessage(messageId) {
     fetch('/deleteMessage/' + messageId, {
         method: 'POST',
+    }).then(() => {
+        displayAllMessages(receiver, username);
     })
-    displayAllMessages(receiver, username);
 }
 
 function editMessage(message) {
@@ -455,19 +459,25 @@ function editMessage(message) {
 
 function searchButton() {
     document.getElementById('contacts-title').innerHTML = '<h2 id="contacts-title">All Users <span onclick="backButton()" style="cursor: pointer"><i class="fa-solid fa-arrow-left"></i></span></h2>'
-    for (const child of contactArea.children) {
-        child.style.display = "none";
-    }
-    document.getElementById('searchDiv').style.display = "inherit";
+    contactArea.innerHTML = ''
+    displayAllContacts()
 }
 
 function backButton() {
     // Csak azokat mutatja, akik mar a kontakt listankon vannak, vagy mar beszelgettunk velunk
     document.getElementById('contacts-title').innerHTML = '<h2>Contacts <span onclick="searchButton()" style="cursor: pointer"><i class="fa-solid fa-magnifying-glass"></i></span></h2>'
-
-    for (const child of contactArea.children) {
-        child.style.display = "inherit";
-    }
-
-    document.getElementById('searchDiv').style.display = "none";
+    contactArea.innerHTML = '<h3 class="notice"><i class="fa-solid fa-thumbtack"></i> Pinned Contacts:</h3>\n' +
+        '        <li class="chat-message" id="DuszaGroupChat"\n' +
+        '            onclick="getContactName(this)">\n' +
+        '            <i style="background-color: rgb(255,183,0);">D</i>\n' +
+        '            <span>Dusza-Workshop Group</span>\n' +
+        '            <p style= "font-size: 0.8rem">Chat with Dusza Members!</p>\n' +
+        '        <li class="chat-message" id="hypeBot"\n' +
+        '            onclick="getContactName(this)">\n' +
+        '            <i class="fa-solid fa-robot hype2"></i>\n' +
+        '            <span><span class="hype">HYPE</span>-Bot</span>\n' +
+        '            <p style= "font-size: 0.8rem">Bip-Bup! Chat with me!</p>\n' +
+        '        </li>' +
+        '        <hr>'
+    displayAllFriends()
 }

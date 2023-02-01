@@ -8,6 +8,7 @@ import com.kapos.hypedemo.model.Warning;
 import com.kapos.hypedemo.model.repo.MessagesRepository;
 import com.kapos.hypedemo.model.repo.UserRepository;
 import com.kapos.hypedemo.model.repo.WarningsRepository;
+import org.mockito.cglib.core.CollectionUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +22,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -144,8 +147,19 @@ public class SimpleController {
     }
 
     @GetMapping("/listMessages/{receiver}/{sender}")
-    public List<Chat> getAllMessages(@PathVariable String receiver, @PathVariable String sender) {
-        return messagesRepository.findChatMessages(sender, receiver);
+    public List<Chat> getAllMessages(@PathVariable String receiver, @PathVariable String sender) throws InterruptedException {
+        List<Chat> messages = new ArrayList<>();
+        int unsuccessfulTries = 0;
+        while (unsuccessfulTries <= 3) {
+            messages = messagesRepository.findChatMessages(sender, receiver);
+            if(messages != null) {
+                unsuccessfulTries += 1;
+                logger.info("Nem sikerult lekerdezni az uzeneteket");
+            } else {
+                Thread.sleep(100);
+            }
+        }
+        return messages;
     }
 
     @GetMapping("/listGroupMessages/{receiver}")

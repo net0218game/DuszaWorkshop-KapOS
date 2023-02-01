@@ -3,6 +3,7 @@ package com.kapos.hypedemo.controller;
 import com.kapos.hypedemo.model.Chat;
 import com.kapos.hypedemo.model.User;
 import com.kapos.hypedemo.model.repo.MessagesRepository;
+import com.kapos.hypedemo.model.repo.UnreadRepository;
 import com.kapos.hypedemo.model.repo.UserRepository;
 import com.kapos.hypedemo.model.repo.WarningsRepository;
 import org.junit.jupiter.api.BeforeEach;
@@ -20,6 +21,7 @@ class SimpleControllerTest {
     private MessagesRepository messagesRepository;
     private UserRepository userRepository;
     private WarningsRepository warningsRepository;
+    private UnreadRepository unreadRepository;
     private SimpleController simpleController;
 
     @BeforeEach
@@ -27,7 +29,7 @@ class SimpleControllerTest {
         userRepository = Mockito.mock(UserRepository.class);
         messagesRepository = Mockito.mock(MessagesRepository.class);
         warningsRepository = Mockito.mock(WarningsRepository.class);
-        simpleController = new SimpleController(userRepository, messagesRepository, warningsRepository);
+        simpleController = new SimpleController(userRepository, messagesRepository, warningsRepository, unreadRepository);
     }
 
     @Test

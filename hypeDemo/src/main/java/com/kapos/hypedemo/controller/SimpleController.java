@@ -150,15 +150,13 @@ public class SimpleController {
     public List<Chat> getAllMessages(@PathVariable String receiver, @PathVariable String sender) throws InterruptedException {
         List<Chat> messages = new ArrayList<>();
         int unsuccessfulTries = 0;
-        while (unsuccessfulTries <= 3) {
+
+        while (unsuccessfulTries <= 3 && messages.isEmpty()) {
+            logger.info("Nem talalt uzenetet");
             messages = messagesRepository.findChatMessages(sender, receiver);
-            if(messages != null) {
-                unsuccessfulTries += 1;
-                logger.info("Nem sikerult lekerdezni az uzeneteket");
-            } else {
-                unsuccessfulTries += 1;
-                Thread.sleep(100);
-            }
+            Thread.sleep(100);
+            unsuccessfulTries ++;
+
         }
         return messages;
     }

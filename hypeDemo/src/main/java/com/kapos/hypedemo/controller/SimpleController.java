@@ -156,6 +156,7 @@ public class SimpleController {
                 unsuccessfulTries += 1;
                 logger.info("Nem sikerult lekerdezni az uzeneteket");
             } else {
+                unsuccessfulTries += 1;
                 Thread.sleep(100);
             }
         }

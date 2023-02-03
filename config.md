@@ -77,7 +77,11 @@ crontab parancs:
 
 ## 5. Domain cím
 * google domains domain cím vásárlása
+  - ahhoz, hogy mások egyszerűen eljuthassanal weboldalunkra, elhanyagolhatatlan egy domain cím. Mi a google domains oldalon vásároltunk magunknak egyet.
 * felhőszolgáltatás összeköttetése a google dns-ekkel
+  - A domain címet azonban össze is kell kötnünk a hosting szolgáltatónkkal, azaz a Digital Ocean-nel.
 
 ## 6. Tűzfal beállítások 
+* Ezután a szerverünkön módosítanunk kell a tűzfalbeállításainkat, annak érdekében, hogy az újonnan vásárolt domain címünkről el is tudjuk érni az oldalunkat.
 ## 7. Port routing
+* Végül át kell állítanunk az alapértelmezett portot, ahhoz, hogy ```www.hypechat.org:8080``` helyett elég legyen csak a ```www.hypechat.org```-ra rákeresni.

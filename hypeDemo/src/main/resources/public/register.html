@@ -69,6 +69,11 @@
                 </div>
 
                 <div class="input-container">
+                    <i class="fa-solid fa-lock"></i>
+                    <input type="confirmedPassword" placeholder="Confirm Password" name="confirmedPassword" required th:value="*{confirmedPassword}">
+                </div>
+
+                <div class="input-container">
                     <i class="fa-solid fa-venus-mars"></i>
                     <select name="gender" id="gender" th:value="*{gender}">
                         <option value="male">Male</option>

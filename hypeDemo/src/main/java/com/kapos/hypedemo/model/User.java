@@ -13,6 +13,7 @@ public class User {
     private String secondName;
     private String email;
     private String password;
+    private String confirmedPassword;
     private String gender;
     private String born;
 
@@ -131,5 +132,13 @@ public class User {
 
     public void setBorn(String born) {
         this.born = born;
+    }
+
+    public String getConfirmedPassword() {
+        return confirmedPassword;
+    }
+
+    public void setConfirmedPassword(String confirmedPassword) {
+        this.confirmedPassword = confirmedPassword;
     }
 }

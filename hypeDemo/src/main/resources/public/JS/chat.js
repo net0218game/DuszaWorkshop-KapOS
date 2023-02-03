@@ -93,9 +93,11 @@ function onMessageReceived(payload) {
     var message = JSON.parse(payload.body);
 
     if (message.type === "CHAT") {
-        if (message.sender === username || message.sender === receiver || message.receiver === group_chat) {
+        if (message.sender !== hypeBot) {
             displayAllMessages(receiver, username)
             //displayMessage(message.sender, message.content, message.date)
+        } else {
+            displayMessage(message.sender, message.content)
         }
 
         if (message.sender !== receiver && message.receiver !== group_chat) {
@@ -166,6 +168,7 @@ function displayMessage(messageUsername, content, time, messageId) {
                 deleteMessage(this.parentElement.getAttribute('id'))
             });
         }
+
         messageArea.appendChild(messageElement);
         messageArea.scrollTop = messageArea.scrollHeight;
     }
@@ -200,7 +203,6 @@ function getContactName(contact) {
     document.getElementById('notification-div').innerHTML = "";
 
     if (receiver === hypeBot) {
-        console.log("asdfghjkléá")
         displayEventMessage("If you don't know how to use me yet, use the .help command, and I'll let you know! :D")
     } else {
         if (receiver === group_chat) {

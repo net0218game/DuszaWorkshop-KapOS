@@ -8,6 +8,7 @@ import com.kapos.hypedemo.model.Warning;
 import com.kapos.hypedemo.model.repo.MessagesRepository;
 import com.kapos.hypedemo.model.repo.UserRepository;
 import com.kapos.hypedemo.model.repo.WarningsRepository;
+import net.bytebuddy.implementation.bytecode.Throw;
 import org.mockito.cglib.core.CollectionUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,6 +24,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.management.MBeanRegistrationException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -122,7 +124,14 @@ public class SimpleController {
     // Regisztralas
     @PostMapping("/register")
     public ModelAndView insertUser(User user) {
-        userRepository.save(new User(user.getUserName(), user.getFirstName(), user.getSecondName(), user.getEmail(), bCryptPasswordEncoder().encode(user.getPassword()), user.getGender(), user.getBorn()));
+        // ++ Ha ilyen felhasznalo / email cim meg nem letezik, es a jelszo megegyezik a megerositett jelszoval
+        List<User> existingUsers;
+        existingUsers = userRepository.findAll();
+        if(user.getPassword().equals(user.getConfirmedPassword()) && !existingUsers.contains(user.getUserName())) {
+            userRepository.save(new User(user.getUserName(), user.getFirstName(), user.getSecondName(), user.getEmail(), bCryptPasswordEncoder().encode(user.getPassword()), user.getGender(), user.getBorn()));
+        } else {
+            logger.error("User already exists, or passwords doesn't match");
+        }
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("index.html");
         return modelAndView;
@@ -223,10 +232,10 @@ public class SimpleController {
 
             if(Objects.equals(chat.getContent(), ".help")) {
                 botMessage = """
-                        Hey! My name is HYPE! I'm a chat bot. You can use these commands:
-                        .help\tDisplays this mesage
-                        .say [text]\tI'll say the message you specify in the [text] tag
-                        .gif [gif topic]\tRequest a gif about the specified topic after the .gif tag.""";
+                        Hey! My name is HYPE! I'm a chat bot. You can use these commands: <br>
+                        .help &emsp; Displays this mesage <br>
+                        .say [text] &emsp; I'll say the message you specify in the [text] tag <br>
+                        .gif [gif topic] &emsp; Request a gif about the specified topic after the .gif tag.""";
             } else if (chat.getContent().contains(".say ")) {
                 botMessage = chat.getContent().replace(".say ", "");
             } else if (chat.getContent().contains(".gif ")) {

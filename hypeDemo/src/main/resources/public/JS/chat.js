@@ -77,7 +77,7 @@ function sendMessage(event) {
         } else {
             stompClient.send("/app/private", {}, JSON.stringify(chatMessage))
 
-            if (receiver !== hypeBot) {
+            if (receiver !== hypeBot && receiver !== group_chat) {
                 console.log("displayed")
                 displayLastMessages(receiver, username)
                 displayAllMessages(receiver, username)
@@ -93,11 +93,11 @@ function onMessageReceived(payload) {
     var message = JSON.parse(payload.body);
 
     if (message.type === "CHAT") {
-        if (message.sender !== hypeBot) {
+        if (message.sender !== hypeBot && message.receiver !== group_chat) {
             displayAllMessages(receiver, username)
             //displayMessage(message.sender, message.content, message.date)
         } else {
-            displayMessage(message.sender, message.content)
+            displayMessage(message.sender, message.content, message.date)
         }
 
         if (message.sender !== receiver && message.receiver !== group_chat) {
@@ -148,10 +148,14 @@ function displayMessage(messageUsername, content, time, messageId) {
         var deleteButton = document.createElement("button")
         deleteButton.textContent = "delete"
 
-        var dateText = document.createTextNode(" - " + time);
-
         usernameElement.appendChild(usernameText);
-        usernameElement.appendChild(dateText);
+
+
+        if(receiver !== hypeBot) {
+            var dateText = document.createTextNode(" - " + time);
+            usernameElement.appendChild(dateText);
+        }
+
         messageElement.appendChild(usernameElement);
 
         var textElement = document.createElement('p');

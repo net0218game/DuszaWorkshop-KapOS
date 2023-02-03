@@ -52,7 +52,7 @@ git_valtozas_volt_e = git_pull_change(repo_path)
 if (git_valtozas_volt_e):
 
     # Letrehozza az uj (friss) .jar file-t, skippeli a testeket
-    maven_return_val = os.system("cd " + repo_path + java_project_path + "; mvn clean install -DskipTests")
+    maven_return_val = os.system("cd " + repo_path + java_project_path + "; mvn clean package -DskipTests")
 
     # Ha hiba tortent akkor kilep
     if (maven_return_val != 0):

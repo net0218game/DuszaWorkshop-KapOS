@@ -165,7 +165,7 @@ function displayMessage(messageUsername, content, time, messageId) {
 
         messageElement.appendChild(textElement);
 
-        if (messageUsername === username) {
+        if (messageUsername === username && receiver !== group_chat) {
             messageElement.appendChild(deleteButton);
 
             deleteButton.addEventListener('click', function () {

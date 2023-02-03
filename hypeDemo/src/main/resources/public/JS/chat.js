@@ -189,6 +189,11 @@ function displayEventMessage(message) {
     messageArea.scrollTop = messageArea.scrollHeight;
 }
 
+function clearUnreads(username, receiver){
+    fetch('/clearUnreads/'+username+'/'+receiver, {method: 'POST',
+    })
+}
+
 // Contactok Listazasa
 function getContactName(contact) {
 
@@ -211,7 +216,7 @@ function getContactName(contact) {
             displayAllMessages(receiver, username);
         }
     }
-
+    clearUnreads(username, receiver)
     closeNav();
 }
 

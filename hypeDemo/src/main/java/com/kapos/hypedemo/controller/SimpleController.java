@@ -3,9 +3,11 @@ import at.mukprojects.giphy4j.Giphy;
 import at.mukprojects.giphy4j.entity.search.SearchFeed;
 import at.mukprojects.giphy4j.exception.GiphyException;
 import com.kapos.hypedemo.model.Chat;
+import com.kapos.hypedemo.model.Unread;
 import com.kapos.hypedemo.model.User;
 import com.kapos.hypedemo.model.Warning;
 import com.kapos.hypedemo.model.repo.MessagesRepository;
+import com.kapos.hypedemo.model.repo.UnreadRepository;
 import com.kapos.hypedemo.model.repo.UserRepository;
 import com.kapos.hypedemo.model.repo.WarningsRepository;
 import net.bytebuddy.implementation.bytecode.Throw;
@@ -36,7 +38,7 @@ public class SimpleController {
     private final UserRepository userRepository;
     private final MessagesRepository messagesRepository;
     private final WarningsRepository warningsRepository;
-
+    private final UnreadRepository unreadRepository;
     Logger logger = LoggerFactory.getLogger(SimpleController.class);
 
     // Giphy API Key: t8gAiitRXmPGxIJQA3ESiqjWm9p98t1Q
@@ -46,10 +48,11 @@ public class SimpleController {
     private SimpMessagingTemplate simpMessagingTemplate;
 
     @Autowired
-    public SimpleController(UserRepository userRepository, MessagesRepository messagesRepository, WarningsRepository warningsRepository) {
+    public SimpleController(UserRepository userRepository, MessagesRepository messagesRepository, WarningsRepository warningsRepository, UnreadRepository unreadRepository) {
         this.userRepository = userRepository;
         this.messagesRepository = messagesRepository;
         this.warningsRepository = warningsRepository;
+        this.unreadRepository = unreadRepository;
     }
 
     @Bean
@@ -153,6 +156,11 @@ public class SimpleController {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("index.html");
         return modelAndView;
+    }
+
+    @PostMapping("clearUnreads/{receiver}/{sender}")
+    public void clearUnread(@PathVariable String receiver, @PathVariable String sender){
+        unreadRepository.deleteUnreads(receiver, sender);
     }
 
     @GetMapping("/listMessages/{receiver}/{sender}")
@@ -264,6 +272,7 @@ public class SimpleController {
             Ezeket majd a Spring Security-vel bejelentkezett felhasznalonak az Id-jevel oldjuk meg.*/
 
             messagesRepository.save(new Chat(chat.getId(), chat.getContent(), chat.getSender(), chat.getReceiver(), chat.getDate()));
+            unreadRepository.save(new Unread(chat.getId(), chat.getSender(), chat.getReceiver(), chat.getContent(), chat.getDate()));
         }
     }
 

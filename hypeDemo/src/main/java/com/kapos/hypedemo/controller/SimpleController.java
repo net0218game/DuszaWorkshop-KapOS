@@ -171,7 +171,7 @@ public class SimpleController {
         while (unsuccessfulTries <= 3 && messages.isEmpty()) {
             logger.info("Nem talalt uzenetet");
             messages = messagesRepository.findChatMessages(sender, receiver);
-            Thread.sleep(100);
+            Thread.sleep(200);
             unsuccessfulTries ++;
 
         }

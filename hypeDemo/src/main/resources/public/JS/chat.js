@@ -29,7 +29,6 @@ stompClient = Stomp.over(socket);
 
 stompClient.connect({}, onConnected, onError);
 
-
 function onConnected() {
     // Subscribe to the Public Chat
     stompClient.subscribe('/all/dusza-group', onMessageReceived);
@@ -150,8 +149,7 @@ function displayMessage(messageUsername, content, time, messageId) {
 
         usernameElement.appendChild(usernameText);
 
-
-        if(receiver !== hypeBot) {
+        if (receiver !== hypeBot) {
             var dateText = document.createTextNode(" - " + time);
             usernameElement.appendChild(dateText);
         }
@@ -193,14 +191,14 @@ function displayEventMessage(message) {
     messageArea.scrollTop = messageArea.scrollHeight;
 }
 
-function clearUnreads(username, receiver){
-    fetch('/clearUnreads/'+username+'/'+receiver, {method: 'POST',
+function clearUnreads(username, receiver) {
+    fetch('/clearUnreads/' + username + '/' + receiver, {
+        method: 'POST',
     })
 }
 
 // Contactok Listazasa
 function getContactName(contact) {
-
     // Torli az elozo uzeneteket
     messageArea.innerHTML = ""
     // Beallitja az uzenet fogadojat, es a contact cimet
@@ -447,7 +445,7 @@ function notificationAudio() {
     var audio = new Audio("Media/notification.mp3");
     audio.play();
 }
-
+ // Összes üzenet törlése
 function deleteMessages() {
     fetch('/deleteMessages/' + receiver + '/' + username, {
         method: 'POST',
@@ -455,17 +453,13 @@ function deleteMessages() {
         displayAllMessages(receiver, username);
     })
 }
-
+// Kiválasztott üzenet törlése
 function deleteMessage(messageId) {
     fetch('/deleteMessage/' + messageId, {
         method: 'POST',
     }).then(() => {
         displayAllMessages(receiver, username);
     })
-}
-
-function editMessage(message) {
-    console.log(message.getElementsByClassName())
 }
 
 function searchButton() {

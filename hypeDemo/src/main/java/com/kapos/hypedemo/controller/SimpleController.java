@@ -166,6 +166,7 @@ public class SimpleController {
     @GetMapping("/listMessages/{receiver}/{sender}")
     public List<Chat> getAllMessages(@PathVariable String receiver, @PathVariable String sender) throws InterruptedException {
         List<Chat> messages = new ArrayList<>();
+        messages = messagesRepository.findChatMessages(sender, receiver);
         int unsuccessfulTries = 0;
 
         while (unsuccessfulTries <= 3 && messages.isEmpty()) {

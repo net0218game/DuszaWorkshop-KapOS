@@ -216,6 +216,11 @@ public class SimpleController {
         logger.info(user.getOnline().toString());
     }
 
+    @GetMapping("unreads/{receiver}")
+    public Unread findUnreadsOf(@PathVariable String receiver){
+        return unreadRepository.findUnreadMessages(receiver);
+    }
+
     // Felhasznalo Lekerdezese ID Alapjan
     @GetMapping("/user/{id}")
     public User findById(@PathVariable Integer id) {

@@ -6,3 +6,17 @@ function navbar() {
         x.className = "topnav";
     }
 }
+
+username = document.querySelector('.dropbtn').textContent.trim();
+
+<!--
+function displayUnreads(username){
+    fetch('unreads/'+username,{
+        method: 'GET',
+    })
+        .then((response) => response.json())
+        .then((data) => {
+
+        })
+}
+-->

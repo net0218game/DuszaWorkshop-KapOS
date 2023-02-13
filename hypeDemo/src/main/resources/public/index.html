@@ -13,7 +13,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="https://kit.fontawesome.com/02ff1d2c53.js" crossorigin="anonymous">
     </script>
-    <script src="/JS/navbar.js"></script>
 </head>
 
 <style>
@@ -54,10 +53,10 @@
     <a href="https://docs.google.com/forms/d/e/1FAIpQLScMh7Cp-q28b6RnkVU_rUJD7vTUbkEuBcBKjQ6xmU0iwqE5zg/viewform?fbzx=-4144298480465207363"><i class="fa fa-wpforms"></i> Kérdőív</a>
 
     <!--Olvasatlan üzenetek
-        <div class="unread-count" style="float: right" sec:authorize="isAuthenticated()"><p>2</p></div>
+        <div onclick="displayUnreads()" class="unread-count" style="float: right" sec:authorize="isAuthenticated()"><p style="user-select: none">2</p></div>
 
 
-        <div class="dropdown" style="float: right">
+    <div id="unread-bin" class="dropdown" style="float: right">
         <a class="dropbtn" sec:authorize="isAuthenticated()">
             <i class="fa-solid fa-bell"></i>
         </a>
@@ -76,7 +75,7 @@
     <div class="dropdown" style="right: 0">
         <a class="dropbtn" sec:authorize="isAuthenticated()">
             <i class="fa fa-user"></i>
-            <span sec:authentication="name">USERNAME
+            <span id="username" sec:authentication="name">USERNAME
             </span>
         </a>
         <div class="dropdown-content">
@@ -302,7 +301,7 @@
         <img src="/Media/logo.png" onclick="hype()" alt="hype:DD" width="25%">
     </div>
 </div>
-
+    <script src="/JS/navbar.js"></script>
     <script>
         const observer = new IntersectionObserver((entries) => {
             entries.forEach((entry) => {

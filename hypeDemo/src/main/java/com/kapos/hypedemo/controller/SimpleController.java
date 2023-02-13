@@ -217,8 +217,9 @@ public class SimpleController {
         logger.info(user.getOnline().toString());
     }
 
-    @GetMapping("unreads/{receiver}")
-    public Unread findUnreadsOf(@PathVariable String receiver){
+    @GetMapping("/unreads/{receiver}")
+    public List<Unread> findUnreadsOf(@PathVariable String receiver){
+        logger.info(receiver);
         return unreadRepository.findUnreadMessages(receiver);
     }
 

@@ -8,18 +8,17 @@ function navbar() {
 }
 
 var username = document.getElementById('username').innerText;
-var unreadBin = document.querySelector('#unread-bin');
-/*
-function displayUnreads(){
-    fetch('/unreads/'+username,{
+var unreadBin = document.getElementById('unreadMessages');
+
+function displayUnreads() {
+    fetch('/unreads/' + username, {
         method: 'GET',
     })
         .then((response) => response.json())
         .then((data) => {
-            console.log(data)
-            for (let j=0;j<Object.keys(data);j++) {
+            console.log(Object.keys(data))
+            for (let j = 0; j < Object.keys(data).length; j++) {
                 var fodiv = document.createElement('div')
-                fodiv.className = 'dropdown-content unread-message'
 
                 var hr = document.createElement('hr')
 
@@ -33,7 +32,7 @@ function displayUnreads(){
                 span.innerText = data[j].sender
 
                 var p = document.createElement('p')
-                var text = date[j].content
+                var text = data[j].content
                 if (text.length > 20) {
                     text = text.substring(20) + '...'
                 }
@@ -45,10 +44,11 @@ function displayUnreads(){
                 fodiv.appendChild(i)
                 fodiv.appendChild(aldiv)
 
+                console.log(fodiv)
+
                 unreadBin.appendChild(fodiv)
             }
         })
 }
 
 displayUnreads()
-*/

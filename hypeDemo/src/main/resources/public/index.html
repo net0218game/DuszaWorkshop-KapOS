@@ -51,8 +51,6 @@
     <a href="/register"><i class="fa fa-key"></i> Register</a>
     <a href="/chat"><i class="fa fa-comment-dots"></i> Chat</a>
     <a href="https://docs.google.com/forms/d/e/1FAIpQLScMh7Cp-q28b6RnkVU_rUJD7vTUbkEuBcBKjQ6xmU0iwqE5zg/viewform?fbzx=-4144298480465207363"><i class="fa fa-wpforms"></i> Kérdőív</a>
-
-    <!--Olvasatlan üzenetek
         <div onclick="displayUnreads()" class="unread-count" style="float: right" sec:authorize="isAuthenticated()"><p style="user-select: none">2</p></div>
 
 
@@ -60,7 +58,7 @@
         <a class="dropbtn" sec:authorize="isAuthenticated()">
             <i class="fa-solid fa-bell"></i>
         </a>
-        <div class="dropdown-content unread-message">
+        <div class="dropdown-content unread-message" id="unreadMessages">
                 <hr>
                 <i style="background-color: rgb(255,183,0);">D</i>
                 <div class="unread-info">
@@ -69,7 +67,6 @@
                 </div>
         </div>
     </div>
-    -->
 
     <!-- Profil -->
     <div class="dropdown" style="right: 0">

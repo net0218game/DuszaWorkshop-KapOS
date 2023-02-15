@@ -7,7 +7,7 @@ function navbar() {
     }
 }
 
-var username = document.getElementById('username').innerText;
+var username = document.getElementById('user').innerText;
 var unreadBin = document.getElementById('unreadMessages');
 
 function displayUnreads() {
@@ -16,14 +16,13 @@ function displayUnreads() {
     })
         .then((response) => response.json())
         .then((data) => {
-            console.log(Object.keys(data))
+            console.log(data)
             for (let j = 0; j < Object.keys(data).length; j++) {
-                var fodiv = document.createElement('div')
-
+                console.log('lefutott')
                 var hr = document.createElement('hr')
 
                 var i = document.createElement('i')
-                i.style.backgound = 'red'
+                i.style.backgroundColor = 'red'
                 i.innerText = data[j].id
 
                 var aldiv = document.createElement('div')
@@ -39,14 +38,11 @@ function displayUnreads() {
                 p.innerText = text
                 aldiv.appendChild(span)
                 aldiv.appendChild(p)
+                aldiv.classList.add('unread-info')
 
-                fodiv.appendChild(hr)
-                fodiv.appendChild(i)
-                fodiv.appendChild(aldiv)
-
-                console.log(fodiv)
-
-                unreadBin.appendChild(fodiv)
+                unreadBin.appendChild(hr)
+                unreadBin.appendChild(i)
+                unreadBin.appendChild(aldiv)
             }
         })
 }

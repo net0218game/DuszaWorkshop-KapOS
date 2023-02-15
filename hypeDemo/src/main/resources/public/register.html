@@ -24,6 +24,17 @@
     <a href="/chat"><i class="fa fa-comment-dots"></i> Chat</a>
     <a href="https://docs.google.com/forms/d/e/1FAIpQLScMh7Cp-q28b6RnkVU_rUJD7vTUbkEuBcBKjQ6xmU0iwqE5zg/viewform?fbzx=-4144298480465207363"><i class="fa fa-wpforms"></i> Kérdőív</a>
 
+    <!--olvasatlan üzenetek-->
+    <div class="unread-count" style="float: right" sec:authorize="isAuthenticated()"><p style="user-select: none">2</p></div>
+    <div class="dropdown" style="float: right">
+        <a class="dropbtn" sec:authorize="isAuthenticated()">
+            <i class="fa-solid fa-bell"></i>
+        </a>
+        <div class="dropdown-content unread-message" id="unreadMessages">
+
+        </div>
+    </div>
+
     <!-- Profil -->
     <div class="dropdown">
         <a class="dropbtn" sec:authorize="isAuthenticated()">

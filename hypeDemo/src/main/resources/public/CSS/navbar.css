@@ -119,8 +119,8 @@
     position: absolute;
     border-radius: 5px;
     width: 17.5vw;
-    height: 7.5vh;
-    background: #4f5b6c;
+    height: 3vh;
+    background: transparent;
 }
 
 
@@ -198,4 +198,10 @@
 }
 .fa-bell{
     font-size: 22.5px;
+}
+
+.unread-empty{
+    height: 7vh;
+    text-align: center;
+    vertical-align: center;
 }

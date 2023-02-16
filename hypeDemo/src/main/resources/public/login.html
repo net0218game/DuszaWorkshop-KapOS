@@ -28,11 +28,12 @@
     <!--olvasatlan üzenetek-->
     <div class="unread-count" style="float: right" sec:authorize="isAuthenticated()"><p style="user-select: none">2</p></div>
     <div class="dropdown" style="float: right">
-        <a class="dropbtn" sec:authorize="isAuthenticated()">
+        <a sec:authorize="isAuthenticated()">
             <i class="fa-solid fa-bell"></i>
         </a>
         <div class="dropdown-content unread-message" id="unreadMessages">
-
+            <p style="text-align: center;
+                      height: 3vh  ">UNREAD MESSAGES</p>
         </div>
     </div>
 

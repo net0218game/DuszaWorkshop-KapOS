@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en"
+    xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <meta charset="UTF-8">
+    <title>bejállítások </title>
+    <link rel="stylesheet" href="/CSS/setting.css">
+    <link rel="stylesheet" href="/CSS/chat.css"/>
+    <link rel="stylesheet" href="/CSS/hype.css"/>
+    <link rel="stylesheet" href="/CSS/navbar.css"/>
+    <link rel="stylesheet" href="/CSS/sidenav.css"/>
+    <link rel="stylesheet" href="/CSS/login.css">
+</head>
+<body>
+<div class="topnav" id="myTopnav">
+    <a href="/" class="hype">HYPE</a>
+    <a href="/register"><i class="fa fa-key"></i> Register</a>
+    <a href="/chat" class="active"><i class="fa fa-comment-dots"></i> Chat</a>
+    <a href="https://docs.google.com/forms/d/e/1FAIpQLScMh7Cp-q28b6RnkVU_rUJD7vTUbkEuBcBKjQ6xmU0iwqE5zg/viewform?fbzx=-4144298480465207363"><i class="fa fa-wpforms"></i> Kérdőív</a>
+    <a href="settings.html" class="active"  ><p> settings</p></a>
+
+    <!-- Profil -->
+    <div class="dropdown">
+        <a class="dropbtn" sec:authorize="isAuthenticated()">
+            <i class="fa fa-user"></i> <span sec:authentication="name">USERNAME</span></a>
+        </a>
+        <div class="dropdown-content">
+            <a href="#">My Profile</a>
+            <!-- Login / Logout -->
+            <a href="/logout" class="logout" sec:authorize="isAuthenticated()"><i class="fa fa-sign-out"
+                                                                                  style="background: transparent"></i></a>
+        </div>
+    </div>
+    <a href="/login" class="login" sec:authorize="!isAuthenticated()"><i class="fa fa-sign-in"></i></a>
+    <a href="javascript:void(0);" class="icon" onclick="navbar()"><i class="fa fa-bars"></i></a>
+</div>
+
+<div id="setting-page">
+    <div class="settcontainer ">
+        <div class="sett-header">
+            <h2 >Settings</h2>
+        </div>
+        <div class="container1">
+            <h2>switch between light and dark mode</h2>
+            <label id="switch" class="switch">
+                <input type="checkbox" onchange="toggleTheme()" id="slider">
+                <span class="slider round"></span>
+            </label>
+        </div>
+    </div>
+
+
+
+</div>
+<script src="/JS/settings.js"></script>
+
+</body>
+</html>
+
+
+
+
+

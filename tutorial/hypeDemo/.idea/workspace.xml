@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="c3742cd9-60bd-401e-9b47-95ee295ee9fd" name="Changes" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="2GdTooZadqk91awhHKDtGeidlKD" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
+    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
+    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
+    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/dusza/DuszaWorkshop-KapOS/tutorial/hypeDemo&quot;,
+    &quot;spring.configuration.checksum&quot;: &quot;55e8c0cd5e4ef58eb64b2f0470876a4e&quot;
+  },
+  &quot;keyToStringList&quot;: {
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;mariadb&quot;
+    ]
+  }
+}</component>
+  <component name="RunManager" selected="Spring Boot.HypeDemoApplication">
+    <configuration name="All in hypedemo" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="hypedemo" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="TEST_OBJECT" value="package" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="chat.html" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/hypeDemo/public/chat.html" useBuiltInWebServerPort="true">
+      <method v="2" />
+    </configuration>
+    <configuration name="HypeDemoApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <option name="ACTIVE_PROFILES" />
+      <module name="hypedemo" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.kapos.hypedemo.HypeDemoApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="HypedemoApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <option name="ACTIVE_PROFILES" />
+      <module name="hypedemo" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.example.hypedemo.HypedemoApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <list>
+      <item itemvalue="JavaScript Debug.chat.html" />
+      <item itemvalue="JUnit.All in hypedemo" />
+      <item itemvalue="Spring Boot.HypeDemoApplication" />
+      <item itemvalue="Spring Boot.HypedemoApplication" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JavaScript Debug.chat.html" />
+        <item itemvalue="JUnit.All in hypedemo" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="c3742cd9-60bd-401e-9b47-95ee295ee9fd" name="Changes" comment="" />
+      <created>1666717642852</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1666717642852</updated>
+      <workItem from="1666717645564" duration="3438000" />
+      <workItem from="1667805336653" duration="4179000" />
+      <workItem from="1667890990423" duration="920000" />
+      <workItem from="1667927195518" duration="4858000" />
+      <workItem from="1667987041986" duration="2842000" />
+      <workItem from="1668084807935" duration="1881000" />
+      <workItem from="1668111023753" duration="213000" />
+      <workItem from="1668190477718" duration="146000" />
+      <workItem from="1668195455328" duration="177000" />
+      <workItem from="1668409100650" duration="5363000" />
+      <workItem from="1668495627220" duration="164000" />
+      <workItem from="1668592061248" duration="2481000" />
+      <workItem from="1668602810576" duration="4288000" />
+      <workItem from="1668614481484" duration="5812000" />
+      <workItem from="1669013448280" duration="4718000" />
+      <workItem from="1669100321505" duration="2335000" />
+      <workItem from="1669134587137" duration="2271000" />
+      <workItem from="1669294337502" duration="969000" />
+      <workItem from="1669406356912" duration="434000" />
+      <workItem from="1669539762199" duration="5230000" />
+      <workItem from="1669705162604" duration="622000" />
+      <workItem from="1669744059226" duration="592000" />
+      <workItem from="1670405887287" duration="1175000" />
+      <workItem from="1670746478085" duration="624000" />
+      <workItem from="1670828383570" duration="4336000" />
+      <workItem from="1670833493228" duration="487000" />
+      <workItem from="1671012063713" duration="1114000" />
+      <workItem from="1671108436183" duration="926000" />
+      <workItem from="1671433114058" duration="774000" />
+      <workItem from="1671437091373" duration="723000" />
+      <workItem from="1673430494850" duration="658000" />
+      <workItem from="1674455369175" duration="2032000" />
+      <workItem from="1674479368264" duration="631000" />
+      <workItem from="1674543054974" duration="1565000" />
+      <workItem from="1674639843795" duration="26000" />
+      <workItem from="1674640087283" duration="8000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+</project>

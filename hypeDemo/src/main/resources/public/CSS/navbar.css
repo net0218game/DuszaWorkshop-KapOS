@@ -1,21 +1,23 @@
 .topnav {
     overflow: hidden;
-    background-color: #333;
+    background: var(--color-secondary);
 }
 @font-face {
     font-family: Comfortaa;
     src: url("../Media/Comfortaa-Bold.ttf");
 }
 .topnav a {
-    background-color: #333;
+    background: var(--color-secondary);
     float: left;
     font-family: Comfortaa;
     display: block;
-    color: #f2f2f2;
+    color: var(--font-color);
     text-align: center;
     padding: 14px 16px;
     text-decoration: none;
     font-size: 17px;
+
+
 }
 
 .topnav a:hover {
@@ -96,13 +98,14 @@
 
 .topnav span {
     background: transparent;
-    color: white;
+    color: var(--font-color);
 }
 
 .dropdown {
     background: transparent;
     float: right;
     overflow: hidden;
+
 }
 
 .dropdown-content {
@@ -114,12 +117,13 @@
     background-color: #f9f9f9;
     box-shadow: 0px 8px 16px 0px rgba(255, 255, 255, 0.2);
     z-index: 1;
+
 }
 
 .dropdown-content a {
     width: 100%;
     float: right;
-    color: white;
+    color: var(--font-color);
     padding: 12px 16px;
     text-decoration: none;
     display: block;

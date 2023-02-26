@@ -1,20 +1,20 @@
 * {
-    color: black;
+    color: var(--font-color);
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
 }
 
 body {
-    background-color: black;
+    color: var(--font-color);
     margin: 0;
     padding: 0;
     font-weight: 400;
     font-family: Comfortaa;
     font-size: 1rem;
     line-height: 1.58;
-    color: #333;
-    background-color: #000000;
+    background: var(--color-secondary);
+
     height: 100%;
 }
 
@@ -24,7 +24,7 @@ body {
 }
 
 input, select {
-    color: black;
+    color: var(--font-color);
     width: 100%;
     height: 40px;
     border: none;
@@ -38,14 +38,14 @@ input, select {
 
 label p {
     text-align: left;
-    color: #777777;
+    color: var(--font-color);
     margin-bottom: -10px;
 }
 
 .container i {
     padding-top: 22px;
     padding-left: 15px;
-    color: #777777;
+    color: var(--font-color);
     min-width: 20px;
     text-align: left;
     position: absolute;

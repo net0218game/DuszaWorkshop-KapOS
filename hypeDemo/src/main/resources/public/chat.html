@@ -6,13 +6,15 @@
     <title>Hype</title>
     <link rel="stylesheet" href="/CSS/chat.css"/>
     <link rel="stylesheet" href="/CSS/hype.css"/>
-    <link rel="stylesheet" href="/CSS/navbar.css"/>
     <link rel="stylesheet" href="/CSS/sidenav.css"/>
     <link rel="stylesheet" href="/CSS/setting.css">
     <link rel="icon" type="image/x-icon" href="/Media/hype.gif">
     <script src="https://kit.fontawesome.com/02ff1d2c53.js" crossorigin="anonymous"></script>
     <script src="/JS/navbar.js"></script>
     <script src="/JS/settings.js"></script>
+    <link rel="stylesheet" href="/CSS/navbar.css"/>
+    <link rel="icon" type="image/x-icon" href="/Media/hype.gif">
+    <script src="https://kit.fontawesome.com/02ff1d2c53.js" crossorigin="anonymous"></script>
 </head>
 <body>
 
@@ -70,10 +72,22 @@
     <a href="https://docs.google.com/forms/d/e/1FAIpQLScMh7Cp-q28b6RnkVU_rUJD7vTUbkEuBcBKjQ6xmU0iwqE5zg/viewform?fbzx=-4144298480465207363"><i class="fa fa-wpforms"></i> Kérdőív</a>
     <a href="settings.html" class="active"  ><p>settings</p></a>
 
+    <!--olvasatlan üzenetek-->
+    <div class="unread-count" style="float: right" sec:authorize="isAuthenticated()"><p style="user-select: none">2</p></div>
+    <div class="dropdown" style="float: right">
+        <a sec:authorize="isAuthenticated()">
+            <i class="fa-solid fa-bell"></i>
+        </a>
+        <div class="dropdown-content unread-message" id="unreadMessages">
+            <p style="text-align: center;
+                      height: 3vh  ">UNREAD MESSAGES</p>
+        </div>
+    </div>
+
     <!-- Profil -->
     <div class="dropdown">
         <a class="dropbtn" sec:authorize="isAuthenticated()">
-            <i class="fa fa-user"></i> <span sec:authentication="name">USERNAME</span></a>
+            <i class="fa fa-user"></i> <span id="user" sec:authentication="name">USERNAME</span></a>
         </a>
         <div class="dropdown-content">
             <a href="#">My Profile</a>
@@ -125,7 +139,7 @@
         </div>
     </form>
 </div>
-
+<script src="/JS/navbar.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.1.4/sockjs.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
 <script src="/JS/chat.js"></script>

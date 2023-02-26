@@ -55,11 +55,24 @@
     <a href="/chat"><i class="fa fa-comment-dots"></i> Chat</a>
     <a href="https://docs.google.com/forms/d/e/1FAIpQLScMh7Cp-q28b6RnkVU_rUJD7vTUbkEuBcBKjQ6xmU0iwqE5zg/viewform?fbzx=-4144298480465207363"><i class="fa fa-wpforms"></i> Kérdőív</a>
     <a href="settings.html" class="active"  ><p>settings</p></a>
+        <div class="unread-count" style="float: right" sec:authorize="isAuthenticated()"><p id="sumUnread" style="user-select: none">0</p></div>
+
+    <!--olvasatlan üzenetek-->
+    <div class="dropdown" style="float: right">
+        <a sec:authorize="isAuthenticated()">
+            <i class="fa-solid fa-bell"></i>
+        </a>
+        <div class="dropdown-content unread-message" id="unreadMessages">
+            <p style="text-align: center;
+                      height: 3vh  ">UNREAD MESSAGES</p>
+        </div>
+    </div>
+
     <!-- Profil -->
     <div class="dropdown" style="right: 0">
         <a class="dropbtn" sec:authorize="isAuthenticated()">
             <i class="fa fa-user"></i>
-            <span sec:authentication="name">USERNAME
+            <span id="user" sec:authentication="name">USERNAME
             </span>
         </a>
         <div class="dropdown-content">
@@ -285,7 +298,7 @@
         <img src="/Media/logo.png" onclick="hype()" alt="hype:DD" width="25%">
     </div>
 </div>
-
+    <script src="/JS/navbar.js"></script>
     <script>
         const observer = new IntersectionObserver((entries) => {
             entries.forEach((entry) => {

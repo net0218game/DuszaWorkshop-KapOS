@@ -166,12 +166,13 @@ public class SimpleController {
     @GetMapping("/listMessages/{receiver}/{sender}")
     public List<Chat> getAllMessages(@PathVariable String receiver, @PathVariable String sender) throws InterruptedException {
         List<Chat> messages = new ArrayList<>();
+        messages = messagesRepository.findChatMessages(sender, receiver);
         int unsuccessfulTries = 0;
 
         while (unsuccessfulTries <= 3 && messages.isEmpty()) {
             logger.info("Nem talalt uzenetet");
             messages = messagesRepository.findChatMessages(sender, receiver);
-            Thread.sleep(100);
+            Thread.sleep(200);
             unsuccessfulTries ++;
 
         }
@@ -214,6 +215,12 @@ public class SimpleController {
     public void updateStatus(@PathVariable String status, User user) {
         user.setOnline(Objects.equals(status, "online"));
         logger.info(user.getOnline().toString());
+    }
+
+    @GetMapping("/unreads/{receiver}")
+    public List<Unread> findUnreadsOf(@PathVariable String receiver){
+        logger.info(receiver);
+        return unreadRepository.findUnreadMessages(receiver);
     }
 
     // Felhasznalo Lekerdezese ID Alapjan

@@ -173,6 +173,7 @@ a {
     height: 100%;
     position: relative;
     float: right;
+    padding-bottom: 50px;
 }
 
 .chat-container ul, .sidenav ul {

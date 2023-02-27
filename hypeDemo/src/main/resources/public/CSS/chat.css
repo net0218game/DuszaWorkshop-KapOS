@@ -261,7 +261,7 @@ a {
 }
 
 #chat-page .chat-message span, .side8 .chat-message span {
-    color: #ffffff;
+    color: var(--font-color);
     font-weight: 600;
 }
 
@@ -384,8 +384,6 @@ a {
     0%, 90% { top: 0; left: 0; }
     100%  { top: -100px; left: 0; }
 }
-
-
 
 .edit {
     float: right;

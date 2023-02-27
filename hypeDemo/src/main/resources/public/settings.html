@@ -3,21 +3,23 @@
     xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
     <meta charset="UTF-8">
-    <title>bejállítások </title>
+    <title>Settings</title>
     <link rel="stylesheet" href="/CSS/setting.css">
     <link rel="stylesheet" href="/CSS/chat.css"/>
     <link rel="stylesheet" href="/CSS/hype.css"/>
     <link rel="stylesheet" href="/CSS/navbar.css"/>
     <link rel="stylesheet" href="/CSS/sidenav.css"/>
-    <link rel="stylesheet" href="/CSS/login.css">
+    <link rel="stylesheet" href="/CSS/login.css"/>
+    <script src="https://kit.fontawesome.com/02ff1d2c53.js" crossorigin="anonymous"></script>
+
 </head>
 <body>
 <div class="topnav" id="myTopnav">
     <a href="/" class="hype">HYPE</a>
     <a href="/register"><i class="fa fa-key"></i> Register</a>
-    <a href="/chat" class="active"><i class="fa fa-comment-dots"></i> Chat</a>
+    <a href="/chat"><i class="fa fa-comment-dots"></i> Chat</a>
     <a href="https://docs.google.com/forms/d/e/1FAIpQLScMh7Cp-q28b6RnkVU_rUJD7vTUbkEuBcBKjQ6xmU0iwqE5zg/viewform?fbzx=-4144298480465207363"><i class="fa fa-wpforms"></i> Kérdőív</a>
-    <a href="settings.html" class="active"  ><p> settings</p></a>
+    <a href="settings.html" class="active"><i class="fa fa-cog" aria-hidden="true"></i> Settings</a>
 
     <!-- Profil -->
     <div class="dropdown">
@@ -34,23 +36,53 @@
     <a href="/login" class="login" sec:authorize="!isAuthenticated()"><i class="fa fa-sign-in"></i></a>
     <a href="javascript:void(0);" class="icon" onclick="navbar()"><i class="fa fa-bars"></i></a>
 </div>
-
 <div id="setting-page">
     <div class="settcontainer ">
         <div class="sett-header">
             <h2 >Settings</h2>
         </div>
+
         <div class="container1">
-            <h2>switch between light and dark mode</h2>
-            <label id="switch" class="switch">
-                <input type="checkbox" onchange="toggleTheme()" id="slider">
-                <span class="slider round"></span>
-            </label>
+            <h2>Switch between color themes!</h2>
+            <div class="colors">
+                <div class="palette" onclick="light()">
+                    <h2>Dark</h2>
+                    <div class="color" style="background-color: #0060df"></div>
+                    <div class="color" style="background-color: #171718"></div>
+                    <div class="color" style="background-color: #fd6f53"></div>
+                    <div class="color" style="background-color: #ffffff"></div>
+                </div>
+                <div class="palette" onclick="dark()">
+                    <h2>Light</h2>
+                    <div class="color" style="background-color: #17ed90"></div>
+                    <div class="color" style="background-color: #ffffff"></div>
+                    <div class="color" style="background-color: #12cdea"></div>
+                    <div class="color" style="background-color: #000000"></div>
+                </div>
+                <div class="palette" onclick="blue()">
+                    <h2>Blue</h2>
+                    <div class="color" style="background-color: #0A2647"></div>
+                    <div class="color" style="background-color: #144272"></div>
+                    <div class="color" style="background-color: #205295"></div>
+                    <div class="color" style="background-color: #2C74B3"></div>
+                </div>
+                <div class="palette" onclick="purple()">
+                    <h2>Purple</h2>
+                    <div class="color" style="background-color: #2D033B"></div>
+                    <div class="color" style="background-color: #810CA8"></div>
+                    <div class="color" style="background-color: #C147E9"></div>
+                    <div class="color" style="background-color: #E5B8F4"></div>
+                </div>
+                <div class="palette" onclick="lightblue()">
+                    <h2>Lightblue</h2>
+                    <div class="color" style="background-color: #2155CD"></div>
+                    <div class="color" style="background-color: #0AA1DD"></div>
+                    <div class="color" style="background-color: #79DAE8"></div>
+                    <div class="color" style="background-color: #E8F9FD"></div>
+                </div>
+            </div>
         </div>
     </div>
-
-
-
 </div>
 <script src="/JS/settings.js"></script>
 

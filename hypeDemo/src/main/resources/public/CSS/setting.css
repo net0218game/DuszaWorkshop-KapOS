@@ -31,18 +31,42 @@ body {
     margin: 0;
     font-weight: 500;
 }
+
 .theme-light {
     --color-primary: #0060df;
     --color-secondary: #171718;
     --color-accent: #fd6f53;
     --font-color: #ffffff;
 }
+
 .theme-dark {
     --color-primary: #17ed90;
     --color-secondary: #ffffff;
     --color-accent: #12cdea;
     --font-color: #000000;
 }
+
+.theme-blue {
+    --color-primary: #0A2647;
+    --color-secondary: #144272;
+    --color-accent: #205295;
+    --font-color: #2C74B3;
+}
+
+.theme-purple {
+    --color-primary: #2D033B;
+    --color-secondary: #810CA8;
+    --color-accent: #C147E9;
+    --font-color: #E5B8F4;
+}
+
+.theme-lightblue {
+    --color-primary: #2155CD;
+    --color-secondary: #0AA1DD;
+    --color-accent: #79DAE8;
+    --font-color: #E8F9FD;
+}
+
 .container1 {
     display: flex;
     width: 100%;
@@ -134,4 +158,26 @@ input:checked + .slider:before {
 
 .slider.round:before {
     border-radius: 50%;
+}
+
+.palette {
+    width: 200px;
+    height: auto;
+}
+
+.color {
+    width: 200px;
+    height: 40px;
+}
+
+.colors {
+    padding: 20px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.color h2 {
+    text-align: center;
 }

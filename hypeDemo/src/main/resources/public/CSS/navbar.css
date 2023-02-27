@@ -36,7 +36,7 @@
 
 .topnav i {
     background: transparent;
-    color: white;
+    color: var(--font-color);
 }
 
 @media screen and (max-width: 600px) {

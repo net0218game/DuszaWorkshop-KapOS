@@ -77,7 +77,6 @@ function sendMessage(event) {
             stompClient.send("/app/private", {}, JSON.stringify(chatMessage))
 
             if (receiver !== hypeBot && receiver !== group_chat) {
-                console.log("displayed")
                 displayLastMessages(receiver, username)
                 displayAllMessages(receiver, username)
             }
@@ -317,7 +316,8 @@ function displayAllFriends() {
         });
 }
 
-function displayAllContacts() {
+function displayAllContacts(name) {
+    contactArea.innerHTML = ''
     fetch('/contacts', {
         method: 'GET',
     })
@@ -325,37 +325,39 @@ function displayAllContacts() {
         .then((data) => {
             for (let i = 0; i < Object.keys(data).length; i++) {
                 if (data[i].userName !== username) {
+                    if (data[i].userName.includes(name) || name == null) {
+                        var messageElement = document.createElement('li');
+                        messageElement.classList.add('chat-message');
+                        messageElement.addEventListener('click', function () {
+                            getContactName(this)
+                        });
 
-                    var messageElement = document.createElement('li');
-                    messageElement.classList.add('chat-message');
-                    messageElement.addEventListener('click', function () {
-                        getContactName(this)
-                    });
+                        messageElement.setAttribute('id', data[i].userName)
 
-                    messageElement.setAttribute('id', data[i].userName)
+                        var avatarElement = document.createElement('i');
+                        var avatarText = document.createTextNode(data[i].userName.substring(0, 1));
+                        avatarElement.appendChild(avatarText);
+                        avatarElement.style['background-color'] = getAvatarColor(data[i].userName);
 
-                    var avatarElement = document.createElement('i');
-                    var avatarText = document.createTextNode(data[i].userName.substring(0, 1));
-                    avatarElement.appendChild(avatarText);
-                    avatarElement.style['background-color'] = getAvatarColor(data[i].userName);
+                        messageElement.appendChild(avatarElement);
 
-                    messageElement.appendChild(avatarElement);
+                        var usernameElement = document.createElement('span');
+                        var usernameText = document.createTextNode(data[i].userName);
 
-                    var usernameElement = document.createElement('span');
-                    var usernameText = document.createTextNode(data[i].userName);
+                        usernameElement.appendChild(usernameText);
+                        messageElement.appendChild(usernameElement);
 
-                    usernameElement.appendChild(usernameText);
-                    messageElement.appendChild(usernameElement);
+                        var textElement = document.createElement('p');
 
-                    var textElement = document.createElement('p');
+                        textElement.innerHTML = "No messages yet.";
+                        textElement.style.fontSize = "0.8rem";
 
-                    textElement.innerHTML = "No messages yet.";
-                    textElement.style.fontSize = "0.8rem";
+                        messageElement.appendChild(textElement);
 
-                    messageElement.appendChild(textElement);
+                        contactArea.appendChild(messageElement);
+                        displayLastMessages(data[i].userName, username)
 
-                    contactArea.appendChild(messageElement);
-                    displayLastMessages(data[i].userName, username)
+                    }
                 }
             }
         });
@@ -401,7 +403,6 @@ function displayLastMessages(receiver, username) {
     })
         .then((response) => response.json())
         .then((data) => {
-            console.log(data)
             for (let i = 0; i < Object.keys(data).length; i++) {
                 var msg = data[i].content
                 if (msg.length > 20) {
@@ -445,7 +446,8 @@ function notificationAudio() {
     var audio = new Audio("Media/notification.mp3");
     audio.play();
 }
- // Összes üzenet törlése
+
+// Összes üzenet törlése
 function deleteMessages() {
     fetch('/deleteMessages/' + receiver + '/' + username, {
         method: 'POST',
@@ -453,6 +455,7 @@ function deleteMessages() {
         displayAllMessages(receiver, username);
     })
 }
+
 // Kiválasztott üzenet törlése
 function deleteMessage(messageId) {
     fetch('/deleteMessage/' + messageId, {
@@ -463,9 +466,11 @@ function deleteMessage(messageId) {
 }
 
 function searchButton() {
-    document.getElementById('contacts-title').innerHTML = '<h2 id="contacts-title">All Users <span onclick="backButton()" style="cursor: pointer"><i class="fa-solid fa-arrow-left"></i></span></h2>'
-    contactArea.innerHTML = ''
     displayAllContacts()
+
+    document.getElementById('contacts-title').innerHTML = '<h2 id="contacts-title">All Users <span onclick="backButton()" style="cursor: pointer"><i class="fa-solid fa-arrow-left"></i></span></h2><div id="searchDiv" style="padding-top: 15px">\n' +
+        '            <input type="text" style="width: 98%;" placeholder="Find a specific user" oninput="displayAllContacts(this.value)">\n' +
+        '        </div>'
 }
 
 function backButton() {

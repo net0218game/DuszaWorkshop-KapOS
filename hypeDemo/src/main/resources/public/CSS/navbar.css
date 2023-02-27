@@ -170,12 +170,20 @@
 }
 
 .unread-message .unread-info{
-    margin-left: 3.25vw;
+    margin-left: 3.75vw;
     font-size: 15px;
+}
+
+.unread-info p{
+    font-size: 12px;
 }
 
 .unread-message .unread-info, .unread-message i{
     margin-top: 1.75vh;
+}
+
+.unread-message p{
+    margin: 0;
 }
 
 .unread-count{
@@ -208,4 +216,13 @@
     height: 7vh;
     text-align: center;
     vertical-align: center;
+}
+
+#sumUnread{
+    margin: 0;
+    padding: 0;
+}
+
+hr{
+    margin: 0;
 }

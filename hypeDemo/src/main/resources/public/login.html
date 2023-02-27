@@ -29,7 +29,7 @@
     <a href="settings.html" class="active"  ><p>settings</p></a>
 
     <!--olvasatlan üzenetek-->
-    <div class="unread-count" style="float: right" sec:authorize="isAuthenticated()"><p style="user-select: none">2</p></div>
+    <div class="unread-count" style="float: right" sec:authorize="isAuthenticated()"><p id="sumUnread" style="user-select: none">0</p></div>
     <div class="dropdown" style="float: right">
         <a sec:authorize="isAuthenticated()">
             <i class="fa-solid fa-bell"></i>

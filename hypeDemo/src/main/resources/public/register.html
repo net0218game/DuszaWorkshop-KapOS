@@ -14,7 +14,6 @@
     <link rel="stylesheet" href="/CSS/setting.css"/>
     <link rel="icon" type="image/x-icon" href="/Media/hype.gif">
     <script src="https://kit.fontawesome.com/02ff1d2c53.js" crossorigin="anonymous"></script>
-    <script src="/JS/navbar.js"></script>
     <script src="/JS/settings.js"></script>
 </head>
 <body>
@@ -28,8 +27,8 @@
     <a href="settings.html"><i class="fa fa-cog" aria-hidden="true"></i> Settings</a>
 
     <!--olvasatlan üzenetek-->
-    <div class="unread-count" style="float: right" sec:authorize="isAuthenticated()"><p style="user-select: none">2</p></div>
-    <div class="dropdown" style="float: right">
+    <div class="unread-count" style="float: right" sec:authorize="isAuthenticated()"><p id="sumUnread" style="user-select: none">2</p></div>
+    <div class="dropdown unread" style="float: right">
         <a sec:authorize="isAuthenticated()">
             <i class="fa-solid fa-bell"></i>
         </a>
@@ -42,7 +41,7 @@
     <!-- Profil -->
     <div class="dropdown">
         <a class="dropbtn" sec:authorize="isAuthenticated()">
-            <i class="fa fa-user"></i> <span sec:authentication="name">USERNAME</span></a>
+            <i class="fa fa-user"></i> <span id="user" sec:authentication="name">USERNAME</span></a>
         </a>
         <div class="dropdown-content">
             <a href="#">My Profile</a>
@@ -112,6 +111,6 @@
         </form>
     </div>
 
-
+<script src="/JS/navbar.js"></script>
 </body>
 </html>

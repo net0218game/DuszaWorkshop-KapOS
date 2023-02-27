@@ -32,17 +32,24 @@ body {
     font-weight: 500;
 }
 
-.theme-light {
+.theme-dark {
     --color-primary: #0060df;
     --color-secondary: #171718;
-    --color-accent: #fd6f53;
+    --color-accent: #539dfd;
     --font-color: #ffffff;
 }
 
-.theme-dark {
-    --color-primary: #17ed90;
-    --color-secondary: #ffffff;
-    --color-accent: #12cdea;
+.theme-black {
+    --color-primary: #5f5f5f;
+    --color-secondary: #000000;
+    --color-accent: #000000;
+    --font-color: #ffffff;
+}
+
+.theme-light {
+    --color-primary: #ffffff;
+    --color-secondary: #E1D9D1;
+    --color-accent: #d4faff;
     --font-color: #000000;
 }
 
@@ -50,21 +57,21 @@ body {
     --color-primary: #0A2647;
     --color-secondary: #144272;
     --color-accent: #205295;
-    --font-color: #2C74B3;
+    --font-color: #ffffff;
 }
 
 .theme-purple {
     --color-primary: #2D033B;
     --color-secondary: #810CA8;
     --color-accent: #C147E9;
-    --font-color: #E5B8F4;
+    --font-color: #ffffff;
 }
 
 .theme-lightblue {
     --color-primary: #2155CD;
     --color-secondary: #0AA1DD;
     --color-accent: #79DAE8;
-    --font-color: #E8F9FD;
+    --font-color: #ffffff;
 }
 
 .container1 {

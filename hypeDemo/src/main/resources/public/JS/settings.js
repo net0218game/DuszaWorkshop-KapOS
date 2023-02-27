@@ -18,6 +18,8 @@ function setTheme(themeName) {
         setTheme('theme-purple');
     } else if (localStorage.getItem('theme') === 'theme-lightblue') {
         setTheme('theme-lightblue');
+    } else if (localStorage.getItem('theme') === 'theme-black') {
+        setTheme('theme-black');
     }
 })();
 
@@ -39,13 +41,8 @@ function purple() {
 }
 function lightblue() {
     setTheme('theme-lightblue');
-
 }
 
-
-/*
-light
-dark
-blue
-purple
-lightblue*/
+function black() {
+    setTheme('theme-black');
+}

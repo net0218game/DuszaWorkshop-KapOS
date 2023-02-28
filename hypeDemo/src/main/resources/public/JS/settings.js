@@ -31,28 +31,22 @@ function setTheme(themeName) {
 
 function light() {
     setTheme('theme-light');
-
 }
 function dark() {
     setTheme('theme-dark');
-
 }
 function blue() {
     setTheme('theme-blue');
-
 }
 function purple() {
     setTheme('theme-purple');
-
 }
 function lightblue() {
     setTheme('theme-lightblue');
 }
-
 function black() {
     setTheme('theme-black');
 }
-
 function sunset() {
     setTheme('theme-sunset');
 }

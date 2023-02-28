@@ -324,40 +324,38 @@ function displayAllContacts(name) {
         .then((response) => response.json())
         .then((data) => {
             for (let i = 0; i < Object.keys(data).length; i++) {
-                if (data[i].userName !== username) {
-                    if (data[i].userName.includes(name) || name == null) {
-                        var messageElement = document.createElement('li');
-                        messageElement.classList.add('chat-message');
-                        messageElement.addEventListener('click', function () {
-                            getContactName(this)
-                        });
+                if (data[i].userName !== username && (data[i].userName.includes(name)) || name == null) {
+                    var messageElement = document.createElement('li');
+                    messageElement.classList.add('chat-message');
+                    messageElement.addEventListener('click', function () {
+                        getContactName(this)
+                    });
 
-                        messageElement.setAttribute('id', data[i].userName)
+                    messageElement.setAttribute('id', data[i].userName)
 
-                        var avatarElement = document.createElement('i');
-                        var avatarText = document.createTextNode(data[i].userName.substring(0, 1));
-                        avatarElement.appendChild(avatarText);
-                        avatarElement.style['background-color'] = getAvatarColor(data[i].userName);
+                    var avatarElement = document.createElement('i');
+                    var avatarText = document.createTextNode(data[i].userName.substring(0, 1));
+                    avatarElement.appendChild(avatarText);
+                    avatarElement.style['background-color'] = getAvatarColor(data[i].userName);
 
-                        messageElement.appendChild(avatarElement);
+                    messageElement.appendChild(avatarElement);
 
-                        var usernameElement = document.createElement('span');
-                        var usernameText = document.createTextNode(data[i].userName);
+                    var usernameElement = document.createElement('span');
+                    var usernameText = document.createTextNode(data[i].userName);
 
-                        usernameElement.appendChild(usernameText);
-                        messageElement.appendChild(usernameElement);
+                    usernameElement.appendChild(usernameText);
+                    messageElement.appendChild(usernameElement);
 
-                        var textElement = document.createElement('p');
+                    var textElement = document.createElement('p');
 
-                        textElement.innerHTML = "No messages yet.";
-                        textElement.style.fontSize = "0.8rem";
+                    textElement.innerHTML = "No messages yet.";
+                    textElement.style.fontSize = "0.8rem";
 
-                        messageElement.appendChild(textElement);
+                    messageElement.appendChild(textElement);
 
-                        contactArea.appendChild(messageElement);
-                        displayLastMessages(data[i].userName, username)
+                    contactArea.appendChild(messageElement);
+                    displayLastMessages(data[i].userName, username)
 
-                    }
                 }
             }
         });

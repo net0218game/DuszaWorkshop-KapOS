@@ -1,13 +1,13 @@
 .topnav {
     overflow: hidden;
-    background: var(--color-secondary);
+    background: var(--color-primary);
 }
 @font-face {
     font-family: Comfortaa;
     src: url("../Media/Comfortaa-Bold.ttf");
 }
 .topnav a {
-    background: var(--color-secondary);
+    background: none;
     float: left;
     font-family: Comfortaa;
     display: block;
@@ -16,8 +16,6 @@
     padding: 14px 16px;
     text-decoration: none;
     font-size: 17px;
-
-
 }
 
 .topnav a:hover {
@@ -184,7 +182,6 @@
     width: 20px;
     height: 20px;
     overflow: hidden;
-
     font-size: 18px;
     line-height: 42px;
     color: #ffffff;
@@ -208,4 +205,12 @@
     height: 7vh;
     text-align: center;
     vertical-align: center;
+}
+
+.unread-message * {
+    margin: 0;
+}
+
+#sumUnread{
+    margin: 0;
 }

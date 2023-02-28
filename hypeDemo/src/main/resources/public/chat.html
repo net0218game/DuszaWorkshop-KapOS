@@ -40,10 +40,6 @@
         <h2>Friends <span onclick="searchButton()" style="cursor: pointer"><i class="fa-solid fa-magnifying-glass search"></i></span></h2>
     </div>
     <ul id="contactArea">
-        <div id="searchDiv" style="display: none; padding-top: 15px">
-            <input type="text" disabled style="width: 98%;" placeholder="Find a specific user">
-        </div>
-
         <h3 class="notice"><i class="fa-solid fa-thumbtack"></i> Pinned Contacts:</h3>
         <li class="chat-message" id="DuszaGroupChat"
             onclick="getContactName(this)">
@@ -75,8 +71,8 @@
     <a href="settings.html"><i class="fa fa-cog" aria-hidden="true"></i> Settings</a>
 
     <!--olvasatlan üzenetek-->
-    <div class="unread-count" style="float: right" sec:authorize="isAuthenticated()"><p style="user-select: none">2</p></div>
-    <div class="dropdown" style="float: right">
+    <div class="unread-count" style="float: right" sec:authorize="isAuthenticated()"><p id="sumUnread" style="user-select: none">2</p></div>
+    <div class="dropdown unread" style="float: right">
         <a sec:authorize="isAuthenticated()">
             <i class="fa-solid fa-bell"></i>
         </a>
@@ -126,6 +122,7 @@
                 <iframe src="https://docs.google.com/forms/d/e/1FAIpQLScMh7Cp-q28b6RnkVU_rUJD7vTUbkEuBcBKjQ6xmU0iwqE5zg/viewform?embedded=true" width="100%" height="700" frameborder="0" marginheight="0" marginwidth="0">Betöltés…</iframe>
             </li>
         </ul>
+
         <!--
         <form id="file-form">
             <input type="file" id="file" class="input"/>

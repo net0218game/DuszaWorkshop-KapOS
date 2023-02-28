@@ -4,7 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c3742cd9-60bd-401e-9b47-95ee295ee9fd" name="Changes" comment="" />
+    <list default="true" id="c3742cd9-60bd-401e-9b47-95ee295ee9fd" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/jpa-buddy.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -22,24 +26,25 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
-    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
-    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
-    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/dusza/DuszaWorkshop-KapOS/tutorial/hypeDemo&quot;,
-    &quot;spring.configuration.checksum&quot;: &quot;55e8c0cd5e4ef58eb64b2f0470876a4e&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "C:/dusza/DuszaWorkshop-KapOS/tutorial/hypeDemo",
+    "spring.configuration.checksum": "55e8c0cd5e4ef58eb64b2f0470876a4e",
+    "vue.rearranger.settings.migration": "true"
   },
-  &quot;keyToStringList&quot;: {
-    &quot;DatabaseDriversLRU&quot;: [
-      &quot;mariadb&quot;
+  "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "mariadb"
     ]
   }
-}</component>
+}]]></component>
   <component name="RunManager" selected="Spring Boot.HypeDemoApplication">
     <configuration name="All in hypedemo" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="hypedemo" />
@@ -125,6 +130,7 @@
       <workItem from="1674543054974" duration="1565000" />
       <workItem from="1674639843795" duration="26000" />
       <workItem from="1674640087283" duration="8000" />
+      <workItem from="1677509031832" duration="43000" />
     </task>
     <servers />
   </component>

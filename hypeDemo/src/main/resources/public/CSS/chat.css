@@ -393,3 +393,11 @@ a {
 .chat-message:hover .edit {
     display: unset;
 }
+
+.sidenav #contactArea {
+    background-color: var(--color-accent);
+}
+
+.sidenav .chat-header {
+    background-color: var(--color-accent);
+}

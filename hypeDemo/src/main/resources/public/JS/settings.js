@@ -18,34 +18,41 @@ function setTheme(themeName) {
         setTheme('theme-purple');
     } else if (localStorage.getItem('theme') === 'theme-lightblue') {
         setTheme('theme-lightblue');
+    } else if (localStorage.getItem('theme') === 'theme-black') {
+        setTheme('theme-black');
+    } else if (localStorage.getItem('theme') === 'theme-sunset') {
+        setTheme('theme-sunset');
+    } else if (localStorage.getItem('theme') === 'theme-lime') {
+        setTheme('theme-lime');
+    } else if (localStorage.getItem('theme') === 'theme-sea') {
+        setTheme('theme-sea');
     }
 })();
 
 function light() {
     setTheme('theme-light');
-
 }
 function dark() {
     setTheme('theme-dark');
-
 }
 function blue() {
     setTheme('theme-blue');
-
 }
 function purple() {
     setTheme('theme-purple');
-
 }
 function lightblue() {
     setTheme('theme-lightblue');
-
 }
-
-
-/*
-light
-dark
-blue
-purple
-lightblue*/
+function black() {
+    setTheme('theme-black');
+}
+function sunset() {
+    setTheme('theme-sunset');
+}
+function lime() {
+    setTheme('theme-lime');
+}
+function sea() {
+    setTheme('theme-sea');
+}

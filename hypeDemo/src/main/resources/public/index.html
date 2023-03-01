@@ -54,18 +54,18 @@
     <a href="/register"><i class="fa fa-key"></i> Register</a>
     <a href="/chat"><i class="fa fa-comment-dots"></i> Chat</a>
     <a href="https://docs.google.com/forms/d/e/1FAIpQLScMh7Cp-q28b6RnkVU_rUJD7vTUbkEuBcBKjQ6xmU0iwqE5zg/viewform?fbzx=-4144298480465207363"><i class="fa fa-wpforms"></i> Kérdőív</a>
-    <a href="settings.html" class="active"  ><p>settings</p></a>
+    <a href="settings.html"><i class="fa fa-cog" aria-hidden="true"></i> Settings</a>
 
 
     <!--olvasatlan üzenetek-->
-    <div class="unread-count" style="float: right" sec:authorize="isAuthenticated()"><p id="sumUnread" style="user-select: none">0</p></div>
-    <div class="dropdown" style="float: right">
+    <div class="unread-count" style="float: right " sec:authorize="isAuthenticated()"><p id="sumUnread" style="user-select: none">0</p></div>
+    <div class="dropdown unread" style="float: right">
         <a sec:authorize="isAuthenticated()">
             <i class="fa-solid fa-bell"></i>
         </a>
         <div class="dropdown-content unread-message" id="unreadMessages">
             <p style="text-align: center;
-                      height: 3vh">UNREAD MESSAGES</p>
+                      height: 3vh  ">UNREAD MESSAGES</p>
         </div>
     </div>
 
@@ -99,14 +99,15 @@
 
 <div class="alert hidden" id="alert">
     <span class="closebtn" style="cursor: pointer" onclick="closebtn()">×</span>
-    <strong>INFO</strong><br><span>Kérlek Töltsétek Ki Felmérésünket!</span><br><span><a href="https://docs.google.com/forms/d/e/1FAIpQLScMh7Cp-q28b6RnkVU_rUJD7vTUbkEuBcBKjQ6xmU0iwqE5zg/viewform?fbzx=-4144298480465207363">Google Forms Kérdőív</a></span>
+    <strong>INFO</strong>
+    <br><span>Próbálják ki új <a href="settings.html">szín témáinkat</a> a beállításokban, vagy a linkre kattintva!</span>
     <br><span class="signature">A <b class="hype">HYPE</b> csapata!</span><br>
 </div>
 
 <table>
     <tr class="hidden">
         <th style="width:40%"><h5>The</h5></th>
-        <th style="width:20%"><img src="/Media/kek_logo_00000.png" width="80%"></th>
+        <th style="width:20%"><img src="/Media/logo2.png" width="80%"></th>
         <th style="width:40%"><h6>Team</h6></th>
     </tr>
 </table>

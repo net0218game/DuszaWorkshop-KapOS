@@ -77,7 +77,6 @@ function sendMessage(event) {
             stompClient.send("/app/private", {}, JSON.stringify(chatMessage))
 
             if (receiver !== hypeBot && receiver !== group_chat) {
-                console.log("displayed")
                 displayLastMessages(receiver, username)
                 displayAllMessages(receiver, username)
             }
@@ -317,15 +316,15 @@ function displayAllFriends() {
         });
 }
 
-function displayAllContacts() {
+function displayAllContacts(name) {
+    contactArea.innerHTML = ''
     fetch('/contacts', {
         method: 'GET',
     })
         .then((response) => response.json())
         .then((data) => {
             for (let i = 0; i < Object.keys(data).length; i++) {
-                if (data[i].userName !== username) {
-
+                if (data[i].userName !== username && (data[i].userName.includes(name)) || name == null) {
                     var messageElement = document.createElement('li');
                     messageElement.classList.add('chat-message');
                     messageElement.addEventListener('click', function () {
@@ -356,6 +355,7 @@ function displayAllContacts() {
 
                     contactArea.appendChild(messageElement);
                     displayLastMessages(data[i].userName, username)
+
                 }
             }
         });
@@ -401,7 +401,6 @@ function displayLastMessages(receiver, username) {
     })
         .then((response) => response.json())
         .then((data) => {
-            console.log(data)
             for (let i = 0; i < Object.keys(data).length; i++) {
                 var msg = data[i].content
                 if (msg.length > 20) {
@@ -445,7 +444,8 @@ function notificationAudio() {
     var audio = new Audio("Media/notification.mp3");
     audio.play();
 }
- // Összes üzenet törlése
+
+// Összes üzenet törlése
 function deleteMessages() {
     fetch('/deleteMessages/' + receiver + '/' + username, {
         method: 'POST',
@@ -453,6 +453,7 @@ function deleteMessages() {
         displayAllMessages(receiver, username);
     })
 }
+
 // Kiválasztott üzenet törlése
 function deleteMessage(messageId) {
     fetch('/deleteMessage/' + messageId, {
@@ -463,9 +464,11 @@ function deleteMessage(messageId) {
 }
 
 function searchButton() {
-    document.getElementById('contacts-title').innerHTML = '<h2 id="contacts-title">All Users <span onclick="backButton()" style="cursor: pointer"><i class="fa-solid fa-arrow-left"></i></span></h2>'
-    contactArea.innerHTML = ''
     displayAllContacts()
+
+    document.getElementById('contacts-title').innerHTML = '<h2 id="contacts-title">All Users <span onclick="backButton()" style="cursor: pointer"><i class="fa-solid fa-arrow-left"></i></span></h2><div id="searchDiv" style="padding-top: 15px">\n' +
+        '            <input type="text" style="width: 98%;" placeholder="Find a specific user" oninput="displayAllContacts(this.value)">\n' +
+        '        </div>'
 }
 
 function backButton() {

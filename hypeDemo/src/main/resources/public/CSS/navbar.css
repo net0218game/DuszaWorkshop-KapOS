@@ -1,13 +1,13 @@
 .topnav {
     overflow: hidden;
-    background: var(--color-secondary);
+    background: var(--color-primary);
 }
 @font-face {
     font-family: Comfortaa;
     src: url("../Media/Comfortaa-Bold.ttf");
 }
 .topnav a {
-    background: var(--color-secondary);
+    background: none;
     float: left;
     font-family: Comfortaa;
     display: block;
@@ -16,8 +16,6 @@
     padding: 14px 16px;
     text-decoration: none;
     font-size: 17px;
-
-
 }
 
 .topnav a:hover {
@@ -170,20 +168,12 @@
 }
 
 .unread-message .unread-info{
-    margin-left: 3.75vw;
+    margin-left: 3.25vw;
     font-size: 15px;
-}
-
-.unread-info p{
-    font-size: 12px;
 }
 
 .unread-message .unread-info, .unread-message i{
     margin-top: 1.75vh;
-}
-
-.unread-message p{
-    margin: 0;
 }
 
 .unread-count{
@@ -192,7 +182,6 @@
     width: 20px;
     height: 20px;
     overflow: hidden;
-
     font-size: 18px;
     line-height: 42px;
     color: #ffffff;
@@ -218,11 +207,10 @@
     vertical-align: center;
 }
 
-#sumUnread{
+.unread-message * {
     margin: 0;
-    padding: 0;
 }
 
-hr{
+#sumUnread{
     margin: 0;
 }

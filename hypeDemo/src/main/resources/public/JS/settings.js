@@ -26,6 +26,8 @@ function setTheme(themeName) {
         setTheme('theme-lime');
     } else if (localStorage.getItem('theme') === 'theme-sea') {
         setTheme('theme-sea');
+    } else {
+        setTheme('theme-black');
     }
 })();
 

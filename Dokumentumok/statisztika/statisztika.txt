@@ -1,0 +1,12 @@
+-info orak: 23 het --> 23*4 infoora --> kb 92 ora (fejenkent)
+-sziszivel 20 meeting 
+-3 demo az istvanekkal
+
+github rol:
+80000 sor kod
+300 commit
+
+felhasznalok szama?
+digitalocean grafikonok?
+
+

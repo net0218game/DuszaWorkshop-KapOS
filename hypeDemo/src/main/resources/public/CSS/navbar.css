@@ -120,9 +120,11 @@
 .unread-message{
     position: absolute;
     border-radius: 5px;
-    width: 17.5vw;
+    width: 25%;
     height: 3vh;
     background: transparent;
+    white-space: nowrap;
+    right: 13.5%;
 }
 
 
@@ -213,4 +215,5 @@
 
 #sumUnread{
     margin: 0;
+    display: inline-block;
 }

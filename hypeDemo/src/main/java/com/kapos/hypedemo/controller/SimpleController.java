@@ -174,7 +174,6 @@ public class SimpleController {
             messages = messagesRepository.findChatMessages(sender, receiver);
             Thread.sleep(200);
             unsuccessfulTries ++;
-
         }
         return messages;
     }
@@ -263,24 +262,23 @@ public class SimpleController {
             chat.setReceiver(chat.getSender());
             chat.setSender("hypeBot");
 
-            simpMessagingTemplate.convertAndSendToUser(chat.getReceiver(), "/specific", chat);
         } else {
 
+            /*
+            Gif-ek DM-ben
             if (chat.getContent().contains(".gif ")) {
                 SearchFeed feed = giphy.search(chat.getContent().replace(".gif ", ""), 1, 0);
                 chat.setContent(feed.getDataList().get(0).getEmbedUrl());
-            }
+            }*/
 
-            // Uzenet elkuldese felhasznalonak
-            simpMessagingTemplate.convertAndSendToUser(chat.getReceiver(), "/specific", chat);
             // Uzenetek eltarolasa db ben
-
-            /* A kesobbiekben a sender-t es a receiver-t meg kell valtoztatnunk senderId és receiverId-re.
-            Ezeket majd a Spring Security-vel bejelentkezett felhasznalonak az Id-jevel oldjuk meg.*/
 
             messagesRepository.save(new Chat(chat.getId(), chat.getContent(), chat.getSender(), chat.getReceiver(), chat.getDate()));
             unreadRepository.save(new Unread(chat.getId(), chat.getSender(), chat.getReceiver(), chat.getContent(), chat.getDate()));
+
+            // Uzenet elkuldese felhasznalonak
         }
+        simpMessagingTemplate.convertAndSendToUser(chat.getReceiver(), "/specific", chat);
     }
 
     // ========== Thymeleaf Részek ==========

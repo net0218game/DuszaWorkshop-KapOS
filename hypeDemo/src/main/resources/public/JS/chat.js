@@ -76,11 +76,12 @@ function sendMessage(event) {
         } else {
             stompClient.send("/app/private", {}, JSON.stringify(chatMessage))
 
-            if (receiver !== hypeBot && receiver !== group_chat) {
-                displayLastMessages(receiver, username)
-                displayAllMessages(receiver, username)
-            }
-
+            setTimeout(function () {
+                if (receiver !== hypeBot && receiver !== group_chat) {
+                    displayAllMessages(receiver, username)
+                    displayLastMessages(receiver, username)
+                }
+            }, 100);
         }
         messageInput.value = '';
     }

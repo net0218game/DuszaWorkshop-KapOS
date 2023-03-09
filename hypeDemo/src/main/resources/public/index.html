@@ -57,18 +57,6 @@
     <a href="settings.html"><i class="fa fa-cog" aria-hidden="true"></i> Settings</a>
 
 
-    <!--olvasatlan üzenetek-->
-    <div class="unread-count" style="float: right " sec:authorize="isAuthenticated()"><p id="sumUnread" style="user-select: none">0</p></div>
-    <div class="dropdown unread" style="float: right">
-        <a sec:authorize="isAuthenticated()">
-            <i class="fa-solid fa-bell"></i>
-        </a>
-        <div class="dropdown-content unread-message" id="unreadMessages">
-            <p style="text-align: center;
-                      height: 3vh  ">UNREAD MESSAGES</p>
-        </div>
-    </div>
-
     <!-- Profil -->
     <div class="dropdown" style="right: 0">
         <a class="dropbtn"  sec:authorize="isAuthenticated()">
@@ -85,7 +73,22 @@
     </div>
     <a href="/login" class="login" sec:authorize="!isAuthenticated()"><i class="fa fa-sign-in"></i></a>
     <a href="javascript:void(0);" class="icon" onclick="navbar()"><i class="fa fa-bars"></i></a>
+
+    <!--olvasatlan üzenetek-->
+    <div class="unread-count" style="float: right " sec:authorize="isAuthenticated()"><p id="sumUnread" style="user-select: none">0</p></div>
+    <div class="dropdown unread" style="float: right">
+        <a sec:authorize="isAuthenticated()">
+            <i class="fa-solid fa-bell"></i>
+        </a>
+        <div class="dropdown-content unread-message" id="unreadMessages">
+            <p style="text-align: center;
+                      height: 3vh  ">UNREAD MESSAGES</p>
+        </div>
+    </div>
+
 </div>
+
+
 
 <div class="title-div">
     <h1 class="hype">HYPE</h1>

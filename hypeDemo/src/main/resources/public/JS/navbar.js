@@ -38,7 +38,7 @@ function displayUnreads() {
                     var aldiv = document.createElement('div')
 
                     var span = document.createElement('span')
-                    span.innerText = data[j].sender
+                    span.innerText = data[j].sender + " sent you a message!"
 
                     var p = document.createElement('p')
                     var text = data[j].content

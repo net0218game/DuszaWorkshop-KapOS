@@ -7,6 +7,8 @@
     padding: 0;
 }
 
+
+
 body {
     margin: 0;
     padding: 0;
@@ -15,7 +17,7 @@ body {
     font-size: 1rem;
     line-height: 1.58;
     color: var(--font-color);
-    background-color: var(--color-primary);
+    background-color: var(--color-secondary);
     height: 100%;
     overflow-x: hidden;
 }
@@ -98,7 +100,9 @@ h2 {
 }
 
 .title-div {
+    background: var(--color-secondary);
     width: 100%;
+    height: 50%;
     text-align: center;
     padding-top: 20px;
     padding-bottom: 20px;
@@ -107,6 +111,7 @@ h2 {
 .button {
     margin: 20px;
 }
+
 
 .project{
     font-family: Arial;
@@ -226,8 +231,8 @@ strong {
 .alert {
     text-align: center;
     padding: 20px;
-    background-color: var(--color-primary);
-    color: var(--font-color);
+    background-color: #2196F3;
+    color:  #000000;
 }
 .alert span {
     background: transparent;
@@ -258,7 +263,7 @@ strong {
 }
 
 body {
-    background-color: var(--color-secondary);
+    background: var(--color-secondary);
 }
 
 #load {
@@ -588,7 +593,7 @@ div.card-image img:hover {
 }
 
 .cards_wrap .card_inner{
-    background-color: var(--color-primary);
+    background-color: var(--color-secondary);
     border-radius: 5px;
     padding: 35px 20px;
     width: 100%;

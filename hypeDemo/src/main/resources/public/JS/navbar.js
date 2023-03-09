@@ -9,7 +9,6 @@ function navbar() {
 
 var username = document.getElementById('user').innerText;
 var unreadBin = document.getElementById('unreadMessages');
-var unreadCount = document.getElementById('sumUnread')
 
 function displayUnreads() {
     fetch('/unreads/' + username, {
@@ -28,6 +27,9 @@ function displayUnreads() {
             }else{
                 for (let j = 0; j < Object.keys(data).length; j++) {
                     console.log('lefutott')
+                    var fodiv = document.createElement('div')
+                    fodiv.classList.add('unread-message')
+
                     var hr = document.createElement('hr')
 
                     var i = document.createElement('i')
@@ -43,18 +45,21 @@ function displayUnreads() {
                     var p = document.createElement('p')
                     var text = data[j].content
                     if (text.length > 20) {
-                        text = text.substring(20) + '...'
+                        text = text.substring(0, 20) + '...'
                     }
                     p.innerText = text
                     aldiv.appendChild(span)
                     aldiv.appendChild(p)
                     aldiv.classList.add('unread-info')
 
-                    unreadBin.appendChild(hr)
-                    unreadBin.appendChild(i)
-                    unreadBin.appendChild(aldiv)
+                    fodiv.appendChild(hr)
+                    fodiv.appendChild(i)
+                    fodiv.appendChild(aldiv)
+
+                    unreadBin.appendChild(fodiv)
+
                 }
-                unreadCount.innerText = osszUnread
+                document.querySelector('.unread-count').innerText = osszUnread
             }
 
         })

@@ -117,14 +117,13 @@
     z-index: 1;
 
 }
-.unread-message{
+#unreadMessages{
     position: absolute;
     border-radius: 5px;
-    width: 25%;
+    width: 300px;
     height: 3vh;
     background: transparent;
     white-space: nowrap;
-    right: 13.5%;
 }
 
 
@@ -163,42 +162,35 @@
     text-transform: uppercase;
 }
 
-.unread-message span{
-    color: #ffffff;
-    font-weight: 600;
-
+.unread-message .unread-info span{
+    font-size: 17.5px;
 }
 
 .unread-message .unread-info{
-    margin-left: 3.25vw;
+    margin-left: 60px;
     font-size: 15px;
+    margin-top: 0;
 }
 
 .unread-message .unread-info, .unread-message i{
-    margin-top: 1.75vh;
+    margin-top: 10px;
 }
 
 .unread-count{
-    margin-right: 0.5vw;
-    margin-top: 1.75vh;
+    margin-left: 5px;
     width: 20px;
     height: 20px;
     overflow: hidden;
-    font-size: 18px;
-    line-height: 42px;
+    font-size: 16px;
     color: #ffffff;
     text-align: center;
     border-radius: 50%;
     font-style: normal;
     text-transform: uppercase;
     background: red;
+    vertical-align: center;
 }
-.unread-count p{
-    position: absolute;
-    right: 0.85vw;
-    top: 0.55vh;
-    font-size: 14px;
-}
+
 .fa-bell{
     font-size: 22.5px;
 }
@@ -209,11 +201,25 @@
     vertical-align: center;
 }
 
-.unread-message * {
+.unread-message *{
     margin: 0;
 }
 
 #sumUnread{
     margin: 0;
-    display: inline-block;
+    right: 5vw;
+}
+
+.unread-message{
+    margin: 0;
+    width: 100%;
+    height: 70px;
+    background: var(--color-primary);
+}
+
+#unread-header{
+    margin: 0;
+    background: var(--color-primary);
+    font-weight: bold;
+    font-size: 20px;
 }

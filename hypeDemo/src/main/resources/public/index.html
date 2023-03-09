@@ -75,14 +75,22 @@
     <a href="javascript:void(0);" class="icon" onclick="navbar()"><i class="fa fa-bars"></i></a>
 
     <!--olvasatlan üzenetek-->
-    <div class="unread-count" style="float: right " sec:authorize="isAuthenticated()"><p id="sumUnread" style="user-select: none">0</p></div>
     <div class="dropdown unread" style="float: right">
         <a sec:authorize="isAuthenticated()">
+            <div class="unread-count" style="float: right" sec:authorize="isAuthenticated()">0</div>
             <i class="fa-solid fa-bell"></i>
         </a>
-        <div class="dropdown-content unread-message" id="unreadMessages">
+        <div class="dropdown-content" id="unreadMessages">
             <p style="text-align: center;
-                      height: 3vh  ">UNREAD MESSAGES</p>
+                      height: 3vh;" id="unread-header">Unread messages</p>
+            <div class="unread-message">
+                <hr>
+                <i style="background-color: rgb(0,247,255);" class="fa-solid fa-face-laugh-wink"></i>
+                <div class="unread-info">
+                    <span>The Hype Team</span>
+                    <p>Utolso uzenet</p>
+                </div>
+            </div>
         </div>
     </div>
 

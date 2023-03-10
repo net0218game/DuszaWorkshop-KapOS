@@ -17,6 +17,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpStatus;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.messaging.handler.annotation.SendTo;
@@ -24,6 +25,7 @@ import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.management.MBeanRegistrationException;
@@ -129,11 +131,14 @@ public class SimpleController {
     public ModelAndView insertUser(User user) {
         // ++ Ha ilyen felhasznalo / email cim meg nem letezik, es a jelszo megegyezik a megerositett jelszoval
         List<User> existingUsers;
-        existingUsers = userRepository.findAll();
+        existingUsers = userRepository.findAllUsers();
+        logger.info(existingUsers.toString());
+
         if(user.getPassword().equals(user.getConfirmedPassword()) && !existingUsers.contains(user.getUserName())) {
             userRepository.save(new User(user.getUserName(), user.getFirstName(), user.getSecondName(), user.getEmail(), bCryptPasswordEncoder().encode(user.getPassword()), user.getGender(), user.getBorn()));
         } else {
             logger.error("User already exists, or passwords doesn't match");
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "User with this username already exists!");
         }
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("index.html");

@@ -15,10 +15,6 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
 
     private UserRepository userRepository;
 
-    //https://www.youtube.com/watch?v=tDZPdovCH4I
-
-    // HERE IT COMES THE BULLSHIT
-
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
         return null;

@@ -16,6 +16,9 @@ body {
     background: var(--color-secondary);
 
     height: 100%;
+    position: absolute;
+    overflow-x: hidden;
+    overflow-y: scroll;
 }
 
 @font-face {
